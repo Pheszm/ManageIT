@@ -5,7 +5,9 @@ body {
     background-color: #FFFFFF;
 }
 
-
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
 
 /* Top Navigation */
 #TopNavBar{
@@ -74,21 +76,140 @@ body {
 
 /* Hero Section */
 #Hero{
-    background-color: #007fc8;
+    background-image: url(../../Assets/Images/HeroBackImage.png);
+    background-size: cover; 
+    background-position: 0;
+    height: 48vw;
     top: 0;
+
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
 }
 
-#BlurEffect{
+#HeroTag{
+    position: absolute;
+    left: 13vw;
+}
+
+#ManageitTitle{
+    line-height: 25px;
+    color: #0094FF;
+    font-size: 60px;
+}
+
+#HeroSubtitle{
+    line-height: 25px;
+    font-size: 60px;
+    color: #ffffff;
+}
+
+#HeroTagline{
+    line-height: 25px;
+    font-size: 40px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.KnowMoreHero_btn{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(-90deg, #0091E2, #0A4194);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 15px;
+    background-color: transparent;
+    border: transparent;
+    width: 150px;
+    height: 35px;
+}
+
+.ReserveNowHero_btn{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    border: 3px solid #ffff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: transparent;
+    width: 150px;
+    height: 35px;
+}
+/* #BlurEffect{
     display: inline-block; 
     width: 40vw; 
     height: 30vw; 
     background-color: #0A4194;
     border-radius: 50%; 
     filter: blur(10vw); 
-    opacity: 0.5;
+    opacity: 0.9;
     position: relative; 
     z-index: 1; 
+    overflow: hidden;
+} 
+
+#BlueEffectHero{
+    position: absolute;
+    background-color: #007fc8;
+    opacity: 0.2;
+    top: 0;
+    height: 120%;
+    width: 100%;
+}
+*/
+
+
+#LoginForm{
+    background-image: url(../../Assets/Images/LoginForm.png);
+    background-size: cover;
+    border-radius: 30px;
+    margin-right: 13%;
+    height: 350px;
+    width: 500px;
 }
 
+#LoginTitle{
+    display: flex;
+    align-items: center;
+}
+#SrcbLogoLogin{
+    height: 70px;
+}
 
+#LoginForm h1{
+    line-height: 60px;
+    background: linear-gradient(180deg, #0091E2, #1757b8);
+    font-size: 60px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 20px;
+    margin-left: 120px;
+}
+
+#LoginForm form input[type="text"]{
+    font-family: 'Poppins', sans-serif;
+    border-radius: 15px;
+    width: 90%;
+    height: 45px;
+    margin-left: 5%;
+    margin-bottom: 20px; 
+    border: 2px solid #e2e2e2;
+    font-size: 16px;
+}
+
+#loginbtnhero {
+    border-radius: 15px;
+    width: 90%;
+    height: 40px;
+    margin-left: 5%;
+    border: 2px solid #e2e2e2;
+    background-image: linear-gradient(90deg, #0091E2, #0A4194);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+}
 /* Hero Section */
