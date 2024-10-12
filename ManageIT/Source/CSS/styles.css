@@ -3,6 +3,7 @@ body {
     font-family: 'Poppins', sans-serif;
     height: 3000px;
     background-color: #FFFFFF;
+    scroll-behavior: smooth;
 }
 
 * { /*Set sizing perfect. */
@@ -190,6 +191,7 @@ body {
 }
 
 #LoginForm form input[type="text"]{
+    padding: 10px;
     font-family: 'Poppins', sans-serif;
     border-radius: 15px;
     width: 90%;
@@ -213,3 +215,33 @@ body {
     border: none;
 }
 /* Hero Section */
+
+
+
+
+
+
+
+
+/* About Us Section */
+
+#AboutUsSection{
+    width: 100%;
+    height: 40vw;
+    display: flex;
+    align-items: center;
+}
+#AboutUsTexts{
+    width: 500px;
+}
+#AboutUsSection h1{
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+}
+#CurveShape1{
+    z-index: -10;
+    position: absolute;
+    top: 30vw;
+    left: 30vw;
+    height: 55vw;
+}
