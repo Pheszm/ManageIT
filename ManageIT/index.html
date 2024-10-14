@@ -16,10 +16,10 @@
         <img id="ManageIT_NavLogo" src="Assets/Images/ManageIT_Logo.png" alt="MANAGEIT LOGO">
         <img id="SRCB_BackgroundIMG" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
         <div id="NavButtons">
-            <button class="simpleNav_btn">How to Use</button>
-            <button class="simpleNav_btn">About Us</button>
-            <button class="simpleNav_btn">Contact Us</button>
-            <button class="simpleNav_btn" id="AdvanceNav_btn">Login</button>
+            <button class="simpleNav_btn" onclick="location.href='#HowToUseSection';">How to Use</button>
+            <button class="simpleNav_btn" onclick="location.href='#AboutUsSection';">About Us</button>
+            <button class="simpleNav_btn" onclick="location.href='#ContactUsSection';">Contact Us</button>
+            <button class="simpleNav_btn" id="AdvanceNav_btn" onclick="location.href='#Hero';">Login</button>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
                 <br>
                 <br>
                 <br>
-                <button class="KnowMoreHero_btn">Know More</button>
+                <button class="KnowMoreHero_btn" onclick="location.href='#AboutUsSection';">Know More</button>
                 <button class="ReserveNowHero_btn">Reserve Now</button>
             </span>
         </span>
@@ -54,15 +54,78 @@
         </div>
     </div>
 
-    <img id="CurveShape1" src="Assets/Images/CurveShapes.png">
 
 
     <div id="AboutUsSection">
+        <img id="CurveShape1" src="Assets/Images/CurveShapes.png">
         <span id="AboutUsTexts">
             <h1>About Us</h1> 
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est </p>
+            <button class="ContactUsBtn">Contact Us</button>
+        </span>
+
+        <video controls>
+            <source src="Assets/Videos/DemoVideo.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+    <div id="HowToUseSection">
+        <video controls>
+            <source src="Assets/Videos/DemoVideo.mp4" type="video/mp4">
+        </video>
+
+        <span id="HowToUseText">
+            <h1>How To Use</h1> 
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est </p>
+            <button class="GetstartedBtn" onclick="location.href='#Hero';">Get Started</button>
         </span>
     </div>
+
+
+    <div id="ContactUsSection">
+        <h1>Contact Us</h1> 
+
+        <div id="ContactUsForm">
+            <div id="ContactFillupArea">
+                <span id="AreaToFill">
+                    <img id="SRCB_BackgroundIMG_Contacts" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+                    
+                    <span id="FillupContactsArea">
+                    <h1>Email Us</h1>
+                    <form style="text-align: center;">
+                        <input type="text" id="Fullnameinput" name="Fullname" placeholder="Fullname..">
+                        <input type="email" id="EmailAddressinput" name="EmailAddress" placeholder="Email Address..">
+                        <textarea id="Messageinput" name="Message" placeholder="Message.." required></textarea>
+                        <input id="SubmitBtnContact" type="submit" value="Login">
+                    </form>
+                    </span>
+                    
+                    <div id="ContactsArea">
+                        <h2>You May Also Reach Us</h2>
+                        <span>
+                            <img id="contact_icons" src="Assets/Images/Location_icon.png" alt="Location icon">
+                            <a>Brgy. 3 Balingasag Mis. Or.</a>
+                        </span>
+                        <span>
+                            <img id="contact_icons" src="Assets/Images/Phone_icon.png" alt="Location icon">
+                            <a>(+63) 987 654 3210</a>
+                        </span>
+                        <span>
+                            <img id="contact_icons" src="Assets/Images/Email_icon.png" alt="Location icon">
+                            <a>Sisterlelibeth@srcb.edu.ph</a>
+                        </span>
+                        <span>
+                            <img id="contact_icons" src="Assets/Images/FB_icon.png" alt="Location icon">
+                            <a>https://www.facebook.com/srcb</a>
+                        </span>
+                    </div>
+
+                </span>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 

@@ -3,6 +3,9 @@ body {
     font-family: 'Poppins', sans-serif;
     height: 3000px;
     background-color: #FFFFFF;
+}
+
+html {
     scroll-behavior: smooth;
 }
 
@@ -60,6 +63,10 @@ body {
     border: transparent;
     height: 35px;
     right: 13%;
+    transition: scale 0.2s;
+}
+.simpleNav_btn:hover{
+    scale: 1.1;
 }
 
 #AdvanceNav_btn{
@@ -67,6 +74,12 @@ body {
     background-color: #fff;
     border-radius: 50px;
     width: 130px;
+    transition: 0.3s;
+}
+#AdvanceNav_btn:hover{
+    scale: 1;
+    color: #fff;
+    background-color: #0A4194;
 }
 /* Top Navigation */
 
@@ -126,6 +139,9 @@ body {
     width: 150px;
     height: 35px;
 }
+.KnowMoreHero_btn:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
 
 .ReserveNowHero_btn{
     position: relative;
@@ -138,6 +154,11 @@ body {
     background-color: transparent;
     width: 150px;
     height: 35px;
+    transition: 0.3s;
+}
+.ReserveNowHero_btn:hover{
+    background-color: #ffff;
+    color: #1e1e1e;
 }
 /* #BlurEffect{
     display: inline-block; 
@@ -166,7 +187,7 @@ body {
 #LoginForm{
     background-image: url(../../Assets/Images/LoginForm.png);
     background-size: cover;
-    border-radius: 30px;
+    border-radius: 15px;
     margin-right: 13%;
     height: 350px;
     width: 500px;
@@ -214,6 +235,9 @@ body {
     font-weight: 600;
     border: none;
 }
+.loginbtnhero:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
 /* Hero Section */
 
 
@@ -229,19 +253,262 @@ body {
     width: 100%;
     height: 40vw;
     display: flex;
-    align-items: center;
+    justify-content: flex-end; 
+    align-items: center; 
+    overflow: hidden;
+    
 }
-#AboutUsTexts{
-    width: 500px;
-}
-#AboutUsSection h1{
-    font-family: 'Poppins', sans-serif;
-    font-size: 30px;
-}
+
+
 #CurveShape1{
     z-index: -10;
-    position: absolute;
-    top: 30vw;
-    left: 30vw;
+    position: inherit;
+    margin-top: -15vw;
+    margin-right: -68vw;
     height: 55vw;
 }
+
+#AboutUsTexts{
+    position: absolute;
+    left: 13vw;
+    width: 480px;
+    color: #0A4194;
+}
+
+.ContactUsBtn{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(-90deg, #0091E2, #0A4194);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 15px;
+    background-color: transparent;
+    border: transparent;
+    width: 150px;
+    height: 35px;
+}
+.ContactUsBtn:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
+
+#AboutUsSection h1{
+    line-height: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 37px;
+}
+
+#AboutUsSection p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+}
+
+
+#AboutUsSection video{
+    margin-right: 13%;
+    border-radius: 10px;
+    height: 350px;
+    width: 500px;
+    background-color: #131313;
+}
+
+
+/* About Us Section */
+
+
+
+
+
+
+
+
+/* How To Use Section */
+
+#HowToUseSection{
+    width: 100%;
+    height: 40vw;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+}
+
+#HowToUseText{
+    margin-right: 13%;
+    width: 480px;
+    color: #0A4194;
+}
+
+.GetstartedBtn{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(-90deg, #0091E2, #0A4194);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 15px;
+    background-color: transparent;
+    border: transparent;
+    width: 150px;
+    height: 35px;
+}
+.GetstartedBtn:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
+
+#HowToUseSection h1{
+    line-height: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 37px;
+}
+
+#HowToUseSection p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+}
+
+
+#HowToUseSection video{
+    position: absolute;
+    left: 13vw;
+    width: 480px;
+    border-radius: 10px;
+    height: 350px;
+    width: 500px;
+    background-color: #131313;
+}
+
+/* How To Use Section */
+
+
+
+
+
+
+
+
+/* Contact Us Section */
+#ContactUsSection{
+    height: 600px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+#ContactUsSection h1{
+    color: #0A4194;
+    line-height: 10px;
+    font-size: 37px;
+}
+
+#ContactUsForm{
+    overflow: hidden;
+    border-radius: 19px;
+    background-color: #fff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    height: 350px;
+    width: 650px;
+}
+
+
+#ContactFillupArea{
+    display: flex;
+    flex-direction: column; 
+    z-index: 1;
+
+    width: 50%;
+    height: 100%;
+    background-color: #0663B5;
+}
+#ContactUsForm h1{
+    padding-top: 33px;
+    margin-left: 20px;
+    margin-bottom: 25px;
+    color: #ffffff;
+    font-size: 24px;
+}
+
+
+#ContactFillupArea form input[type="text"],
+#ContactFillupArea form input[type="email"]
+{
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    width: 90%;
+    height: 32px;
+    margin-bottom: 13px; 
+    border: 2px solid #e2e2e2;
+    font-size: 14px;
+}
+#Messageinput{
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 8px;
+    width: 90%;
+    height: 120px;
+    margin-bottom: 13px; 
+    border: 2px solid #e2e2e2;
+    font-size: 14px;
+    resize: none;
+}
+#SubmitBtnContact{
+    border-radius: 8px;
+    height: 30px;
+    width: 100px;
+    background-color: #fff;
+    color: #005586;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+}
+#SRCB_BackgroundIMG_Contacts{
+    opacity: 0.1;
+    height: 500px;
+    margin-top: -70px;
+    margin-left: -180px;
+}
+
+#AreaToFill{
+    position: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+#FillupContactsArea{
+    position: relative;
+    top: -450px;
+}
+
+#ContactsArea{
+    height: 335px;
+    width: 310px;
+    position: relative;
+    top: -790px;
+    left: 330px;
+}
+#ContactsArea{
+    padding-top: 20px;
+    padding-left: 15px;
+}
+#ContactsArea h2{
+    margin-bottom: 30px;
+    font-size: 20px;
+    color: #0A4194;
+}
+#ContactsArea span{
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    color: #0A4194;
+}
+#ContactsArea a{
+    padding-left: 10px;
+    font-size: 14px;
+}
+#contact_icons{
+    height: 30px;
+}
+/* Contact Us Section */
