@@ -34,8 +34,6 @@
             <h2 id="HeroTagline">Here We Manage</h2>    
             <span>
                 <br>
-                <br>
-                <br>
                 <button class="KnowMoreHero_btn" onclick="location.href='#AboutUsSection';">Know More</button>
                 <button class="ReserveNowHero_btn">Reserve Now</button>
             </span>
@@ -47,8 +45,8 @@
                 <img id="SrcbLogoLogin" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
             </span>
             <form>
-                <input type="text" id="Usernameinput" name="Username" placeholder="Username..">
-                <input type="text" id="Passwordinput" name="Password" placeholder="Password..">
+                <input type="text" id="Usernameinput" name="Username" placeholder="Username.." required>
+                <input type="text" id="Passwordinput" name="Password" placeholder="Password.." required>
                 <input id="loginbtnhero" type="submit" value="Login">
             </form>
         </div>
@@ -94,8 +92,8 @@
                     <span id="FillupContactsArea">
                     <h1>Email Us</h1>
                     <form style="text-align: center;">
-                        <input type="text" id="Fullnameinput" name="Fullname" placeholder="Fullname..">
-                        <input type="email" id="EmailAddressinput" name="EmailAddress" placeholder="Email Address..">
+                        <input type="text" id="Fullnameinput" name="Fullname" placeholder="Fullname.." required>
+                        <input type="email" id="EmailAddressinput" name="EmailAddress" placeholder="Email Address.." required>
                         <textarea id="Messageinput" name="Message" placeholder="Message.." required></textarea>
                         <input id="SubmitBtnContact" type="submit" value="Login">
                     </form>
@@ -126,6 +124,31 @@
         </div>
     </div>
 
+
+    <div id="FooterSection">
+        <table>
+            <tr>
+                <td>
+                    <img id="FooterLogos" src="Assets/Images/ManageIT_Logo.png" alt="MANAGEIT LOGO">
+                </td>
+                <td>
+                    <h1>Useful Links</h1>
+                    <a href="#HowToUseSection">How to Use</a>
+                    <br>
+                    <a href="#ContactUsSection">Contact Us</a>
+                    <br>
+                    <a href="#AboutUsSection">About Us</a>
+                    <br>
+                    <a href="#Hero">Login</a>
+                </td>
+                <td>
+                    <img id="FooterLogos" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+                    <img id="FooterLogos" src="Assets/Images/BSIT_Logo.png" alt="IT LOGO">
+                </td>
+            </tr>
+        </table>
+        <h2>©  2024 - ManageIT, All Rights Reserved</h2>
+    </div>
 </body>
 </html>
 
