@@ -173,9 +173,11 @@ input[type="time"]
 }
 
 #ReturnBtn{
+    color: #02275e;
+    font-weight: bold;
+    font-size: 16px;
     position: absolute;
-    left: 200px;
-    margin-top: -450px;
+    left: 0px;
     border: none;
     background-color: #fff;
     border-radius: 10px;
@@ -183,14 +185,149 @@ input[type="time"]
     text-align: center;
     display: flex;
     justify-items: center;
-    width: 60px;
-    height: 60px;
-    transition: background-color 0.2s;
+    margin-top: 20px;
+    margin-left: 10px;
+    transition: scale 0.2s;
 }
 
 #ReturnBtn:hover{
-    background-color: #cc3939;
+    scale: 1.1;
 }
 #arrowimg{
+    height: 30px;
+}
+
+
+
+
+/* Adding Material Area */
+#DarkBlur{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#AddingMaterialsForm{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+        
+    overflow: hidden;
+    display: None; /*SET NONE IF DEPOY*/
+    justify-content: center; 
+    align-items: center;   
+}
+
+#MaterialsForm{
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    
+    border-radius: 1vw;
+    height: 530px;
+    width: 600px;
+    background-color: #fff;
+}
+
+#exitbtn{
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
     height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+}
+
+#exitbtn:hover{
+    background-color: #590303;
+}
+
+#SearchBoxForItem{
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 15px;
+    height: 30px;
+    width: 500px;
+    border: 2px solid #e2e2e2;
+    font-size: 14px;
+}
+
+#scanqrbtn{
+    margin-left: 10px;
+    background-color: #f3f3f3;
+    border: none;
+    border-radius: 5px;
+    justify-content: center; 
+    align-items: center;
+    padding: 5px;
+    transition: background-color 0.2s;
+}
+#scanqrbtn:hover{
+    background-color: #dedddd;
+}
+#qr_icon{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    height: 20px;
+}
+
+#SearchbarAndQR{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+
+
+#ModelComboBox,
+#CategoryComboBox{
+    margin-top: -100px;
+    background-color: #275fb3;
+    border: 3px solid #fff; 
+    border-radius: 12px;
+    padding: 5px;
+    width: 150px; 
+    color: #fff;
+}
+
+
+#QRFormScanner{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+        
+    overflow: hidden;
+    display: none;  /*SET NONE IF DEPOY*/
+    justify-content: center; 
+    align-items: center;   
+}
+
+
+#QReeexitbtn{
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 35%;
+    top: 24%;
+    transition: background-color 0.2s;
+}
+
+#QReeexitbtn:hover{
+    background-color: #590303;
 }

@@ -1,0 +1,92 @@
+#my-qr-reader{
+
+}
+
+#my-qr-reader__dashboard{
+    color: #ffffff;
+}
+
+#html5-qrcode-select-camera{
+    border-radius: 20px;
+}
+
+#html5-qrcode-button-camera-stop{
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background-color: #951717;
+    border-radius: 15px;
+    border:none;
+    padding: 5px 5px;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+#html5-qrcode-button-camera-stop:hover{
+    background-color: #761010;
+}
+
+#html5-qrcode-button-camera-start{
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #0753a5;
+    background-color: #ffffff;
+    border-radius: 15px;
+    border:none;
+    padding: 5px 5px;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+#html5-qrcode-button-camera-start:hover{
+    background-color: #cdcdcd;
+}
+
+#my-qr-reader{
+    background-color: #0753a5;
+    border-radius: 10px;
+}
+
+#my-qr-reader__dashboard_section_csr{
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#html5-qrcode-anchor-scan-type-change{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+}
+
+
+.html5-qrcode-element{
+    font-size: 10px;
+}
+
+#html5-qrcode-button-file-selection{
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #0753a5;
+    background-color: #fff;
+    border-radius: 15px;
+    border:none;
+    transition: background-color 0.2s;
+}
+#html5-qrcode-button-file-selection:hover{
+    background-color: #cdcdcd;
+}
+
+#html5-qrcode-button-camera-permission{
+    font-size: 17px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    color: #0753a5;
+    background-color: #fff;
+    border-radius: 15px;
+    border:none;
+    transition: background-color 0.2s;
+}
+#html5-qrcode-button-camera-permission:hover{
+    background-color: #cdcdcd;
+}

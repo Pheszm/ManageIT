@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../CSS/poppins_sheet.css" rel="stylesheet">
     <link href="../CSS/reservation_styles.css" rel="stylesheet">
+    <link href="../CSS/qr_ui_config.css" rel="stylesheet">
     <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
 
     <title>ManageIT | Reservation Form</title>
@@ -14,8 +15,8 @@
 <body>
     <div id="background">
         <img id="backgroundImg" src="../../Assets/Images/SRCB_Logo.png">
-        <button id="ReturnBtn" onclick="location.href='../../index.html';"><img id="arrowimg" src="../../Assets/Images/Arrow_Left_Icon.png"></button>
         <div id="FormBox">
+            <button id="ReturnBtn" onclick="location.href='../../index.html';"><img id="arrowimg" src="../../Assets/Images/Arrow_Left_Icon.png"> Return</button>
             <h1>Reservations</h1>
                 <table id="OuterTable">
                     <tr>
@@ -49,7 +50,7 @@
                         <td id="outercol">
                             <span id="MaterialsHeader">
                                 <h2>Materials Needed</h2>
-                                <button type="button">Add +</button>
+                                <button id="AddbtnShow">Add +</button>
                             </span>
     
                             <table id="ItemTable">
@@ -76,7 +77,55 @@
                     </tr>
                 </table>
         </div>
-    </div>
+
+        <div id="AddingMaterialsForm">
+            <div id="DarkBlur"></div>
+            <div id="MaterialsForm">
+                <button id="exitbtn">X</button>
+                <h1>Choose an Item</h1>
+                <span>
+                    <span id="SearchbarAndQR">
+                        <input type="text"  id="SearchBoxForItem" placeholder="Search..">
+                        <button id="scanqrbtn"><img id="qr_icon" src="../../Assets/Images/QR_Icon.png"></button>
+                    </span>
+                    <br>
+                    <select id="ModelComboBox">
+                        <option value="">Model</option>
+                        <option value="item1">Item 1</option>
+                        <option value="item2">Item 2</option>
+                        <option value="item3">Item 3</option>
+                    </select>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select id="CategoryComboBox">
+                        <option value="">Category</option>
+                        <option value="item1">Item 1</option>
+                        <option value="item2">Item 2</option>
+                        <option value="item3">Item 3</option>
+                    </select>
+                </span>
+
+            </div>
+        </div>
+
+        <div id="QRFormScanner">
+            <div id="DarkBlur"></div>
+            <div id="you-qr-result"></div>
     
+            <div>
+                <button id="QReeexitbtn">X</button>
+                <div id="my-qr-reader" style="width:350px;"></div>
+            </div>
+
+
+                
+        </div>
+    </div>
+
+
+    
+
+</div>
+    <script src="../JS/Reservation.js"></script>
+    <script src="../JS/QR_Scanner.js"></script>
 </body>
 </html>
