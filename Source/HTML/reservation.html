@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../CSS/poppins_sheet.css" rel="stylesheet">
+    <link href="../CSS/reservation_styles.css" rel="stylesheet">
+    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+
+    <title>ManageIT | Reservation Form</title>
+</head>
+
+<body>
+    <div id="FormBox">
+        <h1>Reservations</h1>
+        <form action="/submit" method="POST">
+            <table>
+                <tr>
+                    <td id="outercol">
+                        <input type="text" id="fullname" name="fullname" placeholder="Full Name.." required>
+                        <input type="date" id="dateofuse" name="dateofuse" required>
+                    </td>
+                    <td id="outercol">
+                        <h2>Materials Needed</h2>
+                        <button type="button">Add +</button>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Operation</th>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <input id="submitbtn" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

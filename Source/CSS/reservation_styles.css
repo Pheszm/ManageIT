@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(-190deg, #0091E2, #0A4194);
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 100vh;    
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
+
+h1{
+    line-height: 20px;
+    color: #0A4194;
+}
+#FormBox{
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    
+    border-radius: 1vw;
+    height: 550px;
+    width: 950px;
+    background-color: #fff;
+}
+
+table{
+    width: 100%;
+}
+form{
+    width: 100%;
+}
+th, td {
+    border: 1px solid black; /* Add border to each cell */
+    padding: 8px;           /* Add padding for better appearance */
+    text-align: left;       /* Align text to the left */
+}
+
+.outercol{
+    width: 50%;
+}
