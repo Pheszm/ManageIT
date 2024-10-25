@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManageIT | Home</title>
+    <link href="../../Source/CSS/poppins_sheet.css" rel="stylesheet">
+    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+    <link rel="stylesheet" href="../CSS/Home.css">
+</head>
+<body>
+    <div id="TopNavBar">
+        <button id="toggle-btn">☰</button>
+        <img id="ManageIT_NavLogo" src="../../Assets/Images/ManageIT_Logo.png" alt="MANAGEIT LOGO">
+        <img id="SRCB_BackgroundIMG" src="../../Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+        <span>
+            <button id="LogoutBtn" onclick="location.href='../../index.html';"><img src="../../Assets/Images/Logout_Icon.png">Logout</button>
+        </span>
+        
+    </div>
+
+    <div id="SideBarNav">
+        <button id="HomeBtn"><img src="../../Assets/Images/Home_Icon.png">Home</button>
+        <button id="ReservationBtn" onclick="location.href='ReservationList.html';"><img src="../../Assets/Images/Reservations_Icon.png">Reservation</button>
+        <button id="ItemsBtn"><img src="../../Assets/Images/Items_Icon.png">Items</button>
+        <button id="ActBtn"><img src="../../Assets/Images/ActivityLog_Icon.png">Activity Logs</button>
+        <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
+    </div>
+
+    <span>
+        <div id="ScheduledArea">
+            <h1>Scheduled</h1>
+            <div id="TableCase">
+                <table id="ScheduledListTable">
+                    <tr>
+                        <th>
+                            Time & Date
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Item
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            7:15AM - 12/25/24
+                        </td>
+                        <td>
+                            Rodel Tamayo
+                        </td>
+                        <td>
+                            Speaker, Cable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            8:00AM - 12/12/24
+                        </td>
+                        <td>
+                            Carl Wyne Gallardo
+                        </td>
+                        <td>
+                            Mouse
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <span>
+                <button id="SchedViewDetailsBtn">View Details</button>
+                <button id="SchedViewMoreBtn">View More ></button>
+            </span>
+        </div>
+
+        
+        <div id="IssuedItemsArea">
+            <h1>Issued Items</h1>
+            <div id="TableCase">
+                <table id="ScheduledListTable">
+                    <tr>
+                        <th>
+                            Deadline
+                        </th>
+                        <th>
+                            Borrower
+                        </th>
+                        <th>
+                            Item
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            5:00PM - 9/15/24
+                        </td>
+                        <td>
+                            Rodelyn Zarate
+                        </td>
+                        <td>
+                            Table
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            12:21PM - 9/24/24
+                        </td>
+                        <td>
+                            Joshua Salan
+                        </td>
+                        <td>
+                            Mouse
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <span>
+                <button id="SchedViewDetailsBtn">View Details</button>
+                <button id="SchedViewMoreBtn">View More ></button>
+            </span>
+        </div>
+    </span>
+    
+    <span id="span2">
+        <div id="VolumeArea">
+            <h1>Volume Today</h1>
+                <table id="ScheduledListTable">
+                    <tr>
+                        <th>
+                            Total Items
+                        </th>
+                        <th>
+                            Items in Use
+                        </th>
+                        <th>
+                            Available Items
+                        </th>
+                        <th>
+                            Pending<br>Reservations
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            105
+                        </td>
+                        <td>
+                            3
+                        </td>
+                        <td>
+                            102
+                        </td>
+                        <td>
+                            7
+                        </td>
+                    </tr>
+                </table>
+        </div>
+
+        <div id="ChartArea">
+            <div id="chartContainer" style="height: 400px;"></div>
+            <script type="text/javascript">
+                window.onload = function () {
+                    var chart = new CanvasJS.Chart("chartContainer",
+                    {
+                        theme: "light2",
+                        title:{
+                            text: "Inventory Quantity Categorized"
+                        },		
+                        data: [
+                        {       
+                            type: "pie",
+                            showInLegend: true,
+                            toolTipContent: "{y} - #percent %",
+                            yValueFormatString: "#",
+                            legendText: "{indexLabel}",
+                            dataPoints: [
+                                {  y: 5, indexLabel: "Audio Equipment" },
+                                {  y: 5, indexLabel: "Visual Equipment" },
+                                {  y: 13, indexLabel: "Computers and Accessories" },
+                                {  y: 12, indexLabel: "Recording Devices"},
+                                {  y: 20, indexLabel: "Furniture" },
+                                {  y: 10, indexLabel: "Lighting"},
+                                {  y: 25, indexLabel: "Educational Materials"},
+                                {  y: 10, indexLabel: "Storage"}
+                            ]
+                        }
+                        ]
+                    });
+                    chart.render();
+                }
+                </script>
+                <script type="text/javascript" src="../JS/PieChart.js"></script>
+        </div>
+    </span>
+    
+    
+
+    <script src="../JS/Home.js"></script>
+</body>
+</html>

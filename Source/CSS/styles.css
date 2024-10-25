@@ -9,6 +9,28 @@ html {
     scroll-behavior: smooth;
 }
 
+
+
+/*Scroll Bar Configuration*/
+html::-webkit-scrollbar {
+    width: 0.9vw;
+}
+html::-webkit-scrollbar-track {
+    background-color: #ffffff;
+}
+html::-webkit-scrollbar-thumb {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    border: solid 0.3vw #145ac3;
+}
+html::-webkit-scrollbar-thumb:hover {
+    background-color: #d3d3d3;
+}
+/*Scroll Bar Configuration*/
+
+
+
+
 * { /*Set sizing perfect. */
     box-sizing: border-box; /* Apply to all elements */
 }
