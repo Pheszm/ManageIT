@@ -21,7 +21,7 @@
                 <table id="OuterTable">
                     <tr>
                         <td id="outercol">
-                            <form action="/submit" method="POST">
+                            <form action="../PHP/Reserve.php" method="POST">
                                 <br>
                                 <input type="text" id="fullname" name="fullname" placeholder="Full Name.." required>
                                 <br>
@@ -35,14 +35,15 @@
                                     <label for="totime">&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;</label>
                                     <input type="time" id="totime" name="totime" required>
                                 </span>
-                                <input type="text" id="fullname" name="fullname" placeholder="Course & Year.." required>
+                                <input type="text" name="course_year" placeholder="Course & Year.." required>
                                 <br>
-                                <input type="text" id="fullname" name="fullname" placeholder="Subject.." required>
+                                <input type="text" name="subject" placeholder="Subject.." required>
                                 <br>
-                                <input type="text" id="fullname" name="fullname" placeholder="Requested By.." required>
+                                <input type="text" name="requested_by" placeholder="Requested By.." required>                                
                                 <br>
                                 <textarea id="Messageinput" name="Message" placeholder="Message.." required></textarea>
                                 <br>
+                                <input type="hidden" name="materialz" value="">
                                 <input id="submitbtn" type="submit" value="Submit">
                             </form>
                         </td>
@@ -60,18 +61,6 @@
                                     <th>Operation</th>
                                 </tr>
                                 <tr>
-                                    <td>Speaker</td>
-                                    <td>
-                                        <span id="itemQty">
-                                            <button>−</button>
-                                            <p>1</p>
-                                            <button>+</button>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button>Remove −</button>
-                                    </td>
-                                </tr>
                             </table>
                         </td>
                     </tr>
@@ -91,19 +80,15 @@
                     <br>
                     <select id="ModelComboBox">
                         <option value="">Model</option>
-                        <option value="item1">Item 1</option>
-                        <option value="item2">Item 2</option>
-                        <option value="item3">Item 3</option>
                     </select>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <select id="CategoryComboBox">
                         <option value="">Category</option>
-                        <option value="item1">Item 1</option>
-                        <option value="item2">Item 2</option>
-                        <option value="item3">Item 3</option>
                     </select>
                 </span>
+                <div id="DisplayItemsHere">
 
+                </div>
             </div>
         </div>
 

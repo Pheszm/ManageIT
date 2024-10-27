@@ -112,12 +112,14 @@ th, td {
     background-color: #fff; 
 }
 
-#itemQty{
+
+#itemQty {
     height: 10px;
     display: flex; /* Use flexbox layout */
     align-items: center;
     justify-content: center; 
 }
+
 
 
 #outercol form input[type="text"],
@@ -215,7 +217,7 @@ input[type="time"]
     height: 100%;
         
     overflow: hidden;
-    display: None; /*SET NONE IF DEPOY*/
+    display: block; /*SET NONE IF DEPOY*/
     justify-content: center; 
     align-items: center;   
 }
@@ -331,3 +333,21 @@ input[type="time"]
 #QReeexitbtn:hover{
     background-color: #590303;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
