@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;    
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+
+    background-image: linear-gradient(180deg, #00340d, #001405);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
+
+/* Top Navigation */
+#TopNavBar{
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(-90deg, #039107, #036d07);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding-top: 5px;
+    display: flex;
+    justify-content: flex-start; 
+    z-index: 100; 
+}
+#TopNavBar span{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+#SRCB_BackgroundIMG{
+    opacity: 0.1;
+    position: absolute;
+    right: -2.3%;
+    top: -270%;
+    height: 900%;
+}
+
+#LogoutBtn{
+    margin-right: 3%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 0;
+    height: 33px;
+    color: #0A4194;
+    font-weight: bold;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background 0.2s;
+}
+#LogoutBtn img{
+    height: 20px;
+    margin-right: 5px;
+}
+#LogoutBtn:hover{
+    background-color: #db6060;
+}
+
+#toggle-btn {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#SideBarNav.open {
+    transform: translateX(-100%); /* Show sidebar */
+}
+#SideBarNav{
+    padding-top: 120px;
+    position: absolute;
+    width: 220px;
+    height: 100%;
+    background-color: #FFFFFF;
+    transition: transform 0.3s ease;
+    transform: translateX(0%); /* Hidden by default */
+}
+
+#SideBarNav button{
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: #FFFF;
+    border: none;
+    font-weight: 500;
+    color: #0A4194;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background 0.2s;
+}
+
+#SideBarNav button:hover{
+    background-color: #d5e1ff;
+}
+
+#SideBarNav img{
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 15px;
+
+}
+
+#ReservationBtn{
+    background-image: linear-gradient(-90deg, #eeeeee, #e4e4e4);
+}
+
+
+#ManageIT_NavLogo{
+    margin-left: 3vw;
+}
+
+
+
+
+
+
+
+
+
+
+#TableAreaContainer{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 100%;
+}
+
+
+
+/*ACCOUNTS TABLE*/
+#AccountsList{
+    padding: 10px;
+    
+    width: 50%;
+    height: 50%;
+    background-color: #fff;
+    vertical-align: top; 
+}
+
+
+#MaterialsHeader{
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+#MaterialsHeader h2{
+    color: #006032;
+    font-weight: 500;
+    line-height: 10px;
+}
+#MaterialsHeader button{
+    font-weight: bolder;
+    border: none;
+    color: #006032;
+    background-color: #fff; 
+    margin-left: auto;
+    font-size: 17px;
+}
+
+#ItemTable{
+    width: 95%;
+    border-collapse: collapse; 
+}
+
+#ItemTable th{
+    height: 20px;
+    align-items: center;
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 10px;
+    background-color: #006032;
+}
+
+#ItemTable td{
+    color: #006032;
+    align-items: center;
+    text-align: center;
+    line-height: 0px;
+}
+
+#ItemTable td button{
+    font-weight: bolder;
+    font-size: 15px;
+    border: none;
+    color: #006032;
+    background-color: #fff; 
+}

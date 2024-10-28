@@ -86,6 +86,9 @@ th, td {
     margin-left: auto;
     font-size: 17px;
 }
+#MaterialsHeader button:hover{
+    scale: 1.15;
+}
 
 #ItemTable th{
     align-items: center;
@@ -109,9 +112,11 @@ th, td {
     font-size: 15px;
     border: none;
     color: #073881;
-    background-color: #fff; 
+    background-color: transparent; 
 }
-
+#ItemTable td button:hover{
+    scale: 1.2;
+}
 
 #itemQty {
     height: 10px;
@@ -217,7 +222,7 @@ input[type="time"]
     height: 100%;
         
     overflow: hidden;
-    display: block; /*SET NONE IF DEPOY*/
+    display: none; /*SET NONE IF DEPOY*/
     justify-content: center; 
     align-items: center;   
 }
