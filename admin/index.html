@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManageIT | Admin</title>
+    <link href="../Source/CSS/poppins_sheet.css" rel="stylesheet">
+    <link rel="icon" href="../Assets/Images/ManageIT_Logo.png">  
+    <link rel="stylesheet" href="../Source/CSS/superadmin.css">
+</head>
+<body>
+    <div id="TopNavBar">
+        <img id="ManageIT_NavLogo" src="../Assets/Images/ManageIT_Logo.png" alt="MANAGEIT LOGO">
+        <img id="SRCB_BackgroundIMG" src="../Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+        <span>
+            <button id="LogoutBtn" onclick="location.href='../index.html';"><img src="../Assets/Images/Logout_Icon.png">Logout</button>
+        </span>
+    </div>
+
+
+    <div id="AccountsList">
+        <span id="MaterialsHeader">
+            <h2>User Accounts List</h2>
+            <button id="AddbtnShow">Add +</button>
+        </span>
+
+        <div id="TableAreaContainer">
+            <table id="ItemTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Operation</th>
+                </tr>
+                <tr>
+                    <td>Carl Wyne Gallardo</td>
+                    <td>Active🟢</td>
+                    <td><button>View</button></td>
+                </tr>
+                <tr>
+                    <td>John Doe</td>
+                    <td>Inactive🔴</td>
+                    <td><button>View</button></td>
+                </tr>
+                <tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="../Source/JS/superadmin.js"></script>
+</body>
+</html>
