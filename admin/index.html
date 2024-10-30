@@ -31,21 +31,30 @@
                     <th>Status</th>
                     <th>Operation</th>
                 </tr>
-                <tr>
-                    <td>Carl Wyne Gallardo</td>
-                    <td>Active🟢</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
-                    <td>John Doe</td>
-                    <td>Inactive🔴</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
             </table>
         </div>
     </div>
 
+    <div id="AddingFacultyForm">
+        <div id="AddingForm">  
+            <button id="extbtn">X</button>
+            <h1>Adding Account</h1>     
+            <form action="../Source/PHP/Faculty_Adding_account.php" method="post">
+                <input type="text" id="adding_fullname" name="fullname" placeholder="Full Name.." required>
+                <input type="email" id="adding_email" name="email" placeholder="Email Address.." required>
+                <input type="tel" id="adding_phone" name="phone" placeholder="Phone Number.." required>
+                <input type="text" id="adding_username" name="username" placeholder="Username.." required>
+                <input type="text" id="adding_password" name="password" placeholder="Password.." required> <!-- Changed to text -->
+                <button type="submit">Submit</button>
+            </form>            
+        </div>
+        <div id="DarkBlur"></div>
+
+
+    </div>
+
+
+    
     <script src="../Source/JS/superadmin.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@ CREATE TABLE Faculty (
     faculty_email_address VARCHAR(100) NOT NULL UNIQUE,
     faculty_phone_number VARCHAR(15),
     faculty_password VARCHAR(255) NOT NULL,
+    faculty_status INT DEFAULT 1,
     faculty_role VARCHAR(50) DEFAULT 'user'
 );
 

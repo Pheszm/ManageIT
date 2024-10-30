@@ -1,8 +1,6 @@
 <?php
-$servername = "localhost"; // Change if needed
-$username = "root"; // Change to your database username
-$password = "123456"; // Change to your database password
-$dbname = "manageit"; // Your database name
+
+include 'connection_string.php';
 
 try {
     // Create connection

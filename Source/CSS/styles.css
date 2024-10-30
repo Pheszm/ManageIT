@@ -512,7 +512,7 @@ html::-webkit-scrollbar-thumb:hover {
     height: 30px;
     width: 100px;
     background-color: #fff;
-    color: #005586;
+    color: #0A4194;
     font-size: 16px;
     font-weight: 600;
     border: none;
@@ -560,6 +560,8 @@ html::-webkit-scrollbar-thumb:hover {
 #ContactsArea a{
     padding-left: 10px;
     font-size: 14px;
+    text-decoration: none;
+    color: #0A4194;
 }
 #contact_icons{
     height: 30px;

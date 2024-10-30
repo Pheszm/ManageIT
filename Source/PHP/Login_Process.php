@@ -1,9 +1,6 @@
 <?php
 // Connect to MySQL
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "manageit_database";
+include 'connection_string.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
