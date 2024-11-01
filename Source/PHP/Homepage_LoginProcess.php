@@ -1,6 +1,6 @@
 <?php
 // Connect to MySQL
-include 'connection_string.php';
+include 'ConnectionString.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

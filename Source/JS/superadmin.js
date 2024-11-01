@@ -19,7 +19,7 @@ document.getElementById("extbtn").addEventListener("click", function() {
 
 //FETCH ACCOUNTS TO THE TABLE
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('../Source/PHP/Faculty_accounts_table_fetch.php')
+    fetch('../Source/PHP/SuperAdmin_AccountsTableFetch.php')
         .then(response => response.json())
         .then(data => {
             const table = document.getElementById('ItemTable');
@@ -49,6 +49,7 @@ window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('success')) {
         alert('Adding was successful!');
+        window.location.href = '../admin';
     } else if (urlParams.has('error')) {
         alert('Error: ' + urlParams.get('error'));
     }

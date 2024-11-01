@@ -136,7 +136,7 @@ document.querySelector("form").onsubmit = function(event) {
     function fetchItems(searchTerm = '', model = '', category = '') {
         const query = new URLSearchParams({ search: searchTerm, model: model, category: category }).toString();
     
-        fetch(`../PHP/Reservation_Item_list.php?${query}`)
+        fetch(`../PHP/ReservationForm_ListTheItems.php?${query}`)
             .then(response => response.json())
             .then(data => {
                 const displayArea = document.getElementById('DisplayItemsHere');
@@ -173,7 +173,7 @@ document.querySelector("form").onsubmit = function(event) {
 
     // Populate ModelComboBox & CategoryComboBox
         window.onload = function() {
-            fetch('../PHP/Fetch_Category_Reservation.php')
+            fetch('../PHP/ReservationForm_FetchComboBox.php')
                 .then(response => response.json())
                 .then(data => {
                     const modelComboBox = document.getElementById('ModelComboBox');
@@ -213,7 +213,7 @@ document.querySelector("form").onsubmit = function(event) {
             document.getElementById("AddingMaterialsForm").style.display = "none";
         
             // Fetch item data from the server
-            fetch(`../PHP/ItemData_Retrieval.php?id=${itemId}`)
+            fetch(`../PHP/ReservationForm_ItemDataRetrieval.php?id=${itemId}`)
                 .then(response => response.json())
                 .then(itemData => {
                     if (itemData && itemData.Item_Name) {

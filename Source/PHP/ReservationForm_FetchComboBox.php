@@ -1,6 +1,6 @@
 <?php
 
-include 'connection_string.php';
+include 'ConnectionString.php';
 
 try {
     // Create connection

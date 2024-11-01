@@ -1,6 +1,6 @@
 <?php
 
-include 'connection_string.php';
+include 'ConnectionString.php';
 
 
 // Create connection
@@ -36,7 +36,7 @@ $stmt->bind_param("sssssssss", $fullname, $dateofuse, $fromtime, $totime, $cours
 // Execute the statement
 // At the end of the PHP code, after executing the statement
 if ($stmt->execute()) {
-    header("Location: ../HTML/reservation.html?success=1");
+    header("Location: ../HTML/ReservationForm.html?success=1");
     exit();
 } else {
     echo "Error: " . $stmt->error;

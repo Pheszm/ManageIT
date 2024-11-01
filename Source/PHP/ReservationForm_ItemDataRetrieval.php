@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-include 'connection_string.php';
+include 'ConnectionString.php';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

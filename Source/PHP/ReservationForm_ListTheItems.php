@@ -1,5 +1,5 @@
 <?php
-include 'connection_string.php';
+include 'ConnectionString.php';
 
 header('Content-Type: application/json');
 

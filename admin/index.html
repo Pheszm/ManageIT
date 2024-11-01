@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManageIT | Admin</title>
-    <link href="../Source/CSS/poppins_sheet.css" rel="stylesheet">
+    <link href="../Source/CSS/Poppins_Sheet.css" rel="stylesheet">
     <link rel="icon" href="../Assets/Images/ManageIT_Logo.png">  
-    <link rel="stylesheet" href="../Source/CSS/superadmin.css">
+    <link rel="stylesheet" href="../Source/CSS/SuperAdmin.css">
 </head>
 <body>
     <div id="TopNavBar">
@@ -39,10 +39,10 @@
         <div id="AddingForm">  
             <button id="extbtn">X</button>
             <h1>Adding Account</h1>     
-            <form action="../Source/PHP/Faculty_Adding_account.php" method="post">
+            <form action="../Source/PHP/SuperAdmin_AddingAccount.php" method="post">
                 <input type="text" id="adding_fullname" name="fullname" placeholder="Full Name.." required>
                 <input type="email" id="adding_email" name="email" placeholder="Email Address.." required>
-                <input type="tel" id="adding_phone" name="phone" placeholder="Phone Number.." required>
+                <input type="number" id="adding_phone" name="phone" placeholder="Phone Number.." required>
                 <input type="text" id="adding_username" name="username" placeholder="Username.." required>
                 <input type="text" id="adding_password" name="password" placeholder="Password.." required> <!-- Changed to text -->
                 <button type="submit">Submit</button>
@@ -55,6 +55,6 @@
 
 
     
-    <script src="../Source/JS/superadmin.js"></script>
+    <script src="../Source/JS/SuperAdmin.js"></script>
 </body>
 </html>
