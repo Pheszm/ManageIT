@@ -27,44 +27,37 @@
         <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
     </div>
 
+
+
+    <div id="ViewDetailsScheduled">
+        <div id="SchedDetailsForm">
+            <div id="exitbtn">X</div>
+            <h1>Reservation Details</h1>
+            <span><h2>Full Name:</h2><p id="viewRes_fullName">Carl Wyne Gallardo</p></span>
+            <span><h2>Course&Year:</h2><p id="viewRes_courseYear">BSIT 2</p></span>
+            <span><h2>Subject:</h2><p id="viewRes_subject">ITP 302</p></span>
+            <span><h2>Materials:</h2><p id="viewRes_materials">1 Mouse</p></span>
+            <span><h2>Requested By:</h2><p id="viewRes_requestedBy">Darl Maglangit</p></span>
+            <span><h2>Date of Use:</h2><p id="viewRes_dateOfUse">2024-10-31</p></span>
+            <span><h2>Time:</h2><p id="viewRes_time">1:00PM</p><h2>To</h2> 3:00 PM</span>
+            <span><h2>Approved By:</h2><p id="viewRes_approvedBy">Carl Wyne Gallardo</p></span>
+            <div id="viewmessagecontainer"><h2>Message:</h2><div id="viewmessagecontainer2"><p id="viewRes_message">GG</p></div></div>
+        </div>
+        <div class="DarkBackground"></div>
+    </div>
+    
+    
     <span>
         <div id="ScheduledArea">
             <h1>Scheduled</h1>
             <div id="TableCase">
                 <table id="ScheduledListTable">
                     <tr>
-                        <th>
-                            Time & Date
-                        </th>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Item
-                        </th>
+                        <th>Time & Date</th>
+                        <th>Name</th>
+                        <th>Item</th>
                     </tr>
-                    <tr>
-                        <td>
-                            7:15AM - 12/25/24
-                        </td>
-                        <td>
-                            Rodel Tamayo
-                        </td>
-                        <td>
-                            Speaker, Cable
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            8:00AM - 12/12/24
-                        </td>
-                        <td>
-                            Carl Wyne Gallardo
-                        </td>
-                        <td>
-                            Mouse
-                        </td>
-                    </tr>
+                    <!-- Rows will be dynamically added here -->
                 </table>
             </div>
             <span>
@@ -72,6 +65,7 @@
                 <button id="SchedViewMoreBtn">View More ></button>
             </span>
         </div>
+        
 
         
         <div id="IssuedItemsArea">
@@ -194,6 +188,6 @@
     
     
 
-    <script src="../JS/Admin_Reservation.js"></script>
+    <script src="../JS/Admin_Home.js"></script>
 </body>
 </html>

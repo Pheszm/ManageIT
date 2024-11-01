@@ -46,10 +46,14 @@
                 <h1>LOGIN</h1>
                 <img id="SrcbLogoLogin" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
             </span>
+
             <form>
-                <input type="text" id="Usernameinput" name="Username" placeholder="Username.." required>
-                <input type="password" id="Passwordinput" name="Password" placeholder="Password.." required>
-                <input id="loginbtnhero" type="submit" value="Login" onclick="location.href='Source/HTML/Admin_Home.html';">
+                <input type="text" id="Usernameinput" placeholder="Username.." required>
+                <div id="passwarea">
+                    <input type="password" id="Passwordinput" placeholder="Password.." required>
+                    <a id="ToggleHidePassword">Show</a>
+                </div>
+                <button id="loginbtnhero" type="button">Login</button>
             </form>
         </div>
     </div>
@@ -65,14 +69,14 @@
         </span>
 
         <video controls>
-            <source src="Assets/Videos/DemoVideo.mp4" type="video/mp4">
+            <source src="" type="video/mp4">
         </video>
     </div>
 
 
     <div id="HowToUseSection">
         <video controls>
-            <source src="Assets/Videos/DemoVideo.mp4" type="video/mp4">
+            <source src="" type="video/mp4">
         </video>
 
         <span id="HowToUseText">
@@ -154,6 +158,8 @@
         </table>
         <h2>©  2024 - ManageIT, All Rights Reserved</h2>
     </div>
+
+    <script src="Source/JS/Homepage.js"></script>
 </body>
 </html>
 

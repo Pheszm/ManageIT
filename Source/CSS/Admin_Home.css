@@ -90,6 +90,7 @@ html {
     transform: translateX(-100%);
 }
 #SideBarNav{
+    z-index: 30;
     padding-top: 120px;
     position: absolute;
     width: 220px;
@@ -153,6 +154,7 @@ html {
     font-size: 20px;
 }
 
+
 #ScheduledArea table{
     border-collapse: collapse;
     width: 100%;
@@ -163,7 +165,8 @@ html {
 }
 
 #ScheduledArea td{
-    color: #1a54ab;;
+    color: #1a54ab;
+    user-select: none;
 }
 #ScheduledArea tr:nth-child(even) {
     background-color: #ffffff;
@@ -177,6 +180,7 @@ html {
     display: flex;
 }
 #SchedViewDetailsBtn{
+    opacity: 0.5;
     height: 30px;
     font-size: 14px;
     font-weight: bold;
@@ -234,6 +238,7 @@ html {
     border-collapse: collapse;
     width: 100%;
 }
+
 #IssuedItemsArea th{
     background-color: #1a54ab;
     color: #fff;
@@ -415,3 +420,105 @@ html {
 
 
 
+
+
+
+
+
+#ViewDetailsScheduled{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 1;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#SchedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 530px;
+    width: 600px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#SchedDetailsForm h1{
+    color: #093374;
+}
+
+#SchedDetailsForm span{
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#viewmessagecontainer{
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+#viewmessagecontainer2{
+    top: 0;
+    width: 100%;
+    max-height: 100px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100px;
+    border: 1px solid #ccc;  
+}
+#viewRes_message{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#SchedDetailsForm h2, p{
+    line-height: 5px;
+}
+
+#SchedDetailsForm h2{
+    color: #0d4293;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+}

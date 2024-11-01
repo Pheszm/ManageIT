@@ -11,7 +11,11 @@ if ($conn->connect_error) {
 }
 
 // SQL query to fetch data
-$sql = "SELECT faculty_id, faculty_full_name, faculty_role, faculty_status FROM Faculty";
+$sql = "
+    SELECT faculty_id, faculty_full_name, faculty_role, faculty_status 
+    FROM Faculty 
+    ORDER BY faculty_status DESC, faculty_full_name ASC
+";
 $result = $conn->query($sql);
 
 $facultyList = [];

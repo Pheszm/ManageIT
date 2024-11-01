@@ -226,6 +226,25 @@ html::-webkit-scrollbar-thumb:hover {
     width: 500px;
 }
 
+#ToggleHidePassword{
+    user-select: none;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 15px;
+    height: 45px;
+    background-color: #fff;
+    border: 2px solid #e2e2e2;
+    font-size: 15px;
+    width: 15%;
+    text-align: center;
+}
+
+#passwarea{
+    display: flex;
+    margin-left: 5%;
+    width: 90%;
+}
+
 #LoginTitle{
     display: flex;
     align-items: center;
@@ -244,8 +263,8 @@ html::-webkit-scrollbar-thumb:hover {
     margin-left: 120px;
 }
 
-#LoginForm form input[type="text"],
-#LoginForm form input[type="password"]
+#Usernameinput,
+#Passwordinput
 {
     padding: 10px;
     font-family: 'Poppins', sans-serif;
@@ -255,8 +274,15 @@ html::-webkit-scrollbar-thumb:hover {
     margin-left: 5%;
     margin-bottom: 20px; 
     border: 2px solid #e2e2e2;
+    background-color: #fff;
     font-size: 16px;
 }
+
+#Passwordinput{
+    width: 85%;
+    margin-left: 0;
+}
+
 .toggle-btn {   
     margin-left: 5px;
 }
@@ -299,6 +325,7 @@ html::-webkit-scrollbar-thumb:hover {
 
 
 #CurveShape1{
+    user-select: none;
     z-index: -10;
     position: inherit;
     margin-top: -15vw;
@@ -442,6 +469,7 @@ html::-webkit-scrollbar-thumb:hover {
     text-align: center;
 }
 #CurveShape2{
+    user-select: none;
     z-index: -10;
     position: inherit;
     margin-top: 20vw;
