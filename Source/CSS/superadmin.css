@@ -196,6 +196,9 @@ html {
     color: #ffffff;
     line-height: 10px;
     background-color: #0b367b;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
 }
 
 #ItemTable td{

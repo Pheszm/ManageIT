@@ -10,14 +10,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to fetch data, ordering by dateofuse and fromtime
+// Get the current date and time in 'YYYY-MM-DD HH:MM:SS' format
+$currentDateTime = date('Y-m-d H:i:s');
+
+// SQL query to fetch data, excluding past dates, ordered by date and time
 $sql = "SELECT id, dateofuse, fromtime, totime, fullname, materials 
         FROM reserve_submissions 
-        WHERE approved_by IS NOT NULL 
-        AND dateofuse >= CURDATE() 
-        ORDER BY dateofuse, fromtime"; // Order by date and then by fromtime
+        WHERE approved_by IS NULL AND (dateofuse > ? OR (dateofuse = ? AND fromtime >= ?))
+        ORDER BY dateofuse, fromtime ASC";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("sss", $currentDateTime, $currentDateTime, $currentDateTime);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $scheduleData = [];
 

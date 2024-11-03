@@ -14,8 +14,8 @@ if ($conn->connect_error) {
 
 // Get the JSON input
 $data = json_decode(file_get_contents('php://input'), true);
-$username = $data['username'];
-$password = $data['password'];
+$username = $data['username']; // Keep the username as is
+$password = $data['password']; // Keep the password as is
 
 // Prepare and bind
 $stmt = $conn->prepare("SELECT faculty_id, faculty_password, faculty_status FROM Faculty WHERE faculty_username = ?");
@@ -28,7 +28,7 @@ if ($stmt->num_rows > 0) {
     $stmt->bind_result($faculty_id, $stored_password, $faculty_status);
     $stmt->fetch();
 
-    // Verify the password (no hashing)
+    // Verify the password (exact case-sensitive match)
     if ($password === $stored_password) {
         if ($faculty_status == 1) {
             // Store session data

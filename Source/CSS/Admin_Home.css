@@ -152,6 +152,9 @@ html {
     line-height: 10px;
     color: #1a54ab;
     font-size: 20px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
 }
 
 

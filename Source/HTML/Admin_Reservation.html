@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManageIT | Reservation List</title>
-    <link href="Source/CSS/Poppins_Sheet.css" rel="stylesheet">
+    <link href="../CSS/Poppins_Sheet.css" rel="stylesheet">
     <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
     <link rel="stylesheet" href="../CSS/Admin_Reservation.css">
 </head>
@@ -20,16 +20,53 @@
     </div>
 
     <div id="SideBarNav">
-        <button id="HomeBtn" onclick="location.href='Admin_Home.html';"><img src="../../Assets/Images/Home_Icon.png">Home</button>
+        <button id="HomeBtn"><img src="../../Assets/Images/Home_Icon.png">Home</button>
         <button id="ReservationBtn"><img src="../../Assets/Images/Reservations_Icon.png">Reservation</button>
         <button id="ItemsBtn"><img src="../../Assets/Images/Items_Icon.png">Items</button>
         <button id="ActBtn"><img src="../../Assets/Images/ActivityLog_Icon.png">Activity Logs</button>
         <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
     </div>
 
+    <h1 class="ReservationHeader">Reservations</h1>
 
-
+    <div id="PendingArea">
+        <h1>Pending</h1>
+        <div id="TableCase">
+            <table id="PendingListTable">
+                <tr>
+                    <th>Time & Date</th>
+                    <th>Name</th>
+                    <th>Item</th>
+                </tr>
+                <!-- Rows will be dynamically added here -->
+            </table>
+        </div>
+        <span>
+            <button id="PendingDetailsBtn">View Details</button>
+            <button id="PendingViewMoreBtn">View More ></button>
+        </span>
+    </div>
     
+
+    <div id="ApprovedArea">
+        <h1>Approved</h1>
+        <div id="TableCase2">
+            <table id="ApprovedListTable">
+                <tr>
+                    <th>Time & Date</th>
+                    <th>Name</th>
+                    <th>Item</th>
+                </tr>
+                <!-- Rows will be dynamically added here -->
+            </table>
+        </div>
+        <span>
+            <button id="ApprovedDetailsBtn">View Details</button>
+            <button id="ApprovedViewMoreBtn">View More ></button>
+        </span>
+    </div>
+    <button id="ApproveBtn" ><img src="../../Assets/Images/Approve_btn.png" alt="ApproveBtn"></button>
+    <img id="SRCB_BackgroundIMG2" src="../../Assets/Images/SRCB_Logo.png">
 
     <script src="../JS/Admin_Reservation.js"></script>
 </body>

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    height: 729px;
+    height: 100vh;
     background-color: #FFFFFF;
     display: flex;
     background-image: linear-gradient(180deg, #0091E2, #0A4194);
@@ -14,6 +14,21 @@ html {
 * { /*Set sizing perfect. */
     box-sizing: border-box; /* Apply to all elements */
 }
+
+
+
+.ReservationHeader{
+    font-size: 40px;
+    color: #fff;
+    font-weight: 500;
+
+    position: absolute;
+    top: 10%; /* Position from the top */
+    left: 50%; /* Position from the left */
+    transform: translate(-50%, -50%); 
+}
+
+
 
 /* Top Navigation */
 #TopNavBar{
@@ -43,6 +58,17 @@ html {
     top: -270%;
     height: 900%;
 }
+
+#SRCB_BackgroundIMG2{
+    opacity: 0.1;
+    position: absolute;
+    left: 50%; /* Position from the left */
+    transform: translate(-50%); 
+    z-index: -1;
+    top: 16vh;
+    height: 70vh;
+}
+
 
 #LogoutBtn{
     margin-right: 3%;
@@ -84,6 +110,7 @@ html {
     position: absolute;
     width: 220px;
     height: 100%;
+    z-index: 10;
     background-color: #FFFFFF;
     transition: transform 0.3s ease;
     transform: translateX(0%); /* Hidden by default */
@@ -117,4 +144,220 @@ html {
 
 #ReservationBtn{
     background-image: linear-gradient(-90deg, #eeeeee, #e4e4e4);
+}
+
+
+
+
+
+
+
+
+
+/*Pending Area*/
+
+#PendingArea{
+    border-radius: 10px;
+    margin-top: 20vh;
+    margin-left: 10vw;
+    width: 35vw;
+    height: 60vh;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+#PendingArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 20px;
+}
+
+#TableCase{
+    background-color: #f0f0f0;
+    height: 47vh;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+#PendingArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#PendingArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#PendingArea td{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 200px;  
+}
+#PendingArea tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#PendingArea tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#PendingArea span{
+    margin-top: 10px;
+    display: flex;
+}
+#PendingDetailsBtn{
+    opacity: 0.5;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1a54ab;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#PendingViewMoreBtn{
+    margin-left: auto;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #1a54ab;
+    border-radius: 30px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*Pending Area*/
+
+
+
+
+
+
+
+
+
+/*Approved Area*/
+
+#ApprovedArea{
+    border-radius: 10px;
+    margin-top: 20vh;
+    margin-left: 10vw;
+    width: 35vw;
+    height: 60vh;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+#ApprovedArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 20px;
+}
+
+#TableCase2{
+    background-color: #f0f0f0;
+    height: 47vh;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+#ApprovedArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#ApprovedArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#ApprovedArea td{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 200px;  
+}
+#ApprovedArea tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#ApprovedArea tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApprovedArea span{
+    margin-top: 10px;
+    display: flex;
+}
+#ApprovedDetailsBtn{
+    opacity: 0.5;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1a54ab;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#ApprovedViewMoreBtn{
+    margin-left: auto;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #1a54ab;
+    border-radius: 30px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*Approved Area*/
+
+
+
+
+
+
+
+
+
+#ApproveBtn{
+    background-color: transparent;
+    border: none;
+    opacity: 0.7;
+    position: absolute;
+    left: 50%; 
+    top: 50%;
+    transform: translate( -50%, -50%); 
+    z-index: 1;
+    height: 6vw;
+    transition: transform 0.2s ease; /* Smooth transition for scaling */
+}
+#ApproveBtn:hover{
+    transform: translate(-50%, -50%) scale(1.1); 
+}
+
+#ApproveBtn img{
+    height: 6vw;
 }

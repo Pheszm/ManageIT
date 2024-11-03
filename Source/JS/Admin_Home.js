@@ -10,8 +10,69 @@ document.getElementById("exitbtn").addEventListener("click", function() {
 
 
 
-var NavStatus = false;
 
+
+
+
+
+
+// NAVIGATION FUNCTIONS
+
+// Get the current URL
+const url = new URL(window.location.href);
+
+// Get the facultyId from the URL
+const facultyId = url.searchParams.get('facultyId');
+
+document.getElementById('HomeBtn').addEventListener('click', () => {
+    if (facultyId) {
+        window.location.href = `Admin_Home.html?facultyId=${facultyId}`;
+    } else {
+        window.location.href = '../../index.html';
+    }
+});
+
+document.getElementById('ReservationBtn').addEventListener('click', () => {
+    if (facultyId) {
+        window.location.href = `Admin_Reservation.html?facultyId=${facultyId}`;
+    } else {
+        window.location.href = '../../index.html';
+    }
+});
+
+document.getElementById('ItemsBtn').addEventListener('click', () => {
+    if (facultyId) {
+        window.location.href = `Admin_Items.html?facultyId=${facultyId}`;
+    } else {
+        window.location.href = '../../index.html';
+    }
+});
+
+document.getElementById('ActBtn').addEventListener('click', () => {
+    if (facultyId) {
+        window.location.href = `Admin_ActivityLogs.html?facultyId=${facultyId}`;
+    } else {
+        window.location.href = '../../index.html';
+    }
+});
+
+document.getElementById('ReportsBtn').addEventListener('click', () => {
+    if (facultyId) {
+        window.location.href = `Admin_Reports.html?facultyId=${facultyId}`;
+    } else {
+        window.location.href = '../../index.html';
+    }
+});
+
+
+
+
+
+
+
+
+//NAVIGATION BAR AUTO CLOSE
+var NavStatus = false;
 function StatusOfNav() {
     const sidebar = document.getElementById("SideBarNav");
     if (NavStatus) {
@@ -20,8 +81,9 @@ function StatusOfNav() {
         sidebar.classList.add("close");
     }
 }
-
 StatusOfNav();
+
+
 
 
 /// CHECK IF IT HAS FACULTY ID
@@ -33,6 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
   //      location.href = '../../index.html';
     }
 });
+
+
 
 
 // LOAD APPROVED RESERVATIONS IN THE TABLE
@@ -84,7 +148,14 @@ document.getElementById('ScheduledListTable').addEventListener('click', function
         targetRow.style.backgroundColor = "#9BB9E5FF"; // Corrected syntax
         SchedViewDetailsBtn.style.opacity = 1;
         // Retrieve the hidden input value (reservation ID)
-        SelectedReservationId = targetRow.querySelector('input[type="hidden"]').value;
+        var SelectReservationId = targetRow.querySelector('input[type="hidden"]').value;
+        if(SelectReservationId != SelectedReservationId){
+            SelectedReservationId = SelectReservationId;
+        }else{
+            targetRow.style.backgroundColor = "Transparent"; // Corrected syntax
+            SchedViewDetailsBtn.style.opacity = 0.7;
+            SelectedReservationId = '';
+        }
     }
 });
 
