@@ -16,14 +16,46 @@
 
 
 
-
 // LOGIN PROCESS
 document.getElementById('loginbtnhero').addEventListener('click', async (event) => {
     event.preventDefault(); // Prevent the default form submission
 
-    const username = document.getElementById('Usernameinput').value;
-    const password = document.getElementById('Passwordinput').value;
+    const usernameInput = document.getElementById('Usernameinput');
+    const passwordInput = document.getElementById('Passwordinput');
 
+    // Clear previous custom validity messages
+    usernameInput.setCustomValidity('');
+    passwordInput.setCustomValidity('');
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+
+    // Input validation
+    if (!username || !password) {
+        if (!username) {
+            usernameInput.setCustomValidity("Please fill in the username.");
+        }
+        if (!password) {
+            passwordInput.setCustomValidity("Please fill in the password.");
+        }
+        passwordInput.reportValidity(); // Show the message
+        usernameInput.reportValidity(); // Show the message
+        return;
+    }
+
+    if (username.length < 5) {
+        usernameInput.setCustomValidity("Username must be at least 5 characters long.");
+        usernameInput.reportValidity(); // Show the message
+        return;
+    }
+
+    if (password.length < 6) {
+        passwordInput.setCustomValidity("Password must be at least 6 characters long.");
+        passwordInput.reportValidity(); // Show the message
+        return;
+    }
+
+    // If all validations pass, proceed with the login
     try {
         const response = await fetch('Source/PHP/Homepage_LoginProcess.php', {
             method: 'POST',
@@ -37,14 +69,16 @@ document.getElementById('loginbtnhero').addEventListener('click', async (event) 
 
         if (result.success) {
             // Redirect to Admin_Home.html with FacultyId as a query parameter
-            alert("Successfully Login.");
+            alert("Successfully Logged In.");
             window.location.href = `Source/HTML/Admin_Home.html?facultyId=${result.facultyId}`;
         } else {
-            // Display error message
-            alert(result.message);
+            // Handle server response errors
+            usernameInput.setCustomValidity(result.message);
+            usernameInput.reportValidity(); // Show the message
         }
     } catch (error) {
-            console.error('Error:', error);
+        console.error('Error:', error);
         alert('An error occurred. Please try again.');
     }
 });
+

@@ -39,17 +39,18 @@
         <div id="AddingForm">  
             <button id="extbtn">X</button>
             <h1>Adding Account</h1>     
-            <form action="../Source/PHP/SuperAdmin_AddingAccount.php" method="post">
+            <form id="facultyForm" novalidate>
                 <input type="text" id="adding_fullname" name="fullname" placeholder="Full Name.." required>
                 <input type="email" id="adding_email" name="email" placeholder="Email Address.." required>
                 <input type="number" id="adding_phone" name="phone" placeholder="Phone Number.." required>
                 <input type="text" id="adding_username" name="username" placeholder="Username.." required>
-                <input type="text" id="adding_password" name="password" placeholder="Password.." required> <!-- Changed to text -->
+                <input type="text" id="adding_password" name="password" placeholder="Password.." required>
                 <button type="submit">Submit</button>
             </form>            
         </div>
         <div id="DarkBlur"></div>
     </div>
+    
 
 
     <div id="CheckFacultyData">

@@ -14,7 +14,7 @@ document.getElementById("exitbtn").addEventListener("click", function() {
 
 
 
-// CHECK IF DOM IS READY
+// QR FUNCTIONALITY
 function domReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(fn, 1);
@@ -22,7 +22,6 @@ function domReady(fn) {
         document.addEventListener("DOMContentLoaded", fn);
     }
 }
-
 domReady(function() {
     var myqr = document.getElementById('you-qr-result');
     var lastResult, countResults = 0;
@@ -72,53 +71,164 @@ domReady(function() {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reservationForm');
+    const dateofuse = document.getElementById('dateofuse');
+    const fromtime = document.getElementById('fromtime');
+    const totime = document.getElementById('totime');
+    const addbtnnn = document.getElementById('AddbtnShow');
 
-// Collect materials before submitting the form
-document.querySelector("form").onsubmit = function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    const materialz = [];
-    const rows = document.querySelectorAll("#ItemTable tr");
-
-    rows.forEach(row => {
-        const name = row.cells[0] ? row.cells[0].textContent.trim() : ''; // Get the material name safely
-        const qtyElement = row.querySelector("span p"); // Select the <p> inside <span>
-        const qty = qtyElement ? qtyElement.textContent.trim() : "0"; // Get quantity safely
-        const itemIdElement = row.querySelector("input.Stored_itemId"); // Select the hidden input for itemId
-        const itemId = itemIdElement ? itemIdElement.value : ''; // Get the itemId safely
-
-        // Only push valid entries (skip if name is empty or if it's the default placeholder)
-        if (name && name !== "Name" && itemId) { // Check if name and itemId are not empty
-            materialz.push(`{"${itemId}","${name}","${qty}"}`); // Format as requested
-        }
+    // Clear custom validity on date input change
+    dateofuse.addEventListener('input', function() {
+        dateofuse.setCustomValidity(''); // Clear the custom validity message
     });
 
-    // Create the final string without extra escaping
-    const formattedMaterials = materialz.join(','); // Join with comma
-    document.querySelector("input[name='materialz']").value = formattedMaterials; // Set the input value
+    // Clear custom validity on 'To' time input change
+    totime.addEventListener('input', function() {
+        totime.setCustomValidity(''); // Clear the custom validity message
+    });
 
-    // Debugging: Check the value before submission
-    console.log(formattedMaterials);
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
 
-    // Now submit the form programmatically
-    this.submit(); // This will submit the form after collecting the data
-};
+        // Input fields
+        const fullname = document.getElementById('fullname');
+        const course_year = document.getElementsByName('course_year')[0];
+        const subject = document.getElementsByName('subject')[0];
+        const requested_by = document.getElementsByName('requested_by')[0];
+        const message = document.getElementById('Messageinput');
+
+        // Reset custom validity for all fields
+        fullname.setCustomValidity('');
+        dateofuse.setCustomValidity('');
+        fromtime.setCustomValidity('');
+        totime.setCustomValidity('');
+        course_year.setCustomValidity('');
+        subject.setCustomValidity('');
+        requested_by.setCustomValidity('');
+        message.setCustomValidity('');
+
+        // Validate that the date of use is at least one day in the future
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set time to midnight for today
+        const nextDay = new Date(today);
+        nextDay.setDate(today.getDate() + 1); // Move to the next day
+
+        // Get the selected date from the date picker
+        const selectedDate = new Date(dateofuse.value);
+
+        // Log the dates for debugging
+        console.log("Today: ", today);
+        console.log("Next Day: ", nextDay);
+        console.log("Selected Date: ", selectedDate);
+
+        // Check if the selected date is at least one day in the future
+        if (selectedDate < nextDay) {
+            dateofuse.setCustomValidity("The reservation date must be at least one day from today.");
+            dateofuse.reportValidity(); // Show the validation message
+
+            return; // Stop submission if the date is not valid
+        }
+
+        // Log time values for debugging
+        const fromTimeValue = fromtime.value;
+        const toTimeValue = totime.value;
+
+        console.log("From Time: ", fromTimeValue);
+        console.log("To Time: ", toTimeValue);
+
+        // Convert to Date objects for comparison
+        const fromTime = new Date(`1970-01-01T${fromTimeValue}:00`);
+        const toTime = new Date(`1970-01-01T${toTimeValue}:00`);
+
+        // Check time validity: from time must be before to time
+        if (fromTime >= toTime) {
+            totime.setCustomValidity("The 'To' time must be later than the 'From' time.");
+            totime.reportValidity(); // Show the validation message
+            return; // Stop submission if the time is not valid
+        }
+
+        // Check validity of each input field
+        const isFormValid = fullname.reportValidity() && dateofuse.reportValidity() &&
+            fromtime.reportValidity() && totime.reportValidity() &&
+            course_year.reportValidity() && subject.reportValidity() &&
+            requested_by.reportValidity() && message.reportValidity();
+
+        if (!isFormValid) {
+            return; // Stop submission if any field is invalid
+        }
+
+        // Collect items in the table
+        const materialz = [];
+        const rows = document.querySelectorAll("#ItemTable tr");
+
+        rows.forEach(row => {
+            const name = row.cells[0] ? row.cells[0].textContent.trim() : '';
+            const qtyElement = row.querySelector("span p");
+            const qty = qtyElement ? qtyElement.textContent.trim() : "0";
+            const itemIdElement = row.querySelector("input.Stored_itemId");
+            const itemId = itemIdElement ? itemIdElement.value : '';
+
+            if (name && name !== "Name" && itemId) {
+                materialz.push(`{"${itemId}","${name}","${qty}"}`);
+            }
+        });
+
+        if (materialz.length === 0) {
+            addbtnnn.setCustomValidity("You must add at least one material.");
+            addbtnnn.reportValidity();
+            return; // Stop submission if no materials are added
+        }
+        
+
+        // Format materials for submission
+        const formattedMaterials = materialz.join(',');
+        document.querySelector("input[name='materialz']").value = formattedMaterials;
+
+        // Prepare the data to be sent
+        const formData = new FormData();
+        formData.append('fullname', fullname.value.trim());
+        formData.append('dateofuse', dateofuse.value);
+        formData.append('fromtime', fromtime.value);
+        formData.append('totime', totime.value);
+        formData.append('course_year', course_year.value.trim());
+        formData.append('subject', subject.value.trim());
+        formData.append('requested_by', requested_by.value.trim());
+        formData.append('Message', message.value.trim());
+        formData.append('materialz', formattedMaterials);
+
+        // Send data to the PHP script
+        fetch('../PHP/ReservationForm_SubmitForm.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Submit successful!"); // Show alert
+                window.location.href = '../../index.html'; // Redirect to HOME.html
+            } else {
+                throw new Error('Submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("There was an error with your submission.");
+        });
+    });
+});
 
 
 
 
 
 
-    // Check URL for success parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('success')) {
-        alert("Submit successful!"); // Show alert
-        window.location.href = '../../index.html'; // Redirect to HOME.html
-    }
+
     
 
 
-    
+
+
+    //ITEM TABLE FETCHING
     const searchBox = document.getElementById('SearchBoxForItem');
     const ModelComboBox = document.getElementById('ModelComboBox');
     const CategoryComboBox = document.getElementById('CategoryComboBox');
@@ -207,9 +317,8 @@ document.querySelector("form").onsubmit = function(event) {
 
 
 
-
+        //SELECTED ITEMS GOES TO THE TABLE
         function handleButtonClick(itemId) {
-            console.log("Button clicked for item ID: " + itemId);
             document.getElementById("AddingMaterialsForm").style.display = "none";
         
             // Fetch item data from the server
@@ -260,4 +369,12 @@ document.querySelector("form").onsubmit = function(event) {
             const row = button.closest('tr');
             row.parentNode.removeChild(row);
         }
+        
+
+
+
+
+
+
+
         

@@ -41,10 +41,10 @@ if ($stmt->num_rows > 0) {
             echo json_encode(['success' => false, 'message' => 'Your account is inactive.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid username or password.']);
+        echo json_encode(['success' => false, 'message' => 'Incorrect username or password.']);
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'Invalid username or password.']);
+    echo json_encode(['success' => false, 'message' => 'Incorrect username or password.']);
 }
 
 $stmt->close();
