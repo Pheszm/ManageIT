@@ -140,6 +140,39 @@
         <div class="DarkBackground"></div>
     </div>
 
+    <div id="AllApprovedReservationList">
+        <div id="AllApprovedArea">
+            <div id="exitbtn6">X</div>
+            <h1>All Reservation List</h1>
+            <span>
+                <select id="StatusComboBox">
+                    <option value="">Status</option>
+                    <option value="ONGOING">ONGOING</option>
+                    <option value="ISSUED">ISSUED</option>
+                    <option value="CANCELED">CANCELED</option>
+                    <option value="RETURNED ON TIME">RETURNED ON TIME</option>
+                    <option value="RETURNED ON LATE">RETURNED ON LATE</option>
+                    <option value="MISSING">MISSING</option>
+                </select>
+                <input id="SearchBarAllApproved" placeholder="Search Here..">
+            </span>
+
+            <div id="TableCase6">
+                <table id="AllApproveReservation">
+                    <tr>
+                        <th>Time & Date</th>
+                        <th>Name</th>
+                        <th>Item</th>
+                    </tr>
+                    <!-- Rows will be dynamically added here -->
+                </table>
+            </div>
+                <button id="ViewDetailsBtn">View Details</button>
+        </div>
+        <div class="DarkBackground"></div>
+    </div>
+
+    
 
     <script src="../JS/Admin_Reservation.js"></script>
 </body>

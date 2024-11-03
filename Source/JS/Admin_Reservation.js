@@ -13,7 +13,13 @@ document.getElementById("exitbtn2").addEventListener("click", function() {
     document.getElementById("ViewApprovedReserv").style.display = "none";
 });
 
+document.getElementById("exitbtn6").addEventListener("click", function() {
+    document.getElementById("AllApprovedReservationList").style.display = "none";
+});
 
+document.getElementById("ApprovedViewMoreBtn").addEventListener("click", function() {
+    document.getElementById("AllApprovedReservationList").style.display = "flex";
+});
 
 
 
@@ -371,7 +377,8 @@ document.getElementById('ApprovedDetailsBtn').addEventListener('click', function
                 // Clear existing rows
                 const table = document.getElementById('pendingviewmaterial3');
                 table.innerHTML = '<tr><th>Item</th><th>Qnty</th></tr>'; // Reset table
-
+                const cancelbtn = document.getElementById('cancelreservbtn');
+                cancelbtn.style.display = 'block';
                 // Add new rows for materials
                 const materials = data.materials.split(', ');
                 materials.forEach(material => {
@@ -437,6 +444,140 @@ document.getElementById('cancelreservbtn').addEventListener('click', () => {
 
 
 
+
+// LOAD ALL APPROVED RESERVATIONS IN THE TABLE
+function RefreshTable() {
+    const searchTerm = searchBar.value; // Get the value from the search bar
+    const statusFilter = statusComboBox.value; // Get the selected status
+    
+    // Build the query parameters
+    const params = new URLSearchParams({
+        search: searchTerm,
+        status: statusFilter
+    });
+
+    fetch(`../PHP/Admin_Reservation_ListOfApproved.php?${params.toString()}`)
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('AllApproveReservation');
+
+            // Clear existing rows
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+
+            // Populate table with fetched data
+            data.forEach(item => {
+                const row = table.insertRow();
+                row.insertCell(0).textContent = item.scheduled_time;
+                row.insertCell(1).textContent = item.fullname;
+                row.insertCell(2).textContent = item.materials;
+
+                // Hidden input for reservation ID
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.value = item.reservation_id;
+                hiddenInput.name = 'reservationId[]';
+                row.appendChild(hiddenInput);
+            });
+        })
+        .catch(error => console.error('Error fetching schedule:', error));
+}
+
+document.addEventListener('DOMContentLoaded', RefreshTable);
+const statusComboBox = document.getElementById('StatusComboBox');
+const searchBar = document.getElementById('SearchBarAllApproved');
+
+// Log the selected status when the dropdown value changes
+statusComboBox.addEventListener('change', function() {
+    RefreshTable();
+});
+
+// Log the search input value when it changes
+searchBar.addEventListener('input', function() {
+    RefreshTable();
+});
+
+
+
+
+
+
+
+
+//CLICKABLE ROW FUNCTION APPROVED RESERVATIONS
+var SelectedApprovedId2;
+document.getElementById('AllApproveReservation').addEventListener('click', function(e) {
+    const SchedViewDetailsBtn = document.getElementById('ViewDetailsBtn');
+    const targetRow = e.target.closest('tr');
+    if (targetRow && targetRow.rowIndex > 0) { // Check if it's not the header row
+        // Clear any inline styles from previous selections
+        Array.from(this.rows).forEach(row => {
+            row.style.border = "";
+            row.style.backgroundColor = ""; // Reset background color
+        });
+        targetRow.style.backgroundColor = "#9BB9E5FF"; // Corrected syntax
+        SchedViewDetailsBtn.style.opacity = 1;
+
+        // Retrieve the hidden input value (reservation ID)
+        var SelectApprovedId = targetRow.querySelector('input[type="hidden"]').value;
+        if(SelectApprovedId != SelectedApprovedId2){
+            SelectedApprovedId2 = SelectApprovedId;
+        }else{
+            targetRow.style.backgroundColor = "transparent"; // Corrected syntax
+            SchedViewDetailsBtn.style.opacity = 0.5;
+            SelectedApprovedId2 = '';
+        }
+    }
+});
+
+
+
+// ALL LIST APPROVED VIEW DETAILS
+document.getElementById('ViewDetailsBtn').addEventListener('click', function() {
+    if (SelectedApprovedId2) {
+        fetch(`../PHP/Admin_Reservation_ViewApproved.php?id=${SelectedApprovedId2}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('viewRes_fullName2').textContent = data.fullname;
+                document.getElementById('viewRes_courseYear2').textContent = data.course_year;
+                document.getElementById('viewRes_subject2').textContent = data.subject;
+                document.getElementById('viewRes_requestedBy2').textContent = data.requested_by;
+                document.getElementById('viewRes_dateOfUse2').textContent = convertToReadableDate(data.dateofuse);
+                document.getElementById('viewRes_fromtime2').textContent = convertToAMPM(data.fromtime);
+                document.getElementById('viewRes_totime2').textContent = convertToAMPM(data.totime);
+                document.getElementById('viewRes_message2').textContent = data.message;
+                document.getElementById('viewRes_Status2').textContent = data.Transaction_status; // Use correct property name
+                document.getElementById('viewRes_RetTime2').textContent = data.Transaction_ReturnedTime; // Use correct property name
+                document.getElementById('viewRes_Approv2').textContent = data.approved_by_name; // Use correct property name
+                
+
+                // Clear existing rows
+                const table = document.getElementById('pendingviewmaterial3');
+                const cancelbtn = document.getElementById('cancelreservbtn');
+                cancelbtn.style.display = 'none';
+                table.innerHTML = '<tr><th>Item</th><th>Qnty</th></tr>'; // Reset table
+
+                // Add new rows for materials
+                const materials = data.materials.split(', ');
+                materials.forEach(material => {
+                    const row = table.insertRow();
+                    const itemCell = row.insertCell(0);
+                    const quantityCell = row.insertCell(1);
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join remaining parts as item name
+                    itemCell.textContent = itemName;
+                    quantityCell.textContent = quantity;
+                });
+
+                // Show the reservation details modal
+                document.getElementById('ViewApprovedReserv').style.display = 'flex';
+            })
+            .catch(error => console.error('Error fetching reservation details:', error));
+    } else {
+        console.log("No reservation selected.");
+    }
+});
 
 
 

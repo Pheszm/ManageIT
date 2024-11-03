@@ -10,16 +10,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the current date in 'YYYY-MM-DD' format
-$currentDate = date('Y-m-d');
+// Prepare search parameters
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+$statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
 
-// SQL query to fetch data, excluding past dates, ordered by date and time
-$sql = "SELECT id, dateofuse, fromtime, totime, fullname, materials 
-        FROM reserve_submissions 
-        WHERE approved_by IS NOT NULL AND dateofuse > ? 
-        ORDER BY dateofuse, fromtime"; // Order by date and then by fromtime
+// SQL query to fetch data, with JOIN to the Transactions table
+$sql = "SELECT r.id, r.dateofuse, r.fromtime, r.totime, r.fullname, r.materials, t.Transaction_status 
+        FROM reserve_submissions r
+        LEFT JOIN Transactions t ON r.id = t.Transaction_Reserve_id
+        WHERE r.approved_by IS NOT NULL 
+        AND r.fullname LIKE ? 
+        AND (t.Transaction_status LIKE ? OR t.Transaction_status IS NULL)
+        ORDER BY r.dateofuse, r.fromtime";
+
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $currentDate);
+$searchTermLike = '%' . $searchTerm . '%';
+$statusFilterLike = '%' . $statusFilter . '%';
+$stmt->bind_param("ss", $searchTermLike, $statusFilterLike);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -50,19 +57,14 @@ $conn->close();
 function parseMaterials($materials)
 {
     $items = [];
-    // Remove outer quotes and backslashes
     $materials = trim($materials, '"'); // Remove leading and trailing quotes
     $materials = str_replace('\\', '', $materials); // Remove backslashes
-
-    // Split by '},{' to get individual items
     $entries = explode('},{', $materials);
 
     foreach ($entries as $entry) {
-        // Remove any leading/trailing spaces and unwanted characters
         $entry = trim($entry, '{}'); // Trim braces
-        // Split by commas and extract Item_Id, Item_Name, and Quantity
         $parts = explode(',', $entry);
-        if (count($parts) === 3) { // Ensure there are exactly 3 parts
+        if (count($parts) === 3) {
             $quantity = trim($parts[2], '"'); // Quantity
             $itemName = trim($parts[1], '"'); // Item_Name
             $items[] = "{$quantity} {$itemName}"; // Format as "Quantity Item_Name"
