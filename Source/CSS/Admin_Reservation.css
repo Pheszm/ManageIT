@@ -200,7 +200,7 @@ html {
     white-space: nowrap;        /* Prevents text from wrapping to a new line */
     overflow: hidden;           /* Hides overflow text */
     text-overflow: ellipsis;   /* Displays "..." for truncated text */
-    max-width: 200px;  
+    max-width: 100px;  
 }
 #PendingArea tr:nth-child(even) {
     background-color: #ffffff;
@@ -294,7 +294,7 @@ html {
     white-space: nowrap;        /* Prevents text from wrapping to a new line */
     overflow: hidden;           /* Hides overflow text */
     text-overflow: ellipsis;   /* Displays "..." for truncated text */
-    max-width: 200px;  
+    max-width: 120px; 
 }
 #ApprovedArea tr:nth-child(even) {
     background-color: #ffffff;
@@ -361,3 +361,381 @@ html {
 #ApproveBtn img{
     height: 6vw;
 }
+
+
+
+
+
+
+/* Pending Details Form */
+
+#ViewPendingReserv{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 1;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#PendingDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 530px;
+    width: 700px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#PendingDetailsForm h1{
+    color: #0e418f;
+}
+
+#PendingDetailsForm span{
+    background-color: #ececec;
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 35px;
+    width: 330px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+
+
+}
+
+#viewmessagecontainer{
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+    background-color: #ececec;
+    border-radius: 20px;
+}
+#viewmessagecontainer2{
+    top: 0;
+    width: 100%;
+    max-height: 100px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100px;
+}
+#viewRes_message{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#PendingDetailsForm h2, p{
+    line-height: 11px;
+    font-size: 16px;
+}
+
+#PendingDetailsForm h2{
+    color: #0e418f;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn1 {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#exitbtn1:hover{
+    background-color: #6b0303;
+}
+
+#schedDetailsBox1{
+    position: absolute;
+    background-color: #f0f0f0;
+    height: 260px;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+    right: 30px;
+    top: 90px;
+    width: 43%;
+}
+
+#PendingDetailsForm table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#PendingDetailsForm th{
+    background-color: #0e418f;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#PendingDetailsForm td{
+    color: #1a54ab;
+    user-select: none;
+}
+#PendingDetailsForm tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#PendingDetailsForm tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApproveBtn2{
+    margin-top: 10px;
+    width: 120px;
+    margin-left: auto;
+    background-color: #037620;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#ApproveBtn2:hover{
+    background-color: #03611a;
+}
+/* Pending Details Form */
+
+
+
+
+
+
+
+
+
+
+/* APPROVE Details Form */
+
+#ViewApprovedReserv{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 1;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#ApprovedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 560px;
+    width: 800px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#ApprovedDetailsForm h1{
+    color: #0e418f;
+}
+
+#ApprovedDetailsForm span{
+    background-color: #ececec;
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    height: 35px;
+    width: 368px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+#ColRowsss{
+    width: 100%;
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+
+#viewmessagecontainer4{
+    top: 0;
+    width: 100%;
+    max-height: 120px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100%;
+}
+
+#viewRes_message2{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#ApprovedDetailsForm h2, p{
+    line-height: 11px;
+    font-size: 16px;
+}
+
+#ApprovedDetailsForm h2{
+    color: #0e418f;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn2 {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#exitbtn2:hover{
+    background-color: #6b0303;
+}
+
+#schedDetailsBox2{
+    position: absolute;
+    background-color: #f0f0f0;
+    height: 250px;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+    right: 30px;
+    top: 90px;
+    width: 45%;
+}
+
+#ApprovedDetailsForm table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#ApprovedDetailsForm th{
+    background-color: #0e418f;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#ApprovedDetailsForm td{
+    color: #1a54ab;
+    user-select: none;
+}
+#ApprovedDetailsForm tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#ApprovedDetailsForm tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApproveBtn2{
+    margin-top: 10px;
+    width: 120px;
+    margin-left: auto;
+    background-color: #037620;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#ApproveBtn2:hover{
+    background-color: #03611a;
+}
+
+#case2, #case3 {
+    width: 50%; /* Set both to 50% */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+#case2 {
+    display: flex;
+    background-color: #ececec;
+    height: 95%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#cancelreservbtn{
+    width: 120px;
+    margin-left: auto;
+    background-color: #931a0f;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#cancelreservbtn:hover{
+    background-color: #7d1107;
+}
+
+#case3 span{
+    width: 100%;
+}
+/* APPROVE Details Form */

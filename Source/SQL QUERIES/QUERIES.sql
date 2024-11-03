@@ -39,4 +39,13 @@ CREATE TABLE Items (
 );
 
 
-
+CREATE TABLE Transactions (
+    Transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    Transaction_Reserve_id INT,
+    Transaction_status VARCHAR(100),
+    Transaction_current INT default 1,
+    Transaction_Items TEXT,
+    Transaction_ReturnedTime TIME,
+    Transaction_Comment TEXT,
+    FOREIGN KEY (Transaction_Reserve_id) REFERENCES reserve_submissions(id)
+);

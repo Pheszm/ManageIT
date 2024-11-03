@@ -13,6 +13,8 @@ if ($conn->connect_error) {
 $data = json_decode(file_get_contents('php://input'), true);
 $reservationId = $data['id'] ?? '';
 $approvedBy = $data['approved_by'] ?? '';
+$transactionStatus = 'ONGOING'; // Set the default status
+$transactionComment = $data['comment'] ?? null; // Optional comment
 
 // Prepare the SQL statement to update the reservation
 $stmt = $conn->prepare("UPDATE reserve_submissions SET approved_by = ? WHERE id = ?");
@@ -25,7 +27,35 @@ $stmt->bind_param("ii", $approvedBy, $reservationId);
 
 // Execute the statement
 if ($stmt->execute()) {
-    echo json_encode(["success" => true]);
+    // Fetch the materials from the reserve_submissions table
+    $stmt = $conn->prepare("SELECT materials FROM reserve_submissions WHERE id = ?");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $stmt->bind_param("i", $reservationId);
+    $stmt->execute();
+    $stmt->bind_result($materials);
+    $stmt->fetch();
+    $stmt->close(); // Close the fetch statement
+
+    // Prepare to insert into Transactions table
+    $stmt = $conn->prepare("INSERT INTO Transactions (Transaction_Reserve_id, Transaction_status, Transaction_current, Transaction_Items, Transaction_Comment) VALUES (?, ?, ?, ?, ?)");
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    $transactionCurrent = 1; // Default value as mentioned in your table structure
+
+    // Bind parameters for the transaction insert
+    $stmt->bind_param("isiss", $reservationId, $transactionStatus, $transactionCurrent, $materials, $transactionComment);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true]);
+    } else {
+        echo json_encode(["success" => false, "error" => $stmt->error]);
+    }
 } else {
     echo json_encode(["success" => false, "error" => $stmt->error]);
 }

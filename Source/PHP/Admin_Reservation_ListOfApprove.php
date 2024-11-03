@@ -14,14 +14,10 @@ if ($conn->connect_error) {
 $currentDate = date('Y-m-d');
 
 // SQL query to fetch data, excluding past dates, ordered by date and time
-$sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.materials 
-        FROM reserve_submissions AS rs
-        JOIN Transactions AS t ON rs.id = t.Transaction_Reserve_id 
-        WHERE rs.approved_by IS NOT NULL 
-          AND rs.dateofuse > ? 
-          AND t.Transaction_status = 'ONGOING' 
-        ORDER BY rs.dateofuse, rs.fromtime"; // Order by date and then by fromtime
-
+$sql = "SELECT id, dateofuse, fromtime, totime, fullname, materials 
+        FROM reserve_submissions 
+        WHERE approved_by IS NOT NULL AND dateofuse > ? 
+        ORDER BY dateofuse, fromtime"; // Order by date and then by fromtime
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $currentDate);
 $stmt->execute();
