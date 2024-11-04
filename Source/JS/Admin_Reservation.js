@@ -491,11 +491,17 @@ const searchBar = document.getElementById('SearchBarAllApproved');
 // Log the selected status when the dropdown value changes
 statusComboBox.addEventListener('change', function() {
     RefreshTable();
+    SelectedApprovedId2 = '';
+    const SchedViewDetailsBtn = document.getElementById('ViewDetailsBtn');
+    SchedViewDetailsBtn.style.opacity = 0.5;
 });
 
 // Log the search input value when it changes
 searchBar.addEventListener('input', function() {
     RefreshTable();
+    SelectedApprovedId2 = '';
+    const SchedViewDetailsBtn = document.getElementById('ViewDetailsBtn');
+    SchedViewDetailsBtn.style.opacity = 0.5;
 });
 
 

@@ -1,5 +1,5 @@
 <?php
-include 'ConnectionString.php';
+include 'ConnectionString.php'; // Your connection settings
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -11,13 +11,16 @@ if ($conn->connect_error) {
 
 $reservationId = $_GET['id'];
 
-// Prepare and execute the SQL statement with a JOIN
+// Prepare and execute the SQL statement with JOINs
 $sql = "SELECT rs.fullname, rs.course_year, rs.subject, rs.materials, 
                rs.requested_by, rs.dateofuse, rs.fromtime, rs.totime, 
-               rs.message, f.faculty_full_name AS approved_by_name 
+               rs.message, f.faculty_full_name AS approved_by_name,
+               t.Transaction_status, t.Transaction_ReturnedTime
         FROM reserve_submissions rs 
         LEFT JOIN Faculty f ON rs.approved_by = f.faculty_id 
+        LEFT JOIN Transactions t ON rs.id = t.Transaction_Reserve_id 
         WHERE rs.id = ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $reservationId);
 $stmt->execute();
@@ -43,22 +46,17 @@ $conn->close();
 function parseMaterials($materials)
 {
     $items = [];
-    // Remove outer quotes and backslashes
-    $materials = trim($materials, '"'); // Remove leading and trailing quotes
-    $materials = str_replace('\\', '', $materials); // Remove backslashes
-
-    // Split by '},{' to get individual items
+    $materials = trim($materials, '"');
+    $materials = str_replace('\\', '', $materials);
     $entries = explode('},{', $materials);
 
     foreach ($entries as $entry) {
-        // Remove any leading/trailing spaces and unwanted characters
-        $entry = trim($entry, '{}'); // Trim braces
-        // Split by commas and extract Item_Id, Item_Name, and Quantity
+        $entry = trim($entry, '{}');
         $parts = explode(',', $entry);
-        if (count($parts) === 3) { // Ensure there are exactly 3 parts
-            $quantity = trim($parts[2], '"'); // Quantity
-            $itemName = trim($parts[1], '"'); // Item_Name
-            $items[] = "{$quantity} {$itemName}"; // Format as "Quantity Item_Name"
+        if (count($parts) === 3) {
+            $quantity = trim($parts[2], '"');
+            $itemName = trim($parts[1], '"');
+            $items[] = "{$quantity} {$itemName}";
         }
     }
     return $items;

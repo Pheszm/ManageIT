@@ -4,12 +4,9 @@ document.getElementById("toggle-btn").addEventListener("click", function() {
 });
 
 
-document.getElementById("exitbtn").addEventListener("click", function() {
-    document.getElementById("ViewDetailsScheduled").style.display = "none";
+document.getElementById("exitbtn2").addEventListener("click", function() {
+    document.getElementById("ViewApprovedReserv").style.display = "none";
 });
-
-
-
 
 
 
@@ -160,26 +157,66 @@ document.getElementById('ScheduledListTable').addEventListener('click', function
 });
 
 
+
+
+
+
+/// APPROVED VIEW DETAILS
 document.getElementById('SchedViewDetailsBtn').addEventListener('click', function() {
     if (SelectedReservationId) {
         fetch(`../PHP/Admin_Home_ViewReservation.php?id=${SelectedReservationId}`)
             .then(response => response.json())
             .then(data => {
-                document.getElementById('viewRes_fullName').textContent = data.fullname;
-                document.getElementById('viewRes_courseYear').textContent = data.course_year;
-                document.getElementById('viewRes_subject').textContent = data.subject;
-                document.getElementById('viewRes_materials').textContent = data.materials;
-                document.getElementById('viewRes_requestedBy').textContent = data.requested_by;
-                document.getElementById('viewRes_dateOfUse').textContent = data.dateofuse;
-                document.getElementById('viewRes_time').textContent = `${data.fromtime} To ${data.totime}`;
-                document.getElementById('viewRes_approvedBy').textContent = data.approved_by_name;
-                document.getElementById('viewRes_message').textContent = data.message;
+                document.getElementById('viewRes_fullName2').textContent = data.fullname;
+                document.getElementById('viewRes_courseYear2').textContent = data.course_year;
+                document.getElementById('viewRes_subject2').textContent = data.subject;
+                document.getElementById('viewRes_requestedBy2').textContent = data.requested_by;
+                document.getElementById('viewRes_dateOfUse2').textContent = convertToReadableDate(data.dateofuse);
+                document.getElementById('viewRes_fromtime2').textContent = convertToAMPM(data.fromtime);
+                document.getElementById('viewRes_totime2').textContent = convertToAMPM(data.totime);
+                document.getElementById('viewRes_message2').textContent = data.message;
+                document.getElementById('viewRes_Status2').textContent = data.Transaction_status; // Use correct property name
+                document.getElementById('viewRes_RetTime2').textContent = data.Transaction_ReturnedTime; // Use correct property name
+                document.getElementById('viewRes_Approv2').textContent = data.approved_by_name; // Use correct property name
                 
+
+                // Clear existing rows
+                const table = document.getElementById('pendingviewmaterial3');
+                table.innerHTML = '<tr><th>Item</th><th>Qnty</th></tr>'; // Reset table
+                // Add new rows for materials
+                const materials = data.materials.split(', ');
+                materials.forEach(material => {
+                    const row = table.insertRow();
+                    const itemCell = row.insertCell(0);
+                    const quantityCell = row.insertCell(1);
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join remaining parts as item name
+                    itemCell.textContent = itemName;
+                    quantityCell.textContent = quantity;
+                });
+
                 // Show the reservation details modal
-                document.getElementById('ViewDetailsScheduled').style.display = 'flex';
+                document.getElementById('ViewApprovedReserv').style.display = 'flex';
             })
             .catch(error => console.error('Error fetching reservation details:', error));
     } else {
         console.log("No reservation selected.");
     }
 });
+//TIME CONVERT MILITARY TIME TO AMPM
+function convertToAMPM(time) {
+    const [hours, minutes] = time.split(':').map(Number);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 hours to 12
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+}
+//TIME CONVERT DATE TO READABLE
+function convertToReadableDate(dateString) {
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day);
+    
+    // Format to "Month Day, Year"
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+}
+
