@@ -1,0 +1,484 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    background-color: #FFFFFF;
+    display: flex;
+    background-image: linear-gradient(180deg, #0091E2, #0A4194);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
+
+/* Top Navigation */
+#TopNavBar{
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(-90deg, #0091E2, #0A4194);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding-top: 5px;
+    display: flex;
+    justify-content: flex-start; 
+    z-index: 100; 
+}
+#TopNavBar span{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+#SRCB_BackgroundIMG{
+    opacity: 0.1;
+    position: absolute;
+    right: -2.3%;
+    top: -270%;
+    height: 900%;
+}
+
+#SRCB_BackgroundIMG2{
+    opacity: 0.1;
+    position: absolute;
+    left: 50%; /* Position from the left */
+    transform: translate(-50%); 
+    z-index: -1;
+    top: 16vh;
+    height: 70vh;
+}
+
+
+#LogoutBtn{
+    margin-right: 3%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 0;
+    height: 33px;
+    color: #0A4194;
+    font-weight: bold;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background 0.2s;
+}
+#LogoutBtn img{
+    height: 20px;
+    margin-right: 5px;
+}
+#LogoutBtn:hover{
+    background-color: #db6060;
+}
+
+#toggle-btn {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#SideBarNav.open {
+    transform: translateX(-100%); /* Show sidebar */
+}
+#SideBarNav{
+    padding-top: 120px;
+    position: absolute;
+    width: 220px;
+    height: 100%;
+    z-index: 10;
+    background-color: #FFFFFF;
+    transition: transform 0.3s ease;
+    transform: translateX(0%); /* Hidden by default */
+}
+
+#SideBarNav button{
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: #FFFF;
+    border: none;
+    font-weight: 500;
+    color: #0A4194;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background 0.2s;
+}
+
+#SideBarNav button:hover{
+    background-color: #d5e1ff;
+}
+
+#SideBarNav img{
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 15px;
+
+}
+
+#ItemsBtn{
+    background-image: linear-gradient(-90deg, #eeeeee, #e4e4e4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ITEM TABLE AREA */
+#TableCase{
+    background-color: #f0f0f0;
+    height: 47vh;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+
+#ItemListArea{
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 10px;
+    width: 36vw;
+    height: 87vh;
+    top: 70px;
+    right: 32vw;
+    background-color: #fefefe;
+    padding: 10px;
+    z-index: 3;
+    position: absolute;
+}
+
+#ItemListArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 20px;
+}
+
+#TableCase6{
+    background-color: #dbdbdb;
+    height: 70vh;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+#ItemListArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#ItemListArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#ItemListArea td{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px;  
+}
+#ItemListArea tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#ItemListArea tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ItemListArea span{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+.specialSpan{
+    align-content: center;
+}
+.specialSpan select{
+    padding-left: 10px;
+    width: 200px;
+    border-radius: 10px;
+    border: none;
+    border: 0.3px solid rgb(97, 97, 97);
+    background-color: #276ace;
+    color: #fff;
+    font-weight: bold;
+}
+
+#StatusComboBox{
+    padding-left: 10px;
+    margin-right: 3px;
+    border-radius: 10px;
+    border: none;
+    border: 0.3px solid rgb(97, 97, 97);
+    background-color: #1a54ab;
+    color: #fff;
+    font-weight: bold;
+}
+#SearchBarAllApproved{
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+    border: none;
+    border: 0.3px solid rgb(97, 97, 97);
+    background-color: #e4e4e4;
+}
+#ViewDetailsBtn{
+    margin-top: 5px;
+    border-radius: 10px;
+    opacity: 0.5;
+    height: 40px;
+    border: none;
+    border: 0.3px solid rgb(97, 97, 97);
+    background-color: #2362c0;
+    color: #fff;
+    font-weight: bold;
+}
+#ViewDetailsBtn:hover{
+    background-color: #12499a;
+}
+
+#AddItemBtn{
+    margin-top: 5px;
+    border-radius: 10px;
+    width: 100px;
+    margin-left: auto;
+    height: 40px;
+    border: none;
+    border: 0.3px solid rgb(97, 97, 97);
+    background-color: #134794;
+    color: #fff;
+    font-weight: bold;
+}
+#AddItemBtn:hover{
+    background-color: #093d8b;
+}
+
+/* ITEM TABLE AREA */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* VIEWING AREA */
+#ViewItemAreaa{
+    display: flex;
+    flex-direction: row; 
+    align-items: flex-end;
+    text-align: center;
+    border-radius: 10px;
+    width: 30vw;
+    height: 87vh;
+    top: 70px;
+    right: 1vw;
+    background-color: #fefefe;
+    padding: 0.5vw;
+    z-index: 3;
+    position: absolute;
+}
+
+#ViewItemAreaa span{
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 0.5vw;
+    height: 5vh;
+    margin-bottom: 1.7vh;
+}
+
+#ViewItemAreaa span h2{
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 17px;
+}
+#ViewItemAreaa span p{
+    font-size: 16px
+}
+.DetailsArea{
+    width: 100%;
+}
+
+
+#ImageBox {
+    background-color: #949494;
+    border-radius: 0.5vw;
+    width: 97%;
+    height: 40%;
+    position: absolute;
+    top: 21.5%; /* Vertically center */
+    left: 50%; /* Horizontally center */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+}
+
+#QRImageBox {
+    background-color: #515151;
+    border-radius: 0.5vw;
+    width: 9vw;
+    height: 9vw;
+    position: absolute;
+    top: 77%; /* Vertically center */
+    left: 83%; /* Horizontally center */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+}
+
+
+.NumberTextArea{
+    width: 66%;
+    margin-bottom: 9.5vh;
+}
+
+
+#UpdateItemBtn{
+    width: 7vw;
+    height: 5vh;
+    font-size: 1vw;
+    font-weight: bold;
+    color: #fff;
+    background-color: #c1b61e;
+    border: none;
+    border-radius: 0.5vw;
+    position: absolute;
+    bottom: 1.2vw;
+}
+
+#RemoveItemBtn{
+    width: 7vw;
+    height: 5vh;
+    font-size: 1vw;
+    font-weight: bold;
+    color: #fff;
+    background-color: #9c2424;
+    border: none;
+    border-radius: 0.5vw;
+    position: absolute;
+    bottom: 1.2vw;
+    left: 8vw;
+}
+
+#SaveQrBtn{
+    width: 7vw;
+    height: 5vh;
+    font-size: 1vw;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0091E2;
+    border: none;
+    border-radius: 0.5vw;
+    position: absolute;
+    right: 0.5vw;
+    bottom: 1.2vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Mostly Used Items*/
+
+#TableCase3{
+    border-radius: 0.5vw;
+    background-color: #dbdbdb;
+    height: 70vh;
+    width: 28vw;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+#TableCase3 table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#TableCase3 th{
+    background-color: #1a54ab;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#TableCase3 td{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px;  
+}
+#TableCase3 tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#TableCase3 tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+
+.HEADERR{
+    color: #fff;
+    font-size: 40px;
+    line-height: 10px;
+}
+
+.MosltyUsedAREA{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    text-align: center;
+    height: 85vh;
+    width: 28vw;
+    position: absolute;
+    top: 10vh;
+    right: 70vw;
+}

@@ -244,6 +244,7 @@ html {
     display: none;
     align-items: center;
     justify-content: center; 
+    z-index: 5;
 }
 
 #DarkBlur{
@@ -330,6 +331,7 @@ html {
     display: none;
     align-items: center;
     justify-content: center; 
+    z-index: 5;
 }
 
 #DataForm{
@@ -342,6 +344,7 @@ html {
     flex-direction: column;
     align-items: center ;
     padding: 20px;
+    z-index: 5;
 
 }
 
@@ -483,6 +486,7 @@ input:checked + .slider:before {
     display: none;
     align-items: center;
     justify-content: center; 
+    z-index: 5;
 }
 
 #extbtn2{

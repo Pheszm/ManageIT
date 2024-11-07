@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManageIT | Item List</title>
+    <link href="../CSS/Poppins_Sheet.css" rel="stylesheet">
+    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+    <link rel="stylesheet" href="../CSS/Admin_Items.css">
+</head>
+<body>
+    <div id="TopNavBar">
+        <button id="toggle-btn">☰</button>
+        <img id="ManageIT_NavLogo" src="../../Assets/Images/ManageIT_Logo.png" alt="MANAGEIT LOGO">
+        <img id="SRCB_BackgroundIMG" src="../../Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+        <span>
+            <button id="LogoutBtn" onclick="location.href='../../index.html';"><img src="../../Assets/Images/Logout_Icon.png">Logout</button>
+        </span>
+        
+    </div>
+
+    <div id="SideBarNav">
+        <button id="HomeBtn"><img src="../../Assets/Images/Home_Icon.png">Home</button>
+        <button id="ReservationBtn"><img src="../../Assets/Images/Reservations_Icon.png">Reservation</button>
+        <button id="ItemsBtn"><img src="../../Assets/Images/Items_Icon.png">Items</button>
+        <button id="ActBtn"><img src="../../Assets/Images/ActivityLog_Icon.png">Activity Logs</button>
+        <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
+    </div>
+    
+
+    <div id="ItemListArea">
+        <h1>AVR Item List</h1>
+        <span>
+            <select id="StatusComboBox">
+                <option value="">Status</option>
+                <option value="BORROWED">BORROWED</option>
+                <option value="AVAILABLE">AVAILABLE</option>
+                <option value="UNAVAILABLE">UNAVAILABLE</option>
+                <option value="INACTIVE">INACTIVE</option>
+                <option value="ACTIVE">ACTIVE</option>
+            </select>
+            <input id="SearchBarAllApproved" placeholder="Search Here..">
+        </span>
+        <span class="specialSpan">
+            <select id="ModelComboBox">
+                <option value="">Model</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="CategoryComboBox">
+                <option value="">Category</option>
+            </select>
+        </span>
+        <div id="TableCase6">
+            <table id="AllApproveReservation">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Total Quantity</th>
+                    <th>Available</th>
+                </tr>
+                <!-- Rows will be dynamically added here -->
+            </table>
+        </div>
+        <span>
+            <button id="ViewDetailsBtn">View Details</button>
+            <button id="AddItemBtn">Add Item</button>
+
+        </span>
+    </div>
+
+    <div id="ViewItemAreaa">
+        <div id="ImageBox"></div>
+        <div class="DetailsArea">
+            <span>
+                <h2>Item:</h2>
+                <p>Speaker</p>
+            </span>
+            <span>
+                <h2>Model:</h2>
+                <p>Speaker</p>
+            </span>
+            <span>
+                <h2>Category:</h2>
+                <p>Speaker</p>
+            </span>
+            <div class="NumberTextArea">
+                <span>
+                    <h2>Total Quantity:</h2>
+                    <p>Speaker</p>
+                </span>
+                <span>
+                    <h2>Available:</h2>
+                    <p>Speaker</p>
+                </span>
+                <span>
+                    <h2>Status:</h2>
+                    <p>Speaker</p>
+                </span>
+            </div>
+        </div>
+        <button id="UpdateItemBtn">Update</button>
+        <button id="RemoveItemBtn">Remove</button>
+        <button id="SaveQrBtn">Save QR</button>
+        <div id="QRImageBox"></div>
+    </div>
+
+
+    <div class="MosltyUsedAREA">
+        <h1 class="HEADERR">Mostly Used Item</h1>
+        <div id="TableCase3">
+            <table id="AllApproveReservation">
+                <tr>
+                    <th>Item</th>
+                    <th>Frequency</th>
+                    <th>Last Used</th>
+                </tr>
+                <!-- Rows will be dynamically added here -->
+            </table>
+        </div>
+    </div>
+
+    <img id="SRCB_BackgroundIMG2" src="../../Assets/Images/SRCB_Logo.png">
+    <script src="../JS/Admin_Items.js"></script>
+</body>
+</html>

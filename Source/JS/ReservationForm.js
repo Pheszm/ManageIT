@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         button.value = item.Item_Id;
                         button.onclick = () => handleButtonClick(item.Item_Id);
                         button.innerHTML = `<h2>${item.Item_Name}</h2>`;
-                        button.style.backgroundImage = `url('${item.Item_ImageLocation}')`;
+                        button.style.backgroundImage = `url('../../Images_Stored/${item.Item_ImageLocation}')`;
                         button.style.backgroundSize = 'cover';
                         button.style.border = 'none'; 
                         button.style.height = '100px';
