@@ -17,8 +17,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 $username = $data['username']; // Keep the username as is
 $password = $data['password']; // Keep the password as is
 
-// Prepare and bind
-$stmt = $conn->prepare("SELECT faculty_id, faculty_password, faculty_status FROM Faculty WHERE faculty_username = ?");
+// Prepare and bind with BINARY to make username case-sensitive
+$stmt = $conn->prepare("SELECT faculty_id, faculty_password, faculty_status FROM Faculty WHERE BINARY faculty_username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $stmt->store_result();

@@ -340,6 +340,7 @@ html {
 
 
 #ImageBox {
+    background-size: cover;
     background-color: #949494;
     border-radius: 0.5vw;
     width: 97%;

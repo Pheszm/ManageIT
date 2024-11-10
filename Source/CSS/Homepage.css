@@ -227,22 +227,24 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 #ToggleHidePassword{
+    margin-left: 405px;
+    position: absolute;
     user-select: none;
     padding: 10px;
     font-family: 'Poppins', sans-serif;
     border-radius: 15px;
     height: 45px;
-    background-color: #fff;
-    border: 2px solid #e2e2e2;
     font-size: 15px;
-    width: 15%;
+    width: 70px;
     text-align: center;
+}
+#PasswordHideIcon{
+    width: 25px;
 }
 
 #passwarea{
     display: flex;
-    margin-left: 5%;
-    width: 90%;
+    width: 100%;
 }
 
 #LoginTitle{
@@ -279,8 +281,9 @@ html::-webkit-scrollbar-thumb:hover {
 }
 
 #Passwordinput{
-    width: 85%;
-    margin-left: 0;
+    padding-right: 60px;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .toggle-btn {   

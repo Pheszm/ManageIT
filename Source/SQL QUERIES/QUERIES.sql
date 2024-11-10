@@ -38,6 +38,16 @@ CREATE TABLE Items (
     Item_ImageLocation TEXT
 );
 
+INSERT INTO Items (Item_Name, Item_Quantity, Item_Category, Item_Model, Item_Available, Item_Status, Item_ImageLocation)
+VALUES
+('Speaker', 3, 'Output', 'Sound Device', 3, 1, 'SampleImage.jpg'),
+('Laptop', 10, 'Computers', 'Dell XPS 13', 10, 1, 'SampleImage.jpg'),
+('Wireless Mouse', 50, 'Accessories', 'Logitech MX Master', 50, 1, 'SampleImage.jpg'),
+('Keyboard', 30, 'Accessories', 'Logitech G915', 30, 1, 'SampleImage.jpg'),
+('Monitor', 15, 'Display', 'Samsung Odyssey', 15, 1, 'SampleImage.jpg');
+
+
+
 
 CREATE TABLE Transactions (
     Transaction_id INT AUTO_INCREMENT PRIMARY KEY,

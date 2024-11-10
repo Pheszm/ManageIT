@@ -1,6 +1,6 @@
     const toggleButton = document.getElementById('ToggleHidePassword');
     const passwordInput = document.getElementById('Passwordinput');
-
+    const passwordIcon = document.getElementById('PasswordHideIcon');
     toggleButton.addEventListener('click', () => {
         const isPasswordVisible = passwordInput.type === 'text';
         
@@ -8,7 +8,8 @@
         passwordInput.type = isPasswordVisible ? 'password' : 'text';
         
         // Update the button text accordingly
-        toggleButton.textContent = isPasswordVisible ? 'Show' : 'Hide';
+        passwordIcon.src = isPasswordVisible ? 'Assets/Images/Show_Password_Icon.png' : 'Assets/Images/Hide_Password_Icon.png';
+
     });
 
 

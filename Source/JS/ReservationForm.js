@@ -38,6 +38,7 @@ domReady(function() {
                 searchBox.value = decodeText; // Set the input value
                 document.getElementById("QRFormScanner").style.display = "none"; // Hide scanner
                 htmlscanner.clear(); // Stop scanning when a QR code is detected
+                fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
             }
         }
     }
