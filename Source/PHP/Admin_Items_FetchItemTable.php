@@ -15,6 +15,7 @@ $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
 $modelFilter = isset($_GET['model']) ? $_GET['model'] : '';
 $categoryFilter = isset($_GET['category']) ? $_GET['category'] : '';
+$itemIdFilter = isset($_GET['item_id']) ? $_GET['item_id'] : null; // Item_ID filter (could be null)
 
 // Prepare the LIKE search variables
 $searchTermLike = '%' . $searchTerm . '%';
@@ -22,7 +23,7 @@ $statusFilterLike = '%' . $statusFilter . '%';
 $modelFilterLike = '%' . $modelFilter . '%';
 $categoryFilterLike = '%' . $categoryFilter . '%';
 
-// SQL query with placeholders for dynamic filters
+// Start building the SQL query
 $sql = "SELECT Item_Id, Item_Name, Item_Quantity, Item_Available
         FROM Items
         WHERE Item_Name LIKE ?";
@@ -31,6 +32,13 @@ $sql = "SELECT Item_Id, Item_Name, Item_Quantity, Item_Available
 $filterConditions = [];
 $filterParams = [];
 $types = 's'; // The first filter is for search term
+
+// Add item_id filter if it's not null (only when item_id is provided)
+if ($itemIdFilter !== null) {
+    $filterConditions[] = "Item_Id = ?";
+    $filterParams[] = $itemIdFilter;
+    $types .= 'i'; // Adding type for item_id (integer)
+}
 
 // Add status filter if it's not empty
 if (!empty($statusFilter)) {
@@ -53,7 +61,7 @@ if (!empty($categoryFilter)) {
     $types .= 's'; // Adding type for category
 }
 
-// Combine all conditions
+// Combine all conditions if there are any
 if (!empty($filterConditions)) {
     $sql .= " AND " . implode(" AND ", $filterConditions);
 }

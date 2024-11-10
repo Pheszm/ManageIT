@@ -15,6 +15,7 @@ document.getElementById("exitbtn").addEventListener("click", function() {
 
 
 // QR FUNCTIONALITY
+var QRcodesearched = null;
 function domReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         setTimeout(fn, 1);
@@ -33,13 +34,14 @@ domReady(function() {
             ++countResults;
             lastResult = decodeText;
 
-            const searchBox = document.getElementById("SearchBoxForItem");
-            if (searchBox) {
-                searchBox.value = decodeText; // Set the input value
-                document.getElementById("QRFormScanner").style.display = "none"; // Hide scanner
-                htmlscanner.clear(); // Stop scanning when a QR code is detected
-                fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
-            }
+            document.getElementById("QRFormScanner").style.display = "none"; // Hide scanner
+            htmlscanner.clear(); // Stop scanning when a QR code is detected
+            QRcodesearched = decodeText;
+            document.getElementById('SearchBoxForItem').value = '';
+            document.getElementById('ModelComboBox').value = '';
+            document.getElementById('CategoryComboBox').value = '';
+            
+            fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
         }
     }
 
@@ -234,18 +236,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const ModelComboBox = document.getElementById('ModelComboBox');
     const CategoryComboBox = document.getElementById('CategoryComboBox');
     
-    ModelComboBox.addEventListener('input', function() {
+    ModelComboBox.addEventListener('input', function() {        
+        QRcodesearched = null;
         fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value); 
     });
     CategoryComboBox.addEventListener('input', function() {
+        QRcodesearched = null;
         fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
     });
     searchBox.addEventListener('input', function() {
+        QRcodesearched = null;
         fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
     });
     
     function fetchItems(searchTerm = '', model = '', category = '') {
-        const query = new URLSearchParams({ search: searchTerm, model: model, category: category }).toString();
+        const params = {
+            search: searchTerm,
+            model: model,
+            category: category
+        };
+        
+        if (QRcodesearched) {
+            params.Item_Id = QRcodesearched;
+        }
+        
+        const query = new URLSearchParams(params).toString();
     
         fetch(`../PHP/ReservationForm_ListTheItems.php?${query}`)
             .then(response => response.json())
@@ -256,6 +271,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     data.forEach(item => {
                         const button = document.createElement('button');
                         button.value = item.Item_Id;
+                        if (QRcodesearched) {
+                            document.getElementById('SearchBoxForItem').value = item.Item_Name;
+                        }
                         button.onclick = () => handleButtonClick(item.Item_Id);
                         button.innerHTML = `<h2>${item.Item_Name}</h2>`;
                         button.style.backgroundImage = `url('../../Images_Stored/${item.Item_ImageLocation}')`;
