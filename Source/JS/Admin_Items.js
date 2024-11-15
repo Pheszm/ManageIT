@@ -69,7 +69,6 @@ document.getElementById("AddItemBtn").addEventListener("click", function() {
 
 
 
-
 // LOAD ALL ITEMS IN THE TABLE
 function RefreshTable() {
 	document.getElementById("View_Item").textContent = "";
@@ -83,6 +82,10 @@ function RefreshTable() {
 	document.getElementById("SaveQrBtn").style.display = "none";
 	document.getElementById("UpdateItemBtn").style.display = "none";
 	document.getElementById("RemoveItemBtn").style.display = "none";
+
+	ImageFullURL = null;
+	ImageFileName = null;
+	ImageFile = null;
 
 	const SearchId = Id_isSearched;
 	const searchTerm = searchBar.value; // Get the value from the search bar
@@ -408,6 +411,40 @@ let ImageFileName = null;
 let ImageFile = null; // Store the image file itself for upload
 
 // Event listener for the button click to trigger file selection
+document.getElementById('Update_UploadImageBtn').addEventListener('click', function() {
+    // Create a temporary file input element to trigger file selection
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*'; // Restrict to image files
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0]; // Get the selected file
+        if (file && file.type.startsWith('image/')) {
+            // Create a URL for the selected image file
+            ImageFullURL = URL.createObjectURL(file); // Use the correct variable name
+            
+            // Store the image file and file name for later use
+            ImageFile = file;
+            ImageFileName = file.name;
+
+            // Apply the image URL as the background image of the parent div
+            document.getElementById('Update_ImageArea').style.backgroundImage = `url(${ImageFullURL})`;
+            document.getElementById('Update_ImageArea').style.backgroundSize = 'cover'; // Optional: Make the image cover the div
+            document.getElementById('Update_ImageArea').style.backgroundPosition = 'center'; // Optional: Center the image
+        } else {
+            alert('Please select a valid image file.');
+        }
+    });
+
+    // Trigger the file input dialog
+    fileInput.click();
+});
+
+
+
+
+//ADD PART
+// Event listener for the button click to trigger file selection
 document.getElementById('Add_UploadImageBtn').addEventListener('click', function() {
     // Create a temporary file input element to trigger file selection
     const fileInput = document.createElement('input');
@@ -458,7 +495,6 @@ function StoringImageFunc() {
             console.log('Image uploaded successfully.');
         } else {
             console.error('Error uploading image:', result.error);
-            alert('Failed to upload the image.');
         }
     })
     .catch(error => {
@@ -541,6 +577,199 @@ document.getElementById("AddBtnSave").addEventListener("click", function() {
         .catch(error => {
             console.error('Error adding item:', error);
             alert('An error occurred while trying to add the item.');
+        });
+    }
+});
+
+
+
+
+
+
+
+
+//EXIT UPDATE FORM
+document.getElementById("UpdateFormExitBtn").addEventListener("click", function() {
+    document.getElementById("UpdateItemArea").style.display = "none";
+});
+
+
+document.getElementById("UpdateItemBtn").addEventListener("click", function() {
+    document.getElementById("UpdateItemArea").style.display = "flex";
+	DisplayToUpdateItemDestails();
+});
+
+
+// DISPLAY THE SELECTED TO UPDATE
+var ImagetoUpdate = null;
+function DisplayToUpdateItemDestails() {
+	if (SelectedAllItemsRow) {
+		// Assuming `SelectedAllItemsRow` holds the ID of the selected item
+		fetch(`../PHP/Admin_Items_ViewItemDetails.php?id=${SelectedAllItemsRow}`)
+			.then((response) => response.json())
+			.then((data) => {
+				// Populate the <p> elements with the fetched data
+
+				// Set Item Name
+				document.getElementById("Update_Item_Name").value = data.Item_Name;
+
+				// Set Model
+				document.getElementById("Update_Item_Model").value = data.Item_Model;
+
+				// Set Category
+				document.getElementById("Update_Item_Category").value =
+					data.Item_Category;
+
+				// Set Total Quantity
+				document.getElementById("Update_Item_Quantity").value =
+					data.Item_Quantity;
+
+				// Set Status
+				const statusSwitch = document.getElementById("Update_Item_Status");
+				if (data.Item_Status == 1) {
+					statusSwitch.checked = true;
+				} else {
+					statusSwitch.checked = false;
+				}
+
+
+				if (data.Item_ImageLocation) {
+					document.getElementById(
+						"Update_ImageArea"
+					).style.backgroundImage = `url(../../Images_Stored/${data.Item_ImageLocation})`;
+					ImagetoUpdate = data.Item_ImageLocation;
+				}
+			})
+			.catch((error) => {
+				console.error("Error fetching item details:", error);
+			});
+	} else {
+		console.log("No item selected.");
+	}
+}
+
+
+// Event listener for the "Save" button in the Update Form
+document.getElementById("UpdateBtnSave").addEventListener("click", function() {
+    // Get values from the form
+    const itemName = document.getElementById("Update_Item_Name").value;
+    const itemModel = document.getElementById("Update_Item_Model").value;
+    const itemCategory = document.getElementById("Update_Item_Category").value;
+    const itemQuantity = document.getElementById("Update_Item_Quantity").value;
+    const itemStatus = document.getElementById("Update_Item_Status").checked ? 1 : 0; // Convert checkbox status to 1 or 0
+    const OlditemImageName = ImagetoUpdate;  // Image location (it might have been set during item selection)
+    // Clear previous validity messages
+    document.getElementById("Update_Item_Name").setCustomValidity('');
+    document.getElementById("Update_Item_Model").setCustomValidity('');
+    document.getElementById("Update_Item_Category").setCustomValidity('');
+    document.getElementById("Update_Item_Quantity").setCustomValidity('');
+
+    // Validate fields
+    if (itemName.trim() === '') {
+        document.getElementById("Update_Item_Name").setCustomValidity('Item Name is required.');
+        document.getElementById("Update_Item_Name").reportValidity();
+        return;
+    }
+
+    if (itemModel.trim() === '') {
+        document.getElementById("Update_Item_Model").setCustomValidity('Item Model is required.');
+        document.getElementById("Update_Item_Model").reportValidity();
+        return;
+    }
+
+    if (itemCategory.trim() === '') {
+        document.getElementById("Update_Item_Category").setCustomValidity('Item Category is required.');
+        document.getElementById("Update_Item_Category").reportValidity();
+        return;
+    }
+
+    if (itemQuantity.trim() === '' || isNaN(itemQuantity) || itemQuantity <= 0) {
+        document.getElementById("Update_Item_Quantity").setCustomValidity('Please enter a valid quantity greater than 0.');
+        document.getElementById("Update_Item_Quantity").reportValidity();
+        return;
+    }
+
+    // Prepare the updated data to be sent
+    const updatedData = {
+        item_id: SelectedAllItemsRow,  // The ID of the item being updated (assuming it's available)
+        item_name: itemName,
+        item_model: itemModel,
+        item_category: itemCategory,
+        item_quantity: itemQuantity,
+        item_status: itemStatus,
+        item_imageName: ImageFileName,  // Image name or URL from the selected image
+    };
+
+    // Confirm before submitting the update
+    const confirmUpdate = confirm("Are you sure you want to update this item?");
+    if (confirmUpdate) {
+		if(OlditemImageName != ImageFileName && ImageFileName != null){
+			StoringImageFunc();
+		}
+
+        // Send the updated data to the server
+        fetch('../PHP/Admin_Items_UpdateItem.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData), // Send updated data as JSON
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.success) {
+                alert('Item updated successfully.');
+                location.reload();  // Optionally reload the page or refresh the data
+            } else {
+                alert('Error updating item: ' + (result.error || 'Unknown error'));
+            }
+        })
+        .catch((error) => {
+            console.error("Error updating item:", error);
+            alert("An error occurred while updating the item.");
+        });
+    }
+});
+
+
+
+
+//REMOVE FUNCTION
+// Event listener for the "Remove" button
+document.getElementById("RemoveItemBtn").addEventListener("click", function() {
+    // Check if an item is selected (you should have a global variable to track the selected item, e.g., SelectedAllItemsRow)
+    if (!SelectedAllItemsRow) {
+        alert('Please select an item to remove.');
+        return;
+    }
+
+    // Confirm before deleting the item
+    const confirmRemove = confirm("Are you sure you want to remove this item?");
+    if (confirmRemove) {
+        // Send a request to remove the item
+        const removeData = {
+            item_id: SelectedAllItemsRow,  // The ID of the item to be removed (must be set before calling this function)
+        };
+
+        fetch('../PHP/Admin_Items_RemoveItem.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(removeData), // Send the item ID as JSON
+        })
+        .then((response) => response.json())
+        .then((result) => {
+            if (result.success) {
+                alert('Item removed successfully.');
+                location.reload();  // Optionally reload the page or refresh the data
+            } else {
+                alert('Error removing item: ' + (result.error || 'Unknown error'));
+            }
+        })
+        .catch((error) => {
+            console.error("Error removing item:", error);
+            alert("An error occurred while removing the item.");
         });
     }
 });

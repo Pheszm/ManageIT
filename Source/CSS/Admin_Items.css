@@ -759,3 +759,125 @@ input:checked + .slider:before {
     transform: translateX(1.8vw);
 }
 /* Switch Styling*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* UPDATE ITEM AREA*/
+#UpdateItemArea {
+    display: none;
+    z-index: 3;
+}
+
+#UpdatingForm {
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    width: 35vw;
+    height: 63vh;
+    background-color: #fefefe;
+    padding: 0.5vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Adjust for exact centering */
+}
+
+#UpdatingForm span {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 2.1vw;
+    margin-bottom: 1vw;
+}
+
+#UpdatingForm h2 {
+    text-align: end;
+    padding-right: 1vw;
+    font-size: 1vw;
+    width: 30%;
+}
+
+#UpdatingForm input {
+    width: 100%;
+    height: 2vw;
+    border-radius: 0.5vw;
+    border: 0.1vw solid #9e9e9e;
+    background-color: #ebebeb;
+    padding: 0.3vw;
+    font-size: 1vw;
+}
+#UpdateBtnSave{
+    height: 3vw;
+    width: 100%;
+    border: none;
+    background-color: #aeae18;
+    color: #fff;
+    border-radius: 1vw;
+    font-weight: bold;
+    font-size: 1vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#Update_ImageArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1vw;
+    background-size: cover;
+    background-color: #949494;
+    border-radius: 0.5vw;
+    width: 100%;
+    height: 30%;
+}
+
+#UpdateFormExitBtn{
+    width: 2.5vw;
+    height: 2.5vw;
+    position: absolute;
+    right: 0.5vw;
+    top: 0.5vw;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 3vw;
+    border: none;
+    font-size: 1vw;
+}
+#UpdateFormExitBtn:hover{
+    background-color: #590303;
+}
+
+#UpdatingForm h1 {
+    line-height: 1vw;
+    font-size: 2vw;
+    color: #093d8b;
+    text-align: center;
+}
+
+#Update_UploadImageBtn{
+    height: 2.5vw;
+    border: 0.2vw solid #ffffff;
+    font-weight: bold;
+    font-size: 1vw;
+    color: #fff;
+    padding: 0.3vw;
+    background-color: transparent;
+    transition: background 0.3s;
+}
+#Update_UploadImageBtn:hover{
+    background-color: #454545;
+}

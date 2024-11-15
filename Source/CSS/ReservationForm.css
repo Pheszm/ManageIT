@@ -5,6 +5,16 @@ body {
     height: 100vh;    
 }
 
+#DisplayItemsHere {
+    display: flex;               /* Enable flexbox layout */
+    flex-wrap: wrap;             /* Allow items to wrap onto the next line */
+    margin-top: 10px;
+    max-height: 360px;           /* Limits the container's height */
+    overflow-y: auto;            /* Enables vertical scrolling if content exceeds max-height */
+    width: 96%;
+}
+
+
 #background{
     width: 100%;
     height: 100%;

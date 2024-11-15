@@ -249,6 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchItems(searchBox.value, ModelComboBox.value, CategoryComboBox.value);
     });
     
+    // ITEMS LISTS
     function fetchItems(searchTerm = '', model = '', category = '') {
         const params = {
             search: searchTerm,
@@ -275,14 +276,50 @@ document.addEventListener('DOMContentLoaded', function() {
                             document.getElementById('SearchBoxForItem').value = item.Item_Name;
                         }
                         button.onclick = () => handleButtonClick(item.Item_Id);
-                        button.innerHTML = `<h2>${item.Item_Name}</h2>`;
-                        button.style.backgroundImage = `url('../../Images_Stored/${item.Item_ImageLocation}')`;
-                        button.style.backgroundSize = 'cover';
+                        button.innerHTML = `<div class="button-content">
+                                              <img src="../../Images_Stored/${item.Item_ImageLocation}" alt="${item.Item_Name}" class="button-image" />
+                                              <h2 class="button-text">${item.Item_Name}</h2>
+                                            </div>`;
+                        
+                        button.style.backgroundColor = '##ACACACFF'; // Remove default background color
                         button.style.border = 'none'; 
-                        button.style.height = '100px';
+                        button.style.height = '150px'; // Adjust as needed
                         button.style.margin = '10px';
-                        button.style.padding = '20px';
-    
+                        button.style.padding = '0'; // Remove padding (we'll handle it in the inner elements)
+                        button.style.display = 'flex';
+                        button.style.flexDirection = 'column'; // Stack image and text vertically
+                        button.style.alignItems = 'center'; // Center-align text and image
+                        button.style.justifyContent = 'flex-end'; // Ensure text stays at the bottom
+                        button.style.borderRadius = '15px'; // Round the corners
+                        button.style.overflow = 'hidden'; // Round the corners
+                        // Add shadow effect
+                        button.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.5)'; // Simple shadow
+                        button.style.transition = 'box-shadow 0.3s ease'; // Smooth transition on hover
+                        
+                        // Optional: Style the content within the button
+                        const buttonContent = button.querySelector('.button-content');
+                        buttonContent.style.display = 'flex';
+                        buttonContent.style.flexDirection = 'column';
+                        buttonContent.style.justifyContent = 'flex-end';
+                        buttonContent.style.height = '100%';
+                        buttonContent.style.width = '100%';
+
+                        
+                        // Optional: Style the image
+                        const buttonImage = button.querySelector('.button-image');
+                        buttonImage.style.height = '80%'; // Adjust to take most of the space
+                        buttonImage.style.objectFit = 'cover'; // Ensure the image covers the area without distortion
+                        
+                        // Optional: Style the text
+                        const buttonText = button.querySelector('.button-text');
+                        buttonText.style.marginTop = 'auto'; // Push the text to the bottom
+                        buttonText.style.textAlign = 'center'; // Center-align the text
+                        buttonContent.style.fontSize = '10px';  // Set the font size to 10px
+                        buttonText.style.marginBottom = '5px'; // Adjust the margin below the text as needed
+                        buttonText.style.marginTop = '5px'; // Adjust the margin below the text as needed
+                        buttonText.style.paddingLeft = '20px'; // Adds 5px of padding to the left of the text
+                        buttonText.style.paddingRight = '20px'; // Adds 5px of padding to the right of the text
+
                         displayArea.appendChild(button);
                     });
                 } else {
