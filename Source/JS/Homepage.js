@@ -15,6 +15,16 @@
 
 
 
+//CLEAR ACCOUNT SESSIONSTORAGE
+window.onload = function() {
+    sessionStorage.removeItem('facultyId');
+    const facultyId = sessionStorage.getItem('facultyId');
+    console.log('Faculty ID:', facultyId); // Example: just logging the facultyId
+
+};
+
+
+
 
 
 // LOGIN PROCESS
@@ -69,9 +79,12 @@ document.getElementById('loginbtnhero').addEventListener('click', async (event) 
         const result = await response.json();
 
         if (result.success) {
-            // Redirect to Admin_Home.html with FacultyId as a query parameter
+            // Store the facultyId in sessionStorage (or localStorage)
+            sessionStorage.setItem('facultyId', result.facultyId); // Store facultyId in sessionStorage
+
             alert("Successfully Logged In.");
-            window.location.href = `Source/HTML/Admin_Home.html?facultyId=${result.facultyId}`;
+            // Redirect to Admin_Home.html with facultyId (as part of URL, or we can just rely on sessionStorage)
+            window.location.href = `Source/HTML/Admin_Home.html`;
         } else {
             // Handle server response errors
             usernameInput.setCustomValidity(result.message);
@@ -82,4 +95,3 @@ document.getElementById('loginbtnhero').addEventListener('click', async (event) 
         alert('An error occurred. Please try again.');
     }
 });
-

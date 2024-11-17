@@ -23,53 +23,44 @@ document.getElementById("ApprovedViewMoreBtn").addEventListener("click", functio
 
 
 
-// NAVIGATION FUNCTIONS
 
-// Get the current URL
-const url = new URL(window.location.href);
+//LOGIN AUTH CHECKER
+var facultyId;
+document.addEventListener('DOMContentLoaded', function() {
+    facultyId = sessionStorage.getItem('facultyId'); // Check sessionStorage for facultyId
 
-// Get the facultyId from the URL
-const facultyId = url.searchParams.get('facultyId');
-
-document.getElementById('HomeBtn').addEventListener('click', () => {
-    if (facultyId) {
-        window.location.href = `Admin_Home.html?facultyId=${facultyId}`;
-    } else {
-        window.location.href = '../../index.html';
+    // If facultyId is not found, redirect to the login page
+    if (!facultyId) {
+        window.location.href = '../../index.html'; // Redirect to the login page if not authenticated
     }
+
+    // If facultyId is found, proceed with page initialization
+    else {
+        console.log('Faculty ID:', facultyId); 
+    }
+});
+// NAVIGATION FUNCTIONS
+document.getElementById('HomeBtn').addEventListener('click', () => {
+    window.location.href = 'Admin_Home.html';
 });
 
 document.getElementById('ReservationBtn').addEventListener('click', () => {
-    if (facultyId) {
-        window.location.href = `Admin_Reservation.html?facultyId=${facultyId}`;
-    } else {
-        window.location.href = '../../index.html';
-    }
+    window.location.href = 'Admin_Reservation.html';
 });
 
 document.getElementById('ItemsBtn').addEventListener('click', () => {
-    if (facultyId) {
-        window.location.href = `Admin_Items.html?facultyId=${facultyId}`;
-    } else {
-        window.location.href = '../../index.html';
-    }
+    window.location.href = 'Admin_Items.html';
 });
 
 document.getElementById('ActBtn').addEventListener('click', () => {
-    if (facultyId) {
-        window.location.href = `Admin_ActivityLogs.html?facultyId=${facultyId}`;
-    } else {
-        window.location.href = '../../index.html';
-    }
+    window.location.href = 'Admin_ActivityLogs.html';
 });
 
 document.getElementById('ReportsBtn').addEventListener('click', () => {
-    if (facultyId) {
-        window.location.href = `Admin_Reports.html?facultyId=${facultyId}`;
-    } else {
-        window.location.href = '../../index.html';
-    }
+    window.location.href = 'Admin_Reports.html';
 });
+
+
 
 
 
