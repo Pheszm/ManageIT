@@ -49,3 +49,25 @@ CREATE TABLE Transactions (
     Transaction_Comment TEXT,
     FOREIGN KEY (Transaction_Reserve_id) REFERENCES reserve_submissions(id)
 );
+
+CREATE TABLE issued_items_date (
+    IssuedItem_Id INT PRIMARY KEY AUTO_INCREMENT,
+    Reservation_Id INT NOT NULL,  
+    Item_Id INT NOT NULL,    
+    Item_UseQuantity INT,      
+    dateofuse DATE,
+    fromtime TIME,
+    totime TIME,
+    FOREIGN KEY (Reservation_Id) REFERENCES reserve_submissions(id),
+    FOREIGN KEY (Item_Id) REFERENCES items(Item_Id)
+);
+
+
+CREATE TABLE activity_logs (
+    Log_Id INT PRIMARY KEY AUTO_INCREMENT,
+    faculty_id INT,  
+    Log_type varchar(100),    
+    Log_action varchar(100),
+    Reference_id INT,
+    DateAndTime DATETIME
+);

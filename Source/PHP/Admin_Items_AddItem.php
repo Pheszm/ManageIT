@@ -72,7 +72,9 @@ $itemStatus = 1; // Active status
 // Bind the parameters and execute the query
 $stmt->bind_param("sisssis", $itemName, $itemQuantity, $itemCategory, $itemModel, $itemAvailable, $itemStatus, $imageLocation);
 if ($stmt->execute()) {
-    echo json_encode(["success" => true]);
+    // Get the ID of the inserted item
+    $lastInsertId = $conn->insert_id;
+    echo json_encode(["success" => true, "item_id" => $lastInsertId]);
 } else {
     echo json_encode(["success" => false, "error" => $stmt->error]);
 }

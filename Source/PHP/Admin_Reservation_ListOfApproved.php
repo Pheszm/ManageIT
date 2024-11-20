@@ -1,6 +1,6 @@
 <?php
 
-include 'ConnectionString.php';
+include 'ConnectionString.php'; // Your connection settings
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -39,8 +39,8 @@ if ($result->num_rows > 0) {
         $formattedTime = formatTimeAndDate($row['dateofuse'], $row['fromtime'], $row['totime']);
         $row['scheduled_time'] = $formattedTime;
 
-        // Parse the materials string
-        $items = parseMaterials($row['materials']);
+        // Parse the materials and get item names
+        $items = parseMaterialsWithNames($row['materials'], $conn);
         $row['materials'] = implode(", ", $items); // Join item details for display
 
         // Add the reservation ID to the row data
@@ -53,21 +53,47 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Function to parse materials
-function parseMaterials($materials)
+// Function to parse materials and get item names
+function parseMaterialsWithNames($materials, $conn)
 {
     $items = [];
-    $materials = trim($materials, '"'); // Remove leading and trailing quotes
-    $materials = str_replace('\\', '', $materials); // Remove backslashes
+    global $itemName;
+    // Clean the string (remove leading/trailing quotes and backslashes)
+    $materials = trim($materials, '"');
+    $materials = str_replace('\\', '', $materials);
+    // Split by material entry
     $entries = explode('},{', $materials);
 
     foreach ($entries as $entry) {
-        $entry = trim($entry, '{}'); // Trim braces
-        $parts = explode(',', $entry);
-        if (count($parts) === 3) {
-            $quantity = trim($parts[2], '"'); // Quantity
-            $itemName = trim($parts[1], '"'); // Item_Name
-            $items[] = "{$quantity} {$itemName}"; // Format as "Quantity Item_Name"
+        // Clean each entry
+        $entry = trim($entry, '{}');
+        // Split by comma to get ItemID and Qnty
+        $parts = explode('","', $entry);
+
+        if (count($parts) === 2) {
+            // Extract ItemID and Qnty using regex
+            preg_match('/ItemID: (\d+)/', $parts[0], $itemMatches);
+            preg_match('/Qnty: (\d+)/', $parts[1], $qtyMatches);
+
+            if (!empty($itemMatches[1]) && !empty($qtyMatches[1])) {
+                // Query for the Item Name from the Items table
+                $itemId = $itemMatches[1];
+                $query = "SELECT Item_Name FROM Items WHERE Item_Id = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("i", $itemId);
+                $stmt->execute();
+                $stmt->bind_result($itemName); // Assign itemName globally
+
+                // Check if we fetched the item name successfully
+                if ($stmt->fetch()) {
+                    // Format the output
+                    $items[] = "{$qtyMatches[1]} {$itemName}"; // Format as "Qnty Item Name"
+                } else {
+                    // If no item is found, you can either skip this item or set a default value
+                    $items[] = "{$qtyMatches[1]} (Unknown Item)";
+                }
+                $stmt->close(); // Always close the statement after execution
+            }
         }
     }
     return $items;

@@ -139,7 +139,7 @@ document.getElementById('ScheduledListTable').addEventListener('click', function
         if(SelectReservationId != SelectedReservationId){
             SelectedReservationId = SelectReservationId;
         }else{
-            targetRow.style.backgroundColor = "Transparent"; // Corrected syntax
+            targetRow.style.backgroundColor = ""; // Corrected syntax
             SchedViewDetailsBtn.style.opacity = 0.7;
             SelectedReservationId = '';
         }

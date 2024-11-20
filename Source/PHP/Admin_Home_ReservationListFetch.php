@@ -36,8 +36,8 @@ if ($result->num_rows > 0) {
         $formattedTime = formatTimeAndDate($row['dateofuse'], $row['fromtime'], $row['totime']);
         $row['scheduled_time'] = $formattedTime;
 
-        // Parse the materials string
-        $items = parseMaterials($row['materials']);
+        // Parse the materials string and fetch item names
+        $items = parseMaterials($row['materials'], $conn);
         $row['materials'] = implode(", ", $items); // Join item details for display
 
         // Add the reservation ID to the row data
@@ -50,10 +50,11 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Function to parse materials
-function parseMaterials($materials)
+// Function to parse materials and fetch item names
+function parseMaterials($materials, $conn)
 {
     $items = [];
+    global $itemName; // Make $itemName a global variable
     // Remove outer quotes and backslashes
     $materials = trim($materials, '"'); // Remove leading and trailing quotes
     $materials = str_replace('\\', '', $materials); // Remove backslashes
@@ -62,16 +63,36 @@ function parseMaterials($materials)
     $entries = explode('},{', $materials);
 
     foreach ($entries as $entry) {
-        // Remove any leading/trailing spaces and unwanted characters
+        // Clean each entry
         $entry = trim($entry, '{}'); // Trim braces
-        // Split by commas and extract Item_Id, Item_Name, and Quantity
+        // Split by ',' and extract ItemID and Qnty
         $parts = explode(',', $entry);
-        if (count($parts) === 3) { // Ensure there are exactly 3 parts
-            $quantity = trim($parts[2], '"'); // Quantity
-            $itemName = trim($parts[1], '"'); // Item_Name
-            $items[] = "{$quantity} {$itemName}"; // Format as "Quantity Item_Name"
+
+        if (count($parts) === 2) { // Ensure there are exactly 2 parts
+            // Extract ItemID and Quantity
+            preg_match('/ItemID: (\d+)/', $parts[0], $matches);
+            preg_match('/Qnty: (\d+)/', $parts[1], $qtyMatches);
+
+            $itemID = isset($matches[1]) ? $matches[1] : null;
+            $quantity = isset($qtyMatches[1]) ? $qtyMatches[1] : null;
+
+            if ($itemID && $quantity) {
+                // Fetch the item name from the Items table
+                $stmt = $conn->prepare("SELECT Item_Name FROM Items WHERE Item_Id = ?");
+                $stmt->bind_param("i", $itemID);
+                $stmt->execute();
+                $stmt->bind_result($itemName);
+                $stmt->fetch();
+                $stmt->close();
+
+                // Format the entry as "Quantity Item_Name"
+                if ($itemName) {
+                    $items[] = "{$quantity} {$itemName}";
+                }
+            }
         }
     }
+
     return $items;
 }
 

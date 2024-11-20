@@ -67,7 +67,6 @@ document.getElementById('ReportsBtn').addEventListener('click', () => {
 
 
 
-
 // LOAD PENDING RESERVATIONS IN THE TABLE
 document.addEventListener('DOMContentLoaded', function() {
     fetch('../PHP/Admin_Reservation_PendingListFetch.php')
@@ -87,9 +86,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cellName = row.insertCell(1);
                 const cellItem = row.insertCell(2);
 
+                // Format the scheduled time
                 cellTime.textContent = item.scheduled_time;
+                // Set the full name for the reservation
                 cellName.textContent = item.fullname;
-                cellItem.textContent = item.materials;
+
+                // Format the materials in the desired format "1 Wood Design, 1 Mouse"
+                const materials = item.materials.split(', ').map(material => {
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join item name parts
+                    return `${quantity} ${itemName}`;
+                }).join(', '); // Join all materials with commas
+
+                // Display formatted materials in the table
+                cellItem.textContent = materials;
 
                 // Create a hidden input for the reservation ID
                 const hiddenInput = document.createElement('input');
@@ -101,6 +111,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching schedule:', error));
 });
+
+
+
+
+
+
+
+
 
 //CLICKABLE ROW FUNCTION PENDING RESERVATIONS
 var SelectedPendingId;
@@ -122,7 +140,7 @@ document.getElementById('PendingListTable').addEventListener('click', function(e
         if(SelectPendingId != SelectedPendingId){
             SelectedPendingId = SelectPendingId;
         }else{
-            targetRow.style.backgroundColor = "transparent"; // Corrected syntax
+            targetRow.style.backgroundColor = ""; // Corrected syntax
             SchedViewDetailsBtn.style.opacity = 0.5;
             ApproveBtnnnn.style.opacity = 0.7;
             SelectedPendingId = '';
@@ -150,6 +168,7 @@ document.getElementById('ApproveBtn').addEventListener('click', () => {
             .then(response => {
                 if (response.ok) {
                     alert("Reservation approved successfully!");
+                    AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
                     location.reload();
                 } else {
                     throw new Error('Failed to approve reservation.');
@@ -185,6 +204,7 @@ document.getElementById('ApproveBtn2').addEventListener('click', () => {
             .then(response => {
                 if (response.ok) {
                     alert("Reservation approved successfully!");
+                    AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
                     location.reload();
                 } else {
                     throw new Error('Failed to approve reservation.');
@@ -200,7 +220,6 @@ document.getElementById('ApproveBtn2').addEventListener('click', () => {
         alert("Please select a pending reservation to approve.");
     }
 });
-
 
 
 
@@ -230,9 +249,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cellName = row.insertCell(1);
                 const cellItem = row.insertCell(2);
 
+                // Format the scheduled time
                 cellTime.textContent = item.scheduled_time;
+                // Set the full name for the reservation
                 cellName.textContent = item.fullname;
-                cellItem.textContent = item.materials;
+
+                // Format the materials in the desired format "1 Wood Design, 1 Mouse"
+                const materials = item.materials.split(', ').map(material => {
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join item name parts
+                    return `${quantity} ${itemName}`;
+                }).join(', '); // Join all materials with commas
+
+                // Display formatted materials in the table
+                cellItem.textContent = materials;
 
                 // Create a hidden input for the reservation ID
                 const hiddenInput = document.createElement('input');
@@ -244,6 +274,14 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching schedule:', error));
 });
+
+
+
+
+
+
+
+
 
 //CLICKABLE ROW FUNCTION APPROVED RESERVATIONS
 var SelectedApprovedId;
@@ -264,14 +302,12 @@ document.getElementById('ApprovedListTable').addEventListener('click', function(
         if(SelectApprovedId != SelectedApprovedId){
             SelectedApprovedId = SelectApprovedId;
         }else{
-            targetRow.style.backgroundColor = "transparent"; // Corrected syntax
+            targetRow.style.backgroundColor = ""; // Corrected syntax
             SchedViewDetailsBtn.style.opacity = 0.5;
             SelectedApprovedId = '';
         }
     }
 });
-
-
 
 
 
@@ -300,14 +336,21 @@ document.getElementById('PendingDetailsBtn').addEventListener('click', function(
     
             // Add new rows for materials
             const materials = data.materials.split(', ');
+    
             materials.forEach(material => {
                 const row = table.insertRow();
                 const itemCell = row.insertCell(0);
                 const quantityCell = row.insertCell(1);
-                const [quantity, ...itemNameParts] = material.split(' ');
-                const itemName = itemNameParts.join(' '); // Join remaining parts as item name
-                itemCell.textContent = itemName;
-                quantityCell.textContent = quantity;
+
+                // For each material string like "1 Wood Design"
+                const matches = material.match(/(\d+) (.+)/);
+                if (matches) {
+                    const quantity = matches[1];  // Quantity
+                    const itemName = matches[2];  // Item Name
+                    
+                    itemCell.textContent = itemName;  // Display the item name
+                    quantityCell.textContent = quantity;  // Display the quantity
+                }
             });
     
             // Show the reservation details modal
@@ -319,6 +362,11 @@ document.getElementById('PendingDetailsBtn').addEventListener('click', function(
         console.log("No reservation selected.");
     }
 });
+
+
+
+
+
 //TIME CONVERT MILITARY TIME TO AMPM
 function convertToAMPM(time) {
     const [hours, minutes] = time.split(':').map(Number);
@@ -417,6 +465,7 @@ document.getElementById('cancelreservbtn').addEventListener('click', () => {
             .then(result => {
                 if (result.success) {
                     alert("Reservation canceled successfully!");
+                    AcitivityLogInsertion("Reservation", "Canceled", SelectedApprovedId);
                     location.reload(); // Reload the page or update the UI accordingly
                 } else {
                     throw new Error(result.message);
@@ -529,7 +578,6 @@ document.getElementById('AllApproveReservation').addEventListener('click', funct
 });
 
 
-
 // ALL LIST APPROVED VIEW DETAILS
 document.getElementById('ViewDetailsBtn').addEventListener('click', function() {
     if (SelectedApprovedId2) {
@@ -544,10 +592,9 @@ document.getElementById('ViewDetailsBtn').addEventListener('click', function() {
                 document.getElementById('viewRes_fromtime2').textContent = convertToAMPM(data.fromtime);
                 document.getElementById('viewRes_totime2').textContent = convertToAMPM(data.totime);
                 document.getElementById('viewRes_message2').textContent = data.message;
-                document.getElementById('viewRes_Status2').textContent = data.Transaction_status; // Use correct property name
-                document.getElementById('viewRes_RetTime2').textContent = data.Transaction_ReturnedTime; // Use correct property name
-                document.getElementById('viewRes_Approv2').textContent = data.approved_by_name; // Use correct property name
-                
+                document.getElementById('viewRes_Status2').textContent = data.Transaction_status;
+                document.getElementById('viewRes_RetTime2').textContent = data.Transaction_ReturnedTime;
+                document.getElementById('viewRes_Approv2').textContent = data.approved_by_name;
 
                 // Clear existing rows
                 const table = document.getElementById('pendingviewmaterial3');
@@ -561,6 +608,8 @@ document.getElementById('ViewDetailsBtn').addEventListener('click', function() {
                     const row = table.insertRow();
                     const itemCell = row.insertCell(0);
                     const quantityCell = row.insertCell(1);
+                    
+                    // Split material into quantity and item name
                     const [quantity, ...itemNameParts] = material.split(' ');
                     const itemName = itemNameParts.join(' '); // Join remaining parts as item name
                     itemCell.textContent = itemName;
@@ -578,6 +627,41 @@ document.getElementById('ViewDetailsBtn').addEventListener('click', function() {
 
 
 
+
+
+
+
+
+//ACTIVITY LOG INSERT FUNCTIONS
+function AcitivityLogInsertion(Type, Action, ReferenceId) {
+    // Prepare data to send
+    const logData = {
+        faculty_id: facultyId,  // Faculty ID
+        log_type: Type,         // Log type (e.g., "Item")
+        log_action: Action,     // Action (e.g., "Create")
+        reference_id: ReferenceId, // Reference ID (e.g., Item ID)
+        timestamp: new Date().toISOString()  // Add a timestamp for the activity
+    };
+    // Send data to the PHP script
+    fetch('../PHP/ActivityLogInsertion.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logData)  // Send the log data as JSON
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            console.log('Activity log saved successfully.');
+        } else {
+            console.error('Failed to save activity log:', result.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error logging activity:', error);
+    });
+}
 
 
 

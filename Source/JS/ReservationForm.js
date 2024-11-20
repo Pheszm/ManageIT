@@ -1,7 +1,24 @@
 //OPEN ADD_MATERIALS FORM
 document.getElementById("AddbtnShow").addEventListener("click", function() {
-    document.getElementById("AddingMaterialsForm").style.display = "flex";
+    if(
+        document.getElementById("fromtime").value != "" &&
+        document.getElementById("totime").value != "" &&
+        document.getElementById("dateofuse").value != "" 
+    ){
+        document.getElementById("AddingMaterialsForm").style.display = "flex";
+    }else{
+        document.getElementById("WarningText").textContent = "You need to choose the Date and Time first in order to check if the item is available.";
+        
+        document.getElementById("WarningSign").style.display = "flex";
+    }
 });
+//CLOSE WARNING SIGN
+document.getElementById("WarningResponseBtn").addEventListener("click", function() {
+    document.getElementById("WarningSign").style.display = "none";
+});
+
+
+
 
 //CLOSE ADD_MATERIALS FORM
 document.getElementById("exitbtn").addEventListener("click", function() {
@@ -173,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const itemId = itemIdElement ? itemIdElement.value : '';
 
             if (name && name !== "Name" && itemId) {
-                materialz.push(`{"${itemId}","${name}","${qty}"}`);
+                materialz.push(`{"ItemID: ${itemId}","Qnty: ${qty}"}`);
             }
         });
 
@@ -370,67 +387,103 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+// SELECTED ITEMS GOES TO THE TABLE
+function handleButtonClick(itemId) {
+    document.getElementById("AddingMaterialsForm").style.display = "none";
+
+    // Fetch item data from the server
+    fetch(`../PHP/ReservationForm_ItemDataRetrieval.php?id=${itemId}`)
+        .then(response => response.json())
+        .then(itemData => {
+            if (itemData && itemData.Item_Name) {
+                // Create a new row
+                const table = document.getElementById("ItemTable");
+                const newRow = table.insertRow(-1); // Insert at the end of the table
+
+                // Insert cells
+                const cellName = newRow.insertCell(0);
+                const cellQuantity = newRow.insertCell(1);
+                const cellOperation = newRow.insertCell(2);
+
+                // Fill cells with data
+                cellName.textContent = itemData.Item_Name;
+
+                // Prepare reservation data for potential conflict checking
 
 
+                // Fetch availability data to check the item quantity
 
-        //SELECTED ITEMS GOES TO THE TABLE
-        function handleButtonClick(itemId) {
-            document.getElementById("AddingMaterialsForm").style.display = "none";
-        
-            // Fetch item data from the server
-            fetch(`../PHP/ReservationForm_ItemDataRetrieval.php?id=${itemId}`)
+            const dateofuse = document.getElementById("dateofuse").value;
+            const fromtime = document.getElementById("fromtime").value;
+            const totime = document.getElementById("totime").value;
+
+            // Example: Use these values in your fetch request
+            fetch(`../PHP/ReservationForm_ItemDataCheckAvailability.php?Item_Id=${itemId}&dateofuse=${dateofuse}&fromtime=${fromtime}&totime=${totime}`)
                 .then(response => response.json())
-                .then(itemData => {
-                    if (itemData && itemData.Item_Name) {
-                        // Create a new row
-                        const table = document.getElementById("ItemTable");
-                        const newRow = table.insertRow(-1); // Insert at the end of the table
-        
-                        // Insert cells
-                        const cellName = newRow.insertCell(0);
-                        const cellQuantity = newRow.insertCell(1);
-                        const cellOperation = newRow.insertCell(2);
-        
-                        // Fill cells with data
-                        cellName.textContent = itemData.Item_Name;
-        
-                        // Use a unique ID for the quantity container
-                        const qtyId = `itemQty-${itemId}`; 
+                .then(qntyFound => {
+                    if (qntyFound !== null && qntyFound >= 0) {
+                        const conflictedItemUsed = qntyFound;
+                        const Available = itemData.Item_Available - conflictedItemUsed;
+                        console.log(conflictedItemUsed+" - "+ itemData.Item_Available + " = " + Available);
                         cellQuantity.innerHTML = `
-                            <span id="${qtyId}" style="height: 10px; display: flex;align-items: center; justify-content: center;">
-                                <button onclick="updateQuantity('${itemId}', -1, ${itemData.Item_Available})">−</button>
-                                <p>1</p>
-                                <button onclick="updateQuantity('${itemId}', 1, ${itemData.Item_Available})">+</button>
+                            <span id="itemQty-${itemId}" style="height: 10px; display: flex; align-items: center; justify-content: center;">
+                                <button onclick="updateQuantity('${itemId}', -1, ${Available})">−</button>
+                                <p>0</p>
+                                <button onclick="updateQuantity('${itemId}', 1, ${Available})">+</button>
                                 <input type="hidden" class="Stored_itemId" value="${itemId}" />
                             </span>
                         `;
-                        cellOperation.innerHTML = `
-                            <button onclick="removeItem(this)">Remove −</button>
-                        `;
                     } else {
-                        console.error('Item not found');
+                        alert('Item not found or no availability data');
                     }
                 })
-                .catch(error => console.error('Error fetching item data:', error));
-        }
+                .catch(error => console.error('Error checking availability:', error));
+
+
+                cellOperation.innerHTML = `
+                    <button onclick="removeItem(this)">Remove −</button>
+                `;
+            } else {
+                console.error('Item not found');
+            }
+        })
+        .catch(error => console.error('Error fetching item data:', error));
+}
+
+function updateQuantity(itemId, change, maxAvailable) {
+    const qtyElement = document.querySelector(`#itemQty-${itemId} p`); // Select the specific item's quantity
+    let currentQty = parseInt(qtyElement.textContent);
+    const newQty = Math.max(0, Math.min(maxAvailable, currentQty + change)); // Limit between 1 and maxAvailable
+    qtyElement.textContent = newQty;
+}
+
+function removeItem(button) {
+    const row = button.closest('tr');
+    row.parentNode.removeChild(row);
+}
+
+
+
         
-        function updateQuantity(itemId, change, maxAvailable) {
-            const qtyElement = document.querySelector(`#itemQty-${itemId} p`); // Select the specific item's quantity
-            let currentQty = parseInt(qtyElement.textContent);
-            const newQty = Math.max(1, Math.min(maxAvailable, currentQty + change)); // Limit between 1 and maxAvailable
-            qtyElement.textContent = newQty;
-        }
-        
-        function removeItem(button) {
-            const row = button.closest('tr');
-            row.parentNode.removeChild(row);
-        }
-        
 
-
-
-
-
-
-
-        
+document.getElementById('dateofuse').addEventListener('change', function() {
+    const table = document.getElementById('ItemTable');
+    // Clear any existing rows except for the header
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+});
+document.getElementById('fromtime').addEventListener('change', function() {
+    const table = document.getElementById('ItemTable');
+    // Clear any existing rows except for the header
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+});
+document.getElementById('totime').addEventListener('change', function() {
+    const table = document.getElementById('ItemTable');
+    // Clear any existing rows except for the header
+    while (table.rows.length > 1) {
+        table.deleteRow(1);
+    }
+});

@@ -27,10 +27,42 @@
         <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
     </div>
 
-    <h1 class="Headerrr">???</h1>
 
-    
 
+
+
+
+    <div id="ItemListArea">
+        <span class="specialSpan">
+            <h1>Activity Logs</h1>  
+            <select id="TypeComboBox">
+                <option value="">Type</option>
+                <option value="Item">Item</option>
+                <option value="Reservation">Reservation</option>
+            </select>
+            <select id="ActionComboBox">
+                <option value="">Actions</option>
+                <option value="Create">Created</option>
+                <option value="Remove">Removed</option>
+                <option value="Update">Updated</option>
+                <option value="Approve">Approved</option>
+                <option value="Cancel">Canceled</option>
+            </select>
+        </span>
+
+        <div id="TableCase6">
+            <table id="AllItemsTable">
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Faculty Name</th>
+                    <th>Action</th>
+                    <th>Type</th>
+                    <th>Material</th>
+                </tr>
+                <!-- Rows will be dynamically added here -->
+            </table>
+        </div>
+    </div>
 
 
     <img id="SRCB_BackgroundIMG2" src="../../Assets/Images/SRCB_Logo.png">

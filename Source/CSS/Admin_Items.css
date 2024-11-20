@@ -250,7 +250,7 @@ html {
     border-radius: 10px;
     border: none;
     border: 2px solid #e2e2e2;
-    background-color: #276ace;
+    background-color: #374c6c;
     color: #fff;
     font-weight: bold;
 }
@@ -785,7 +785,7 @@ input:checked + .slider:before {
     justify-content: flex-start;
     border-radius: 10px;
     width: 35vw;
-    height: 63vh;
+    height: 71vh;
     background-color: #fefefe;
     padding: 0.5vw;
     position: absolute;

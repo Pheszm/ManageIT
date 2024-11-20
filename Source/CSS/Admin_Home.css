@@ -178,6 +178,11 @@ html {
 #ScheduledArea td{
     color: #1a54ab;
     user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px;  
+    
 }
 #ScheduledArea tr:nth-child(even) {
     background-color: #ffffff;

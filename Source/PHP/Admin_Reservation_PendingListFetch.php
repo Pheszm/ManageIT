@@ -1,6 +1,6 @@
 <?php
 
-include 'ConnectionString.php';
+include 'ConnectionString.php';  // Your database connection settings
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -14,10 +14,11 @@ if ($conn->connect_error) {
 $currentDateTime = date('Y-m-d H:i:s');
 
 // SQL query to fetch data, excluding past dates, ordered by date and time
-$sql = "SELECT id, dateofuse, fromtime, totime, fullname, materials 
-        FROM reserve_submissions 
-        WHERE approved_by IS NULL AND (dateofuse > ? OR (dateofuse = ? AND fromtime >= ?))
-        ORDER BY dateofuse, fromtime ASC";
+$sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.materials 
+        FROM reserve_submissions AS rs
+        WHERE rs.approved_by IS NULL 
+          AND (rs.dateofuse > ? OR (rs.dateofuse = ? AND rs.fromtime >= ?))
+        ORDER BY rs.dateofuse, rs.fromtime ASC";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("sss", $currentDateTime, $currentDateTime, $currentDateTime);
@@ -33,8 +34,8 @@ if ($result->num_rows > 0) {
         $formattedTime = formatTimeAndDate($row['dateofuse'], $row['fromtime'], $row['totime']);
         $row['scheduled_time'] = $formattedTime;
 
-        // Parse the materials string
-        $items = parseMaterials($row['materials']);
+        // Parse the materials string and fetch item names
+        $items = parseMaterials($row['materials'], $conn);
         $row['materials'] = implode(", ", $items); // Join item details for display
 
         // Add the reservation ID to the row data
@@ -47,9 +48,10 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 
-// Function to parse materials
-function parseMaterials($materials)
+// Function to parse materials and fetch item names
+function parseMaterials($materials, $conn)
 {
+    global $itemName;
     $items = [];
     // Remove outer quotes and backslashes
     $materials = trim($materials, '"'); // Remove leading and trailing quotes
@@ -59,16 +61,36 @@ function parseMaterials($materials)
     $entries = explode('},{', $materials);
 
     foreach ($entries as $entry) {
-        // Remove any leading/trailing spaces and unwanted characters
+        // Clean each entry
         $entry = trim($entry, '{}'); // Trim braces
-        // Split by commas and extract Item_Id, Item_Name, and Quantity
+        // Split by ',' and extract ItemID and Qnty
         $parts = explode(',', $entry);
-        if (count($parts) === 3) { // Ensure there are exactly 3 parts
-            $quantity = trim($parts[2], '"'); // Quantity
-            $itemName = trim($parts[1], '"'); // Item_Name
-            $items[] = "{$quantity} {$itemName}"; // Format as "Quantity Item_Name"
+
+        if (count($parts) === 2) { // Ensure there are exactly 2 parts
+            // Extract ItemID and Quantity
+            preg_match('/ItemID: (\d+)/', $parts[0], $matches);
+            preg_match('/Qnty: (\d+)/', $parts[1], $qtyMatches);
+
+            $itemID = isset($matches[1]) ? $matches[1] : null;
+            $quantity = isset($qtyMatches[1]) ? $qtyMatches[1] : null;
+
+            if ($itemID && $quantity) {
+                // Fetch the item name from the Items table
+                $stmt = $conn->prepare("SELECT Item_Name FROM Items WHERE Item_Id = ?");
+                $stmt->bind_param("i", $itemID);
+                $stmt->execute();
+                $stmt->bind_result($itemName);
+                $stmt->fetch();
+                $stmt->close();
+
+                // Format the entry as "Quantity Item_Name"
+                if ($itemName) {
+                    $items[] = "{$quantity} {$itemName}";
+                }
+            }
         }
     }
+
     return $items;
 }
 

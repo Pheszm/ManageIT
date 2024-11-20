@@ -182,7 +182,7 @@ document
 				SelectedAllItemsRow = SelectRow;
 				DisplayItemDestails();
 			} else {
-				targetRow.style.backgroundColor = "transparent"; // Corrected syntax
+				targetRow.style.backgroundColor = ""; // Corrected syntax
 				document.getElementById("SaveQrBtn").style.display = "none";
 				document.getElementById("UpdateItemBtn").style.display = "none";
 				document.getElementById("RemoveItemBtn").style.display = "none";
@@ -397,10 +397,10 @@ window.onload = function () {
 
 
 // Global variables to store the selected image URL and file name
-let ImageFullURL = null;
-let ImageFileName = null;
-let ImageFile = null; // Store the image file itself for upload
-
+let Update_ImageFullURL = null;
+let Update_ImageFileName = null;
+let Update_ImageFile = null; // Store the image file itself for upload
+//UPDATE AREAA
 // Event listener for the button click to trigger file selection
 document.getElementById('Update_UploadImageBtn').addEventListener('click', function() {
     // Create a temporary file input element to trigger file selection
@@ -415,8 +415,8 @@ document.getElementById('Update_UploadImageBtn').addEventListener('click', funct
             ImageFullURL = URL.createObjectURL(file); // Use the correct variable name
             
             // Store the image file and file name for later use
-            ImageFile = file;
-            ImageFileName = file.name;
+            Update_ImageFile = file;
+            Update_ImageFileName = file.name;
 
             // Apply the image URL as the background image of the parent div
             document.getElementById('Update_ImageArea').style.backgroundImage = `url(${ImageFullURL})`;
@@ -433,7 +433,9 @@ document.getElementById('Update_UploadImageBtn').addEventListener('click', funct
 
 
 
-
+let Add_ImageFullURL = null;
+let Add_ImageFileName = null;
+let Add_ImageFile = null; 
 //ADD PART
 // Event listener for the button click to trigger file selection
 document.getElementById('Add_UploadImageBtn').addEventListener('click', function() {
@@ -449,8 +451,8 @@ document.getElementById('Add_UploadImageBtn').addEventListener('click', function
             ImageFullURL = URL.createObjectURL(file); // Use the correct variable name
             
             // Store the image file and file name for later use
-            ImageFile = file;
-            ImageFileName = file.name;
+            Add_ImageFile = file;
+            Add_ImageFileName = file.name;
 
             // Apply the image URL as the background image of the parent div
             document.getElementById('AddImageArea').style.backgroundImage = `url(${ImageFullURL})`;
@@ -467,13 +469,21 @@ document.getElementById('Add_UploadImageBtn').addEventListener('click', function
 
 // Function to upload the image to the server
 function StoringImageFunc() {
-    if (!ImageFile) {
-        console.error('No image file selected.');
+    if (Update_ImageFile || Add_ImageFile) {
+    }else{
+		console.error('No image file selected.');
         return;
-    }
+	}
 
     var formData = new FormData();
-    formData.append('image', ImageFile); // Append the selected image file
+	if(Update_ImageFile){
+		formData.append('image', Update_ImageFile); // Append the selected image file
+		console.log(Update_ImageFile);
+	}
+	if(Add_ImageFile){
+		formData.append('image', Add_ImageFile); // Append the selected image file
+		console.log(Add_ImageFile);
+	}
 
     // Send the image file to the server using Fetch API
     fetch('../PHP/Admin_Items_CopyImage.php', {
@@ -538,7 +548,7 @@ document.getElementById("AddBtnSave").addEventListener("click", function() {
         item_model: itemModel.value,
         item_category: itemCategory.value,
         item_quantity: itemQuantity.value,
-        item_imageName: ImageFileName, // ImageName
+        item_imageName: Add_ImageFileName, // ImageName
     };
 
     // Confirm action after validation
@@ -559,6 +569,8 @@ document.getElementById("AddBtnSave").addEventListener("click", function() {
         .then(result => {
             if (result.success) {
                 alert('Item added successfully.');
+				var ItemIDCreate = result.item_id; // STORE IT HERE
+				AcitivityLogInsertion("Item", "Created", ItemIDCreate);
                 location.reload(); // Optionally reload the page or refresh the data
             } else {
                 // Handle specific errors (if any)
@@ -571,6 +583,45 @@ document.getElementById("AddBtnSave").addEventListener("click", function() {
         });
     }
 });
+
+
+
+
+
+
+
+
+//ACTIVITY LOG INSERT FUNCTIONS
+function AcitivityLogInsertion(Type, Action, ReferenceId) {
+    // Prepare data to send
+    const logData = {
+        faculty_id: facultyId,  // Faculty ID
+        log_type: Type,         // Log type (e.g., "Item")
+        log_action: Action,     // Action (e.g., "Create")
+        reference_id: ReferenceId, // Reference ID (e.g., Item ID)
+        timestamp: new Date().toISOString()  // Add a timestamp for the activity
+    };
+
+    // Send data to the PHP script
+    fetch('../PHP/ActivityLogInsertion.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logData)  // Send the log data as JSON
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            console.log('Activity log saved successfully.');
+        } else {
+            console.error('Failed to save activity log:', result.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error logging activity:', error);
+    });
+}
 
 
 
@@ -615,6 +666,8 @@ function DisplayToUpdateItemDestails() {
 				document.getElementById("Update_Item_Quantity").value =
 					data.Item_Quantity;
 
+					document.getElementById("Update_Item_Available").value =
+					data.Item_Available;
 				// Set Status
 				const statusSwitch = document.getElementById("Update_Item_Status");
 				if (data.Item_Status == 1) {
@@ -639,7 +692,7 @@ function DisplayToUpdateItemDestails() {
 	}
 }
 
-
+// UPDATE ITEM ARE
 // Event listener for the "Save" button in the Update Form
 document.getElementById("UpdateBtnSave").addEventListener("click", function() {
     // Get values from the form
@@ -647,9 +700,11 @@ document.getElementById("UpdateBtnSave").addEventListener("click", function() {
     const itemModel = document.getElementById("Update_Item_Model").value;
     const itemCategory = document.getElementById("Update_Item_Category").value;
     const itemQuantity = document.getElementById("Update_Item_Quantity").value;
+	const itemAvailable = document.getElementById("Update_Item_Available").value;
     const itemStatus = document.getElementById("Update_Item_Status").checked ? 1 : 0; // Convert checkbox status to 1 or 0
-    const OlditemImageName = ImagetoUpdate;  // Image location (it might have been set during item selection)
-    // Clear previous validity messages
+	var OlditemImageName = ImagetoUpdate;
+
+	// Clear previous validity messages
     document.getElementById("Update_Item_Name").setCustomValidity('');
     document.getElementById("Update_Item_Model").setCustomValidity('');
     document.getElementById("Update_Item_Category").setCustomValidity('');
@@ -680,24 +735,36 @@ document.getElementById("UpdateBtnSave").addEventListener("click", function() {
         return;
     }
 
-    // Prepare the updated data to be sent
-    const updatedData = {
-        item_id: SelectedAllItemsRow,  // The ID of the item being updated (assuming it's available)
-        item_name: itemName,
-        item_model: itemModel,
-        item_category: itemCategory,
-        item_quantity: itemQuantity,
-        item_status: itemStatus,
-        item_imageName: ImageFileName,  // Image name or URL from the selected image
-    };
+	if (itemAvailable.trim() === '' || isNaN(itemAvailable) || itemAvailable <= 0 || parseInt(itemAvailable) > parseInt(itemQuantity)) {
+		document.getElementById("Update_Item_Available").setCustomValidity('Please enter a valid quantity greater than 0 and less than Item Quantity.');
+		document.getElementById("Update_Item_Available").reportValidity();
+		return;
+    }
+
+
+
 
     // Confirm before submitting the update
     const confirmUpdate = confirm("Are you sure you want to update this item?");
     if (confirmUpdate) {
-		if(OlditemImageName != ImageFileName && ImageFileName != null){
+		if(OlditemImageName != Update_ImageFileName && Update_ImageFileName != null){
+			OlditemImageName = Update_ImageFileName;
+			console.log(OlditemImageName);
 			StoringImageFunc();
 		}
 
+		    // Prepare the updated data to be sent
+			const updatedData = {
+				item_id: SelectedAllItemsRow,  // The ID of the item being updated (assuming it's available)
+				item_name: itemName,
+				item_model: itemModel,
+				item_category: itemCategory,
+				item_quantity: itemQuantity,
+				item_status: itemStatus,
+				item_available: itemAvailable,
+				item_imageName: OlditemImageName,  // Image name or URL from the selected image
+			};
+			
         // Send the updated data to the server
         fetch('../PHP/Admin_Items_UpdateItem.php', {
             method: 'POST',
@@ -710,6 +777,7 @@ document.getElementById("UpdateBtnSave").addEventListener("click", function() {
         .then((result) => {
             if (result.success) {
                 alert('Item updated successfully.');
+				AcitivityLogInsertion("Item", "Updated", SelectedAllItemsRow);
                 location.reload();  // Optionally reload the page or refresh the data
             } else {
                 alert('Error updating item: ' + (result.error || 'Unknown error'));
@@ -753,6 +821,7 @@ document.getElementById("RemoveItemBtn").addEventListener("click", function() {
         .then((result) => {
             if (result.success) {
                 alert('Item removed successfully.');
+				AcitivityLogInsertion("Item", "Removed", SelectedAllItemsRow);
                 location.reload();  // Optionally reload the page or refresh the data
             } else {
                 alert('Error removing item: ' + (result.error || 'Unknown error'));
