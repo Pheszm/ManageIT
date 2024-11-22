@@ -15,18 +15,13 @@ if ($conn->connect_error) {
 // Get JSON data from the request body
 $data = json_decode(file_get_contents('php://input'), true);
 
-// Collect item ID from JSON input
+// Collect form data from JSON input
 $itemId = $data['item_id'];
+$intValue = 1;
 
-// Check if the item ID is valid
-if (!$itemId) {
-    echo json_encode(["success" => false, "error" => "Invalid item ID"]);
-    exit();
-}
-
-// Prepare and execute the DELETE query
-$stmt = $conn->prepare("DELETE FROM Items WHERE Item_ID = ?");
-$stmt->bind_param("i", $itemId);
+// Update query
+$stmt = $conn->prepare("UPDATE Items SET Remove_Status = ? WHERE Item_ID = ?");
+$stmt->bind_param("ii", $intValue, $itemId);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true]);

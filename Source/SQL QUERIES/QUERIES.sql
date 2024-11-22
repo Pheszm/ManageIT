@@ -35,7 +35,8 @@ CREATE TABLE Items (
     Item_Model VARCHAR(255),
     Item_Available INT,
     Item_Status INT,
-    Item_ImageLocation TEXT
+    Item_ImageLocation TEXT,
+    Remove_Status INT DEFAULT 0
 );
 
 
@@ -69,5 +70,5 @@ CREATE TABLE activity_logs (
     Log_type varchar(100),    
     Log_action varchar(100),
     Reference_id INT,
-    DateAndTime DATETIME
+    DateAndTime DATETIME,
 );

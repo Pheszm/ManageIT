@@ -76,7 +76,7 @@ if ($result->num_rows > 0) {
             $itemResult = $itemStmt->get_result();
             $itemRow = $itemResult->fetch_assoc();
             $row['Item_Name'] = $itemRow ? $itemRow['Item_Name'] : 'N/A';
-        } elseif ($row['Log_type'] == 'Reservation') {
+        } elseif ($row['Log_type'] == 'Reservation' || $row['Log_type'] == 'Transaction') {
             // Separate query to get Reservation Full Name
             $reservationQuery = "SELECT fullname FROM reserve_submissions WHERE id = ?";
             $reservationStmt = $conn->prepare($reservationQuery);

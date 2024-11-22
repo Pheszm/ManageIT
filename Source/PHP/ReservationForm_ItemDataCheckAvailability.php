@@ -19,11 +19,15 @@ $fromtime = $_GET['fromtime'];
 $totime = $_GET['totime'];
 
 // Prepare the SQL query with placeholders
-$sql = "SELECT materials FROM reserve_submissions WHERE dateofuse = ? AND NOT (
+$sql = "SELECT materials
+FROM reserve_submissions
+WHERE dateofuse = ?
+AND (
     (fromtime < ? AND totime > ?) OR
     (fromtime < ? AND totime > ?) OR
-    (? BETWEEN fromtime AND totime)
-)";
+    (fromtime > ? AND totime < ?)
+);
+";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
@@ -34,7 +38,7 @@ if ($stmt === false) {
 }
 
 // Bind parameters to the prepared statement
-$stmt->bind_param("ssssss", $dateofuse, $fromtime, $totime, $fromtime, $totime, $fromtime);
+$stmt->bind_param("sssssss", $dateofuse, $fromtime, $fromtime, $totime, $totime, $fromtime, $totime);
 
 // Execute the query
 $stmt->execute();

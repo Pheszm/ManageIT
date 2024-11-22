@@ -26,7 +26,7 @@ $categoryFilterLike = '%' . $categoryFilter . '%';
 // Start building the SQL query
 $sql = "SELECT Item_Id, Item_Name, Item_Quantity, Item_Available
         FROM Items
-        WHERE Item_Name LIKE ?";
+        WHERE Remove_Status = 0 AND Item_Name LIKE ?";
 
 // Filter conditions
 $filterConditions = [];

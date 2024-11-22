@@ -19,7 +19,7 @@ $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.mate
         JOIN Transactions AS t ON rs.id = t.Transaction_Reserve_id 
         WHERE rs.approved_by IS NOT NULL 
           AND rs.dateofuse > ? 
-          AND t.Transaction_status = 'ONGOING' 
+          AND t.Transaction_status = 'UPCOMING' 
         ORDER BY rs.dateofuse, rs.fromtime"; // Order by date and then by fromtime
 
 $stmt = $conn->prepare($sql);

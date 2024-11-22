@@ -80,7 +80,7 @@ function RefreshTable() {
                 // Determine Name based on Log_type
                 if (item.Log_type === 'Item') {
                     row.insertCell(4).textContent = item.Item_Name || 'N/A'; // Item_Name
-                } else if (item.Log_type === 'Reservation') {
+                } else if (item.Log_type === 'Reservation' || item.Log_type === 'Transaction') {
                     row.insertCell(4).textContent = item.Reservation_FullName || 'N/A'; // Reservation fullname
                 } else {
                     row.insertCell(4).textContent = 'N/A'; // Default for other cases

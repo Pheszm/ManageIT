@@ -113,7 +113,22 @@ function RefreshTable() {
 				const row = table.insertRow();
 				row.insertCell(0).textContent = item.Item_Name;
 				row.insertCell(1).textContent = item.Item_Quantity;
-				row.insertCell(2).textContent = item.Item_Available;
+				var OverallItemQnty = item.Item_Available;
+				// Format CurrentDate to YYYY-MM-DD
+				var CurrentDate = new Date().toISOString().split('T')[0]; // Example: "2024-11-22"
+				// Format CurrentTime to HH:MM:SS (24-hour format)
+				var CurrentTime = new Date().toTimeString().split(' ')[0]; // Example: "11:08:43"
+
+				fetch(`../PHP/Admin_Items_ItemDataCheckAvailability.php?Item_Id=${item.Item_Id}&CurrentDate=${CurrentDate}&CurrentTime=${CurrentTime}`)
+                .then(response => response.json())
+                .then(Overall_Item_UseQuantity => {
+					OverallItemQnty -= Overall_Item_UseQuantity;
+					row.insertCell(2).textContent = OverallItemQnty;
+                })
+				.catch(error => {
+					console.error('Error checking availability:', error);
+					row.insertCell(2).textContent = OverallItemQnty; 
+				});
 
 				// Optional: Add hidden input for future use (if needed)
 				const hiddenInput = document.createElement("input");

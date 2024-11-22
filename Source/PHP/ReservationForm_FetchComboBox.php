@@ -8,8 +8,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch unique models and categories from the Items table
-    $modelQuery = "SELECT DISTINCT Item_Model FROM Items";
-    $categoryQuery = "SELECT DISTINCT Item_Category FROM Items";
+    $modelQuery = "SELECT DISTINCT Item_Model FROM Items WHERE Remove_Status = 0";
+    $categoryQuery = "SELECT DISTINCT Item_Category FROM Items WHERE Remove_Status = 0";
 
     // Fetch models
     $stmtModels = $pdo->prepare($modelQuery);

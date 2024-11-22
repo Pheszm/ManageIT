@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 $data = json_decode(file_get_contents('php://input'), true);
 $reservationId = $data['id'] ?? '';
 $approvedBy = $data['approved_by'] ?? '';
-$transactionStatus = 'ONGOING'; // Set the default status
+$transactionStatus = 'UPCOMING'; // Set the default status
 $transactionComment = $data['comment'] ?? null; // Optional comment
 
 // Prepare the SQL statement to update the reservation

@@ -18,7 +18,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : '';
 $itemId = isset($_GET['Item_Id']) ? $_GET['Item_Id'] : null;
 
 // Start with the base SQL query
-$sql = "SELECT Item_Id, Item_ImageLocation, Item_Name FROM Items WHERE Item_Available > 0 AND Item_Status = 1";
+$sql = "SELECT Item_Id, Item_ImageLocation, Item_Name FROM Items WHERE Item_Available > 0 AND Item_Status = 1 AND Remove_Status = 0";
 
 // Apply filters conditionally
 if ($searchTerm) {

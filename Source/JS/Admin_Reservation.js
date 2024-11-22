@@ -168,6 +168,7 @@ document.getElementById('ApproveBtn').addEventListener('click', () => {
             .then(response => {
                 if (response.ok) {
                     alert("Reservation approved successfully!");
+                    InsertItems_IssuedItems();
                     AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
                     location.reload();
                 } else {
@@ -204,6 +205,7 @@ document.getElementById('ApproveBtn2').addEventListener('click', () => {
             .then(response => {
                 if (response.ok) {
                     alert("Reservation approved successfully!");
+                    InsertItems_IssuedItems();
                     AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
                     location.reload();
                 } else {
@@ -224,9 +226,29 @@ document.getElementById('ApproveBtn2').addEventListener('click', () => {
 
 
 
-
-
-
+function InsertItems_IssuedItems() {
+    var idIssued = SelectedPendingId;
+    console.log(idIssued);
+    fetch('../PHP/Admin_Reservation_IssuedItemsDateInsertion.php?id=' + encodeURIComponent(idIssued), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())  // Parse the JSON response from PHP
+    .then(data => {
+        if (data.success) {
+            // Success handling
+            console.log("Items successfully inserted into the database.");
+        } else {
+            // Error handling
+            console.log("Error: " + data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Error in the request: " + error);
+    });
+}
 
 
 

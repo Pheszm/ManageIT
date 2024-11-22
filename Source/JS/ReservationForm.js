@@ -408,7 +408,7 @@ function handleButtonClick(itemId) {
                 // Fill cells with data
                 cellName.textContent = itemData.Item_Name;
 
-                // Prepare reservation data for potential conflict checking
+
 
 
                 // Fetch availability data to check the item quantity

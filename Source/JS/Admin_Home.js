@@ -7,6 +7,9 @@ document.getElementById("toggle-btn").addEventListener("click", function() {
 document.getElementById("exitbtn2").addEventListener("click", function() {
     document.getElementById("ViewApprovedReserv").style.display = "none";
 });
+document.getElementById("exitbtn3").addEventListener("click", function() {
+    document.getElementById("ViewIssued").style.display = "none";
+});
 
 
 
@@ -140,11 +143,12 @@ document.getElementById('ScheduledListTable').addEventListener('click', function
             SelectedReservationId = SelectReservationId;
         }else{
             targetRow.style.backgroundColor = ""; // Corrected syntax
-            SchedViewDetailsBtn.style.opacity = 0.7;
+            SchedViewDetailsBtn.style.opacity = 0.5;
             SelectedReservationId = '';
         }
     }
 });
+
 
 
 
@@ -210,3 +214,224 @@ function convertToReadableDate(dateString) {
     return date.toLocaleDateString(undefined, options);
 }
 
+
+
+
+
+
+
+
+
+// LOAD Issued Items Table
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('../PHP/Admin_Home_IssuedItemsListFetch.php')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('IssuedItemTable');
+
+            //Clear any existing rows except for the header
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+
+            // Populate table with fetched data
+            data.forEach(item => {
+                const row = table.insertRow();
+                const cellTime = row.insertCell(0);
+                const cellName = row.insertCell(1);
+                const cellItem = row.insertCell(2);
+
+                const CurrentDate =  new Date().toISOString().split('T')[0];
+                const CurrentTime = new Date().toTimeString().split(' ')[0];
+                cellTime.textContent = item.scheduled_time;
+                if(item.dateofuse < CurrentDate){
+                    cellTime.textContent = "⚠️" + item.scheduled_time;
+                }
+                else if(item.totime < CurrentTime){
+                    cellTime.textContent = "⚠️" +item.scheduled_time;
+                }
+                cellName.textContent = item.fullname;
+                cellItem.textContent = item.materials;
+
+                // Create a hidden input for the reservation ID
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.value = item.reservation_id; // Set the value to reservation ID
+                hiddenInput.name = 'reservationId[]'; // Optional: name for form submission
+                row.appendChild(hiddenInput); // Append to the row
+            });
+        })
+        .catch(error => console.error('Error fetching schedule:', error));
+}); 
+
+
+
+var SelectedIssuedId;
+document.getElementById('IssuedItemTable').addEventListener('click', function(e) {
+    const SchedViewDetailsBtn = document.getElementById('IssuedViewDetailsBtn');
+    const ReturnBtn = document.getElementById('ReturnItemBtn'); 
+    const targetRow = e.target.closest('tr');
+    if (targetRow && targetRow.rowIndex > 0) { // Check if it's not the header row
+        // Clear any inline styles from previous selections
+        Array.from(this.rows).forEach(row => {
+            row.style.border = "";
+            row.style.backgroundColor = ""; // Reset background color
+        });
+        targetRow.style.backgroundColor = "#9BB9E5FF"; // Corrected syntax
+        SchedViewDetailsBtn.style.opacity = 1;
+        ReturnBtn.style.opacity = 1;
+        // Retrieve the hidden input value (reservation ID)
+        var SelectIssuedId = targetRow.querySelector('input[type="hidden"]').value;
+        if(SelectIssuedId != SelectedIssuedId){
+            SelectedIssuedId = SelectIssuedId;
+        }else{
+            targetRow.style.backgroundColor = ""; // Corrected syntax
+            SchedViewDetailsBtn.style.opacity = 0.5;
+            ReturnBtn.style.opacity = 0.5;
+            SelectedIssuedId = '';
+        }
+    }
+});
+
+
+/// APPROVED VIEW DETAILS
+document.getElementById('IssuedViewDetailsBtn').addEventListener('click', function() {
+    if (SelectedIssuedId) {
+        fetch(`../PHP/Admin_Home_ViewReservation.php?id=${SelectedIssuedId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('viewOnging_fullName2').textContent = data.fullname;
+                document.getElementById('viewOnging_courseYear2').textContent = data.course_year;
+                document.getElementById('viewOnging_subject2').textContent = data.subject;
+                document.getElementById('viewOnging_requestedBy2').textContent = data.requested_by;
+                document.getElementById('viewOnging_dateOfUse2').textContent = convertToReadableDate(data.dateofuse);
+                document.getElementById('viewOnging_fromtime2').textContent = convertToAMPM(data.fromtime);
+                document.getElementById('viewOnging_totime2').textContent = convertToAMPM(data.totime);
+                document.getElementById('viewOnging_message2').textContent = data.message;
+                document.getElementById('viewOnging_Status2').textContent = data.Transaction_status; // Use correct property name
+                document.getElementById('viewOnging_RetTime2').textContent = data.Transaction_ReturnedTime; // Use correct property name
+                document.getElementById('viewOnging_Approv2').textContent = data.approved_by_name; // Use correct property name
+                
+
+                // Clear existing rows
+                const table = document.getElementById('pendingviewmaterial4');
+                table.innerHTML = '<tr><th>Item</th><th>Qnty</th></tr>'; // Reset table
+                // Add new rows for materials
+                const materials = data.materials.split(', ');
+                materials.forEach(material => {
+                    const row = table.insertRow();
+                    const itemCell = row.insertCell(0);
+                    const quantityCell = row.insertCell(1);
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join remaining parts as item name
+                    itemCell.textContent = itemName;
+                    quantityCell.textContent = quantity;
+                });
+
+                // Show the reservation details modal
+                document.getElementById('ViewIssued').style.display = 'flex';
+            })
+            .catch(error => console.error('Error fetching reservation details:', error));
+    } else {
+        console.log("No reservation selected.");
+    }
+});
+
+
+
+function OngoingReservationChecker() {
+    fetch('../PHP/Admin_Home_OngoingReservationChecker.php', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}) // Send an empty body if no data is needed, or you can pass data here
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+OngoingReservationChecker();
+
+
+
+// RETURN ITEM BUTTON FUNCTION
+document.getElementById('ReturnItemBtn').addEventListener('click', () => {
+    if (SelectedIssuedId) {
+        console.log(SelectedIssuedId);
+        // Ask for confirmation
+        const isConfirmed = confirm("Are you sure the item is already returned?");
+        
+        if (isConfirmed) {
+            // Prepare the data to send
+            const CurrentTime = new Date().toTimeString().split(' ')[0];
+            const data = { 
+                reservation_id: SelectedIssuedId,
+                Current_time: CurrentTime
+            };
+
+            fetch('../PHP/Admin_Home_ReturnProcess.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert("Return successfully!");
+                    AcitivityLogInsertion("Transaction", "Returned", SelectedIssuedId);
+                    location.reload(); // Reload the page or update the UI accordingly
+                } else {
+                    throw new Error(result.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("There was an error in returning.");
+            });
+        }
+    } else {        
+
+    }
+});
+
+
+
+
+//ACTIVITY LOG INSERT FUNCTIONS
+function AcitivityLogInsertion(Type, Action, ReferenceId) {
+    // Prepare data to send
+    const logData = {
+        faculty_id: facultyId,  // Faculty ID
+        log_type: Type,         // Log type (e.g., "Item")
+        log_action: Action,     // Action (e.g., "Create")
+        reference_id: ReferenceId, // Reference ID (e.g., Item ID)
+        timestamp: new Date().toISOString()  // Add a timestamp for the activity
+    };
+
+    // Send data to the PHP script
+    fetch('../PHP/ActivityLogInsertion.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logData)  // Send the log data as JSON
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            console.log('Activity log saved successfully.');
+        } else {
+            console.error('Failed to save activity log:', result.error);
+        }
+    })
+    .catch(error => {
+        console.error('Error logging activity:', error);
+    });
+}

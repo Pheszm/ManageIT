@@ -18,12 +18,10 @@ $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.mate
         FROM reserve_submissions AS rs
         JOIN Transactions AS t ON rs.id = t.Transaction_Reserve_id 
         WHERE rs.approved_by IS NOT NULL 
-          AND rs.dateofuse > ? 
-          AND t.Transaction_status = 'UPCOMING' 
+        AND t.Transaction_status = 'ONGOING' 
         ORDER BY rs.dateofuse, rs.fromtime"; // Order by date and then by fromtime
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $currentDate);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -101,7 +99,7 @@ function formatTimeAndDate($date, $fromTime, $toTime)
 {
     $fromTime12hr = date("g:i A", strtotime($fromTime));
     $toTime12hr = date("g:i A", strtotime($toTime));
-    return "{$date} ({$fromTime12hr} - {$toTime12hr})";
+    return "$date ($toTime12hr)";
 }
 
 // Return data as JSON

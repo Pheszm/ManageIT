@@ -25,6 +25,7 @@ html {
 
 /* Top Navigation */
 #TopNavBar{
+    box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.3);
     overflow: hidden;
     width: 100%;
     height: 60px;
@@ -173,6 +174,8 @@ html {
 #ScheduledArea th{
     background-color: #1a54ab;
     color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
 }
 
 #ScheduledArea td{
@@ -181,7 +184,8 @@ html {
     white-space: nowrap;        /* Prevents text from wrapping to a new line */
     overflow: hidden;           /* Hides overflow text */
     text-overflow: ellipsis;   /* Displays "..." for truncated text */
-    max-width: 100px;  
+    max-width: 100px; 
+    text-align: center; 
     
 }
 #ScheduledArea tr:nth-child(even) {
@@ -230,11 +234,6 @@ html {
 /*Issued Items Area*/
 
 #IssuedItemsArea{
-    background-color: #e2e2e2;
-    height: 200px;
-}
-
-#IssuedItemsArea{
     border-radius: 10px;
     margin-top: 12px;
     margin-left: 10px;
@@ -244,25 +243,44 @@ html {
     padding: 10px;
 }
 
+#TableCase3{
+    background-color: #f0f0f0;
+    height: 14vw;
+    overflow-y: auto;
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+
+#IssuedItemsArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#IssuedItemsArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+}
+
+#IssuedItemsArea td{
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px; 
+    text-align: center; 
+    
+}
+
+
 #IssuedItemsArea h1{
     line-height: 10px;
     color: #1a54ab;
     font-size: 20px;
 }
 
-#IssuedItemsArea table{
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#IssuedItemsArea th{
-    background-color: #1a54ab;
-    color: #fff;
-}
-
-#IssuedItemsArea td{
-    color: #1a54ab;;
-}
 #IssuedItemsArea tr:nth-child(even) {
     background-color: #ffffff;
 }
@@ -274,14 +292,28 @@ html {
     margin-top: 10px;
     display: flex;
 }
-#SchedViewDetailsBtn{
+#IssuedViewDetailsBtn{
     height: 30px;
     font-size: 14px;
+    opacity: 0.5;
     font-weight: bold;
     border: 0;
     color: #fff;
     border-radius: 30px;
     background-color: #1a54ab;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#ReturnItemBtn{
+    margin-left: 10px;
+    height: 30px;
+    font-size: 14px;
+    opacity: 0.5;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1aab6a;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -326,6 +358,9 @@ html {
 #TableCase{
     background-color: #f0f0f0;
     height: 14.5vw;
+    overflow-y: auto;
+    max-height: 100%;
+    overflow-x: hidden;
 }
 
 #VolumeArea h1{
@@ -354,17 +389,7 @@ html {
     margin-top: 10px;
     display: flex;
 }
-#SchedViewDetailsBtn{
-    height: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    border: 0;
-    color: #fff;
-    border-radius: 30px;
-    background-color: #1a54ab;
-    padding-left: 10px;
-    padding-right: 10px;
-}
+
 #SchedViewMoreBtn{
     margin-left: auto;
     height: 30px;
@@ -408,17 +433,7 @@ html {
     margin-top: 10px;
     display: flex;
 }
-#SchedViewDetailsBtn{
-    height: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    border: 0;
-    color: #fff;
-    border-radius: 30px;
-    background-color: #1a54ab;
-    padding-left: 10px;
-    padding-right: 10px;
-}
+
 #SchedViewMoreBtn{
     margin-left: auto;
     height: 30px;
@@ -691,6 +706,221 @@ html {
     background-color: #ffffff;
 }
 #ApprovedDetailsForm tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApproveBtn2{
+    margin-top: 10px;
+    width: 120px;
+    margin-left: auto;
+    background-color: #037620;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#ApproveBtn2:hover{
+    background-color: #03611a;
+}
+
+#case2, #case3 {
+    width: 50%; /* Set both to 50% */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+#case2 {
+    display: flex;
+    background-color: #ececec;
+    height: 95%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#cancelreservbtn{
+    width: 120px;
+    margin-left: auto;
+    background-color: #931a0f;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#cancelreservbtn:hover{
+    background-color: #7d1107;
+}
+
+#case3 span{
+    width: 100%;
+}
+/* APPROVE Details Form */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* APPROVE Details Form */
+
+#ViewIssued{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 5;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#IssuedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 520px;
+    width: 800px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#IssuedDetailsForm h1{
+    color: #0e418f;
+}
+
+#IssuedDetailsForm span{
+    background-color: #ececec;
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    height: 35px;
+    width: 368px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+#ColRowsss{
+    width: 100%;
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+
+#viewmessagecontainer5{
+    top: 0;
+    width: 100%;
+    max-height: 120px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100%;
+}
+
+#viewOnging_message2{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#IssuedDetailsForm h2, p{
+    line-height: 11px;
+    font-size: 16px;
+}
+
+#IssuedDetailsForm h2{
+    color: #0e418f;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn3 {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#exitbtn2:hover{
+    background-color: #6b0303;
+}
+
+#schedDetailsBox2{
+    position: absolute;
+    background-color: #f0f0f0;
+    height: 250px;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+    right: 30px;
+    top: 90px;
+    width: 45%;
+}
+
+#IssuedDetailsForm table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#IssuedDetailsForm th{
+    background-color: #0e418f;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#IssuedDetailsForm td{
+    color: #1a54ab;
+    user-select: none;
+}
+#IssuedDetailsForm tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#IssuedDetailsForm tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
 
