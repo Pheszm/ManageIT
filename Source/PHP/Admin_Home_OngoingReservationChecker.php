@@ -24,7 +24,8 @@ $stmt = $conn->prepare("UPDATE Transactions
                             SELECT id 
                             FROM reserve_submissions 
                             WHERE dateofuse = ? 
-                            AND Transaction_status != 'RETURNED'
+                            AND Transaction_status != 'RETURNED ONTIME'
+                            AND Transaction_status != 'RETURNED LATE'
                             AND fromtime < ? 
                             AND totime > ?
                         )");

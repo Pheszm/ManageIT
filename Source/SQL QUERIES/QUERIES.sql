@@ -23,6 +23,7 @@ CREATE TABLE reserve_submissions (
     approved_by INT,
     message TEXT,
     materials TEXT,
+    status INT DEFAULT 1,
     FOREIGN KEY (approved_by) REFERENCES Faculty(faculty_id)
 );
 

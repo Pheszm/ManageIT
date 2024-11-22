@@ -22,6 +22,7 @@ $totime = $_GET['totime'];
 $sql = "SELECT materials
 FROM reserve_submissions
 WHERE dateofuse = ?
+AND status = 1
 AND (
     (fromtime < ? AND totime > ?) OR
     (fromtime < ? AND totime > ?) OR

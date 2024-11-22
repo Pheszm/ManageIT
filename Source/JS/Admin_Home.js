@@ -435,3 +435,42 @@ function AcitivityLogInsertion(Type, Action, ReferenceId) {
         console.error('Error logging activity:', error);
     });
 }
+
+
+
+
+
+
+
+// LOAD VOLUME DATAS
+function LoadVolumeTable() {
+    fetch('../PHP/Admin_Home_FetchVolumeTable.php')
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById('VolumeAreaTable');
+
+            // Clear any existing rows except for the header
+            while (table.rows.length > 1) {
+                table.deleteRow(1);
+            }
+
+            // Insert a new row with the fetched data
+            const row = table.insertRow();
+            
+            // Insert cells for each data field
+            const TotalItem = row.insertCell(0);
+            const ItemUse = row.insertCell(1);
+            const AvailItem = row.insertCell(2);
+            const PendingReserve = row.insertCell(3);
+
+            // Populate the cells with data (ensure these keys match the PHP response)
+            TotalItem.textContent = data.TotalItemCount || 0;
+            ItemUse.textContent = data.ItemUse || 0;
+            AvailItem.textContent = data.AvailItem || 0;
+            PendingReserve.textContent = data.TotalPendingReservation || 0;
+        })
+        .catch(error => console.error('Error fetching volume data:', error));
+};
+
+LoadVolumeTable();
+
