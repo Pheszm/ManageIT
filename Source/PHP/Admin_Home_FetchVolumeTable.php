@@ -23,8 +23,7 @@ $sql1 = "SELECT COUNT(Item_Id) AS TotalItemCount FROM Items WHERE Remove_Status 
 $sql2 = "SELECT COUNT(id) AS TotalPendingReservation 
          FROM reserve_submissions 
          WHERE approved_by IS NULL 
-         AND (dateofuse >= ? AND fromtime < ?) 
-         AND dateofuse > ?";
+         AND ((dateofuse >= ? AND fromtime < ?) OR dateofuse > ?)";
 
 
 // Prepare and execute the first query (items count)
