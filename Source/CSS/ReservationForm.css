@@ -1,8 +1,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(-190deg, #0091E2, #0A4194);
-    height: 100vh;    
+    height: 100%;    
 }
 
 #DisplayItemsHere {
@@ -16,6 +15,8 @@ body {
 
 
 #background{
+    background-image: linear-gradient(-190deg, #0091E2, #0A4194);
+    position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;

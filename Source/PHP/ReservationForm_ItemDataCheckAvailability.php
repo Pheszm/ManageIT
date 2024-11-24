@@ -23,6 +23,7 @@ $sql = "SELECT materials
 FROM reserve_submissions
 WHERE dateofuse = ?
 AND status = 1
+AND approved_by IS NOT NULL
 AND (
     (fromtime < ? AND totime > ?) OR
     (fromtime < ? AND totime > ?) OR

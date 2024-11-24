@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="Source/CSS/Poppins_Sheet.css" rel="stylesheet">
     <link href="Source/CSS/Homepage.css" rel="stylesheet">
-    <link rel="icon" href="Assets/Images/ManageIT_Logo.png">  
+    <link rel="icon" href="Assets/Images/ManageIT_Logo.png">
+    <link rel="stylesheet" href="Source/CSS/SweetAlert.css">
+    <link rel="stylesheet" href="../CSS/SweetAlert.css">
 
     <title>ManageIT | AVR Inventory System</title>
 </head>
@@ -33,11 +35,11 @@
         <span id="HeroTag">
             <h1 id="ManageitTitle">ManageIT</h1>
             <h1 id="HeroSubtitle">AVR Inventory</h1>
-            <h2 id="HeroTagline">Here We Manage</h2>    
+            <h2 id="HeroTagline">Here We Manage</h2>
             <span>
                 <br>
                 <button class="KnowMoreHero_btn" onclick="location.href='#AboutUsSection';">Know More</button>
-                <button class="ReserveNowHero_btn" onclick="location.href='Source/HTML/ReservationForm.html';">Reserve Now</button>
+                <button class="ReserveNowHero_btn" onclick="location.href='Source/PAGES/ReservationForm.php';">Reserve Now</button>
             </span>
         </span>
 
@@ -63,7 +65,7 @@
     <div id="AboutUsSection">
         <img id="CurveShape1" src="Assets/Images/CurveShapes.png">
         <span id="AboutUsTexts">
-            <h1>About Us</h1> 
+            <h1>About Us</h1>
             <p>Welcome to St. Rita’s College of Balingasag! We are dedicated to empowering students through innovative education in Information Technology. Our ManageIT project aims to revolutionize inventory management for AVR Inventory Coordinator, streamlining processes with real-time tracking and enhanced data organization. Join us on our journey to improve operational efficiency and support informed decision-making in today's fast-paced business environment.</p>
             <button class="ContactUsBtn" onclick="location.href='#ContactUsSection';">Contact Us</button>
         </span>
@@ -91,22 +93,22 @@
         <img id="CurveShape2" src="Assets/Images/CurveShapes.png">
 
         <span id="FormwithTitle">
-            <h1 id="contactustitle">Contact Us</h1> 
+            <h1 id="contactustitle">Contact Us</h1>
             <div id="ContactUsForm">
                 <div id="ContactFillupArea">
                     <span id="AreaToFill">
                         <img id="SRCB_BackgroundIMG_Contacts" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
-                        
+
                         <span id="FillupContactsArea">
-                        <h1>Email Us</h1>
-                        <form style="text-align: center;">
-                            <input type="text" id="Fullnameinput" name="Fullname" placeholder="Fullname.." required>
-                            <input type="email" id="EmailAddressinput" name="EmailAddress" placeholder="Email Address.." required>
-                            <textarea id="Messageinput" name="Message" placeholder="Message.." required></textarea>
-                            <input id="SubmitBtnContact" type="submit" value="Login">
-                        </form>
+                            <h1>Email Us</h1>
+                            <form style="text-align: center;">
+                                <input type="text" id="Fullnameinput" name="Fullname" placeholder="Fullname.." required>
+                                <input type="email" id="EmailAddressinput" name="EmailAddress" placeholder="Email Address.." required>
+                                <textarea id="Messageinput" name="Message" placeholder="Message.." required></textarea>
+                                <input id="SubmitBtnContact" type="submit" value="Login">
+                            </form>
                         </span>
-                        
+
                         <div id="ContactsArea">
                             <h2>You May Also Reach Us</h2>
                             <span>
@@ -126,7 +128,7 @@
                                 <a target="_blank" href="https://www.facebook.com/srcbofficial">https://www.facebook.com/srcb</a>
                             </span>
                         </div>
-    
+
                     </span>
                 </div>
             </div>
@@ -159,8 +161,10 @@
         <h2>©  2024 - ManageIT, All Rights Reserved</h2>
     </div>
 
+    <script src="Source/JS/SweetAlert.js"></script>
     <script src="Source/JS/Homepage.js"></script>
 </body>
+
 </html>
 
 

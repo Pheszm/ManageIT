@@ -8,6 +8,7 @@
     <link href="../CSS/ReservationForm.css" rel="stylesheet">
     <link href="../CSS/qr_ui_config.css" rel="stylesheet">
     <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+    <link rel="stylesheet" href="../CSS/SweetAlert.css">
 
     <title>ManageIT | Reservation Form</title>
 </head>
@@ -16,7 +17,7 @@
     <div id="background">
         <img id="backgroundImg" src="../../Assets/Images/SRCB_Logo.png">
         <div id="FormBox">
-            <button id="ReturnBtn" onclick="location.href='../../index.html';"><img id="arrowimg" src="../../Assets/Images/Arrow_Left_Icon.png"> Return</button>
+            <button id="ReturnBtn"><img id="arrowimg" src="../../Assets/Images/Arrow_Left_Icon.png"> Return</button>
             <h1>Reservations</h1>
                 <table id="OuterTable">
                     <tr>
@@ -106,18 +107,13 @@
             <div>
                 <button id="QReeexitbtn">X</button>
                 <div id="my-qr-reader" style="width:350px;"></div>
-
             </div>
-
-
                 
         </div>
     </div>
 
-
-    
-
 </div>
+    <script src="../JS/SweetAlert.js"></script>
     <script src="../JS/ReservationForm.js"></script>
     <script src="../JS/QR_Scanner.js"></script>
 </body>

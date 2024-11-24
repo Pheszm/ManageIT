@@ -7,9 +7,15 @@ document.getElementById("AddbtnShow").addEventListener("click", function() {
     ){
         document.getElementById("AddingMaterialsForm").style.display = "flex";
     }else{
-        document.getElementById("WarningText").textContent = "You need to choose the Date and Time first in order to check if the item is available.";
-        
-        document.getElementById("WarningSign").style.display = "flex";
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You need to choose the Date and Time first in order to check if the item is available.",
+            confirmButtonColor: '#076AD4FF',
+        });
+
+        //document.getElementById("WarningText").textContent = "You need to choose the Date and Time first in order to check if the item is available.";
+        //document.getElementById("WarningSign").style.display = "flex";
     }
 });
 //CLOSE WARNING SIGN
@@ -18,6 +24,10 @@ document.getElementById("WarningResponseBtn").addEventListener("click", function
 });
 
 
+
+document.getElementById('ReturnBtn').addEventListener('click', () => {
+    window.location.href = '../../index.php';
+});
 
 
 //CLOSE ADD_MATERIALS FORM
@@ -224,8 +234,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => {
             if (response.ok) {
-                alert("Submit successful!"); // Show alert
-                window.location.href = '../../index.html'; // Redirect to HOME.html
+
+                Swal.fire({
+                    title: "Submit successful!",
+                    text: "Press okay to continue",
+                    icon: "success",
+                    confirmButtonColor: '#076AD4FF'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '../../index.php'; 
+                    }else{
+                        window.location.href = '../../index.php'; 
+                    }
+                  });
+
             } else {
                 throw new Error('Submission failed');
             }

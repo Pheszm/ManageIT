@@ -111,7 +111,7 @@ html::-webkit-scrollbar-thumb:hover {
 #AdvanceNav_btn:hover{
     scale: 1;
     color: #fff;
-    background-color: #0A4194;
+    background-color: rgb(7, 81, 160);
 }
 /* Top Navigation */
 

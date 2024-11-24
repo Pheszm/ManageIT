@@ -4,7 +4,7 @@ body {
     height: 100vh;
     background-color: #FFFFFF;
     display: flex;
-    background-image: linear-gradient(180deg, #0091E2, #0A4194);
+
 }
 
 html {
@@ -15,13 +15,19 @@ html {
     box-sizing: border-box; /* Apply to all elements */
 }
 
+#FullBody{
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    background-image: linear-gradient(180deg, #0091E2, #0A4194);
+}
 
 
 .ReservationHeader{
     font-size: 40px;
     color: #fff;
     font-weight: 500;
-
+    z-index: 2;
     position: absolute;
     top: 10%; /* Position from the top */
     left: 50%; /* Position from the left */
@@ -65,8 +71,8 @@ html {
     position: absolute;
     left: 50%; /* Position from the left */
     transform: translate(-50%); 
-    z-index: -1;
-    top: 16vh;
+    z-index: 1;
+    top: 8vw;
     height: 70vh;
 }
 
@@ -351,7 +357,7 @@ html {
     left: 50%; 
     top: 50%;
     transform: translate( -50%, -50%); 
-    z-index: 1;
+    z-index: 3;
     height: 6vw;
     transition: transform 0.2s ease; /* Smooth transition for scaling */
 }
@@ -378,7 +384,7 @@ html {
     display: none; /*SET NONE IF DEPLOY*/
     justify-content: center; 
     align-items: center;   
-    z-index: 1;
+    z-index: 3;
 }
 
 
@@ -760,7 +766,7 @@ html {
     display: none; /*SET NONE IF DEPLOY*/
     justify-content: center; 
     align-items: center;   
-    z-index: 1;
+    z-index: 3;
 }
 
 #TableCase{
@@ -771,7 +777,10 @@ html {
     overflow-x: hidden;
 }
 
-
+#ApprovedArea,
+#PendingArea{
+    z-index: 3;
+}
 #AllApprovedArea{
     display: flex;
     flex-direction: column; 
@@ -782,7 +791,7 @@ html {
     height: 550px;
     background-color: #fefefe;
     padding: 10px;
-    z-index: 3;
+    z-index: 2;
     position: absolute;
 }
 

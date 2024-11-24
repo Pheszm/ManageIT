@@ -18,13 +18,61 @@ document.getElementById("extbtn1").addEventListener("click", function() {
 
 
 
+//LOGIN AUTH CHECKER
+var facultyId;
+document.addEventListener('DOMContentLoaded', function() {
+    facultyId = sessionStorage.getItem('facultyId'); // Check sessionStorage for facultyId
+
+    // If facultyId is not found, redirect to the login page
+    if (!facultyId) {
+        window.location.href = '../../index.php'; // Redirect to the login page if not authenticated
+    }
+
+    // If facultyId is found, proceed with page initialization
+    else {
+        console.log('Faculty ID:', facultyId); 
+    }
+});
+
+
+
+
+
+
+document.getElementById('LogoutBtn').addEventListener('click', () => {
+    Swal.fire({
+        title: "Proceed Logout?",
+        text: "Are you sure you want to logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Successfully Logged Out.",
+                text: "Press okay to continue",
+                icon: "success",
+                confirmButtonColor: '#076AD4FF'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href='../../index.php';
+                }else{
+                    location.href='../../index.php';
+                }
+            });
+        }
+    });
+});
+
 
 
 
 
 // Fetch accounts and add event listeners to the View buttons
 document.addEventListener("DOMContentLoaded", function() {
-    fetch('../Source/PHP/SuperAdmin_AccountsTableFetch.php')
+    fetch('../PHP/SuperAdmin_AccountsTableFetch.php')
         .then(response => response.json())
         .then(data => {
             const table = document.getElementById('ItemTable');
@@ -55,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to fetch specific faculty data
 function fetchFacultyData(facultyId) {
-    fetch(`../Source/PHP/SuperAdmin_ViewDataFetch.php?id=${facultyId}`)
+    fetch(`../PHP/SuperAdmin_ViewDataFetch.php?id=${facultyId}`)
         .then(response => response.json())
         .then(faculty => {
             if (faculty.error) {
@@ -168,7 +216,7 @@ window.onload = function() {
         };
 
         try {
-            const response = await fetch('../Source/PHP/SuperAdmin_AddingAccount.php', {
+            const response = await fetch('../PHP/SuperAdmin_AddingAccount.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -225,7 +273,7 @@ document.getElementById("deleteBtn").addEventListener("click", function() {
 
 // Function to delete specific faculty data
 function deleteFaculty(facultyId) {
-    fetch(`../Source/PHP/SuperAdmin_DeletingAccount.php?id=${facultyId}`, {
+    fetch(`../PHP/SuperAdmin_DeletingAccount.php?id=${facultyId}`, {
         method: 'DELETE'
     })
     .then(response => response.json())
@@ -270,7 +318,7 @@ document.getElementById("updateBtn").addEventListener("click", function() {
 });
 
 function fetchFacultyUpdateData(facultyId) {
-    fetch(`../Source/PHP/SuperAdmin_ViewDataFetch.php?id=${facultyId}`)
+    fetch(`../PHP/SuperAdmin_ViewDataFetch.php?id=${facultyId}`)
         .then(response => response.json())
         .then(faculty => {
             if (faculty.error) {
@@ -362,7 +410,7 @@ document.getElementById("Savebtn").addEventListener("click", function() {
     const confirmUpdate = confirm("Are you sure you want to save these changes?");
     if (confirmUpdate) {
         // Send a PUT request to update faculty data
-        fetch('../Source/PHP/SuperAdmin_UpdateAccount.php', {
+        fetch('../PHP/SuperAdmin_UpdateAccount.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

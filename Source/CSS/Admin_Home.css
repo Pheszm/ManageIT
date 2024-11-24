@@ -4,7 +4,6 @@ body {
     height: 100vh;    
     background-color: #FFFFFF;
     display: flex;
-    background-image: linear-gradient(180deg, #0091E2, #0A4194);
 }
 
 html {
@@ -17,6 +16,7 @@ html {
 
 
 #BodyAREA{
+    background-image: linear-gradient(180deg, #0091E2, #0A4194);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -972,3 +972,44 @@ html {
     width: 100%;
 }
 /* APPROVE Details Form */
+
+
+
+
+
+
+
+
+
+
+
+
+/*CHART AREA CONFIGURATION*/
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#chart-container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ChartHeader {
+    color: #1a54ab;
+    text-align: center;
+    font-size: 1.6vw;
+    line-height: 0vw;
+    margin-bottom: 1.8vw;
+}
+
+#ChartTime {
+    color: #083578;
+    text-align: center;
+    font-size: 1.2vw;
+    line-height: 0vw;
+}
+/*CHART AREA CONFIGURATION*/

@@ -7,6 +7,13 @@ body {
     background-image: linear-gradient(180deg, #0091E2, #0A4194);
 }
 
+#FullBody{
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    background-image: linear-gradient(180deg, #0091E2, #0A4194);
+}
+
 html {
     scroll-behavior: smooth;
 }

@@ -26,9 +26,9 @@ window.onload = function() {
 
 
 
-
 // LOGIN PROCESS
 document.getElementById('loginbtnhero').addEventListener('click', async (event) => {
+
     event.preventDefault(); // Prevent the default form submission
 
     const usernameInput = document.getElementById('Usernameinput');
@@ -81,10 +81,34 @@ document.getElementById('loginbtnhero').addEventListener('click', async (event) 
         if (result.success) {
             // Store the facultyId in sessionStorage (or localStorage)
             sessionStorage.setItem('facultyId', result.facultyId); // Store facultyId in sessionStorage
-
-            alert("Successfully Logged In.");
-            // Redirect to Admin_Home.html with facultyId (as part of URL, or we can just rely on sessionStorage)
-            window.location.href = `Source/HTML/Admin_Home.html`;
+            console.log("GARRRR: " + result.faculty_role);
+            if(result.faculty_role !== "admin"){
+                Swal.fire({
+                    title: "Successfully Logged In as Faculty.",
+                    text: "Press okay to continue",
+                    icon: "success",
+                    confirmButtonColor: '#076AD4FF'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `Source/PAGES/Admin_Home.php`;
+                    }else{
+                        window.location.href = `Source/PAGES/Admin_Home.php`;
+                    }
+                });
+            }else{
+                Swal.fire({
+                    title: "Successfully Logged In as ADMIN.",
+                    text: "Press okay to continue",
+                    icon: "success",
+                    confirmButtonColor: '#076AD4FF'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = `Source/PAGES/SuperAdmin.php`;
+                    }else{
+                        window.location.href = `Source/PAGES/SuperAdmin.php`;
+                    }
+                });
+            }
         } else {
             // Handle server response errors
             usernameInput.setCustomValidity(result.message);
@@ -95,3 +119,5 @@ document.getElementById('loginbtnhero').addEventListener('click', async (event) 
         alert('An error occurred. Please try again.');
     }
 });
+
+

@@ -11,6 +11,7 @@ CREATE TABLE Faculty (
     faculty_role VARCHAR(50) DEFAULT 'user'
 );
 
+
 CREATE TABLE reserve_submissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fullname VARCHAR(100),
@@ -52,6 +53,7 @@ CREATE TABLE Transactions (
     FOREIGN KEY (Transaction_Reserve_id) REFERENCES reserve_submissions(id)
 );
 
+
 CREATE TABLE issued_items_date (
     IssuedItem_Id INT PRIMARY KEY AUTO_INCREMENT,
     Reservation_Id INT NOT NULL,  
@@ -73,3 +75,5 @@ CREATE TABLE activity_logs (
     Reference_id INT,
     DateAndTime DATETIME,
 );
+
+
