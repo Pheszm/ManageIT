@@ -236,7 +236,7 @@ include '../PHP/Admin_Home_FetchChart.php';
             </div>
 
             <div id="ChartArea">
-                <h2 class="ChartHeader">Top 5 Items Used this Month</h2>
+                <h2 class="ChartHeader">Top Items Used this Month</h2>
                 <h2 id="ChartTime">December 2024</h2>
                 <div id="chart-container">
                     <canvas id="requestChart"></canvas>
