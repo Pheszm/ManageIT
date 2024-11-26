@@ -392,40 +392,60 @@ document.getElementById('ReturnItemBtn').addEventListener('click', () => {
     if (SelectedIssuedId) {
         console.log(SelectedIssuedId);
         // Ask for confirmation
-        const isConfirmed = confirm("Are you sure the item is already returned?");
-        
-        if (isConfirmed) {
-            // Prepare the data to send
-            const CurrentTime = new Date().toTimeString().split(' ')[0];
-            const data = { 
-                reservation_id: SelectedIssuedId,
-                Current_time: CurrentTime
-            };
 
-            fetch('../PHP/Admin_Home_ReturnProcess.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert("Return successfully!");
-                    AcitivityLogInsertion("Transaction", "Returned", SelectedIssuedId);
-                    location.reload(); // Reload the page or update the UI accordingly
-                } else {
-                    throw new Error(result.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("There was an error in returning.");
-            });
-        }
-    } else {        
-
+        Swal.fire({
+            title: "Confirmation",
+            text: "Are the Items already returned?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const CurrentTime = new Date().toTimeString().split(' ')[0];
+                const data = { 
+                    reservation_id: SelectedIssuedId,
+                    Current_time: CurrentTime
+                };
+    
+                fetch('../PHP/Admin_Home_ReturnProcess.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        AcitivityLogInsertion("Transaction", "Returned", SelectedIssuedId);
+                        Swal.fire({
+                            title: "Return successful!",
+                            text: "Press okay to continue",
+                            icon: "success",
+                            confirmButtonColor: '#076AD4FF'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(true);
+                            }else{
+                                location.reload(true);
+                            }
+                        });
+                    } else {
+                        throw new Error(result.message);
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Oops...",
+                        text: 'Error:' + error,
+                        icon: "warning",
+                        confirmButtonColor: '#076AD4FF'
+                    });
+                });
+            }
+        });
     }
 });
 

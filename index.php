@@ -8,7 +8,6 @@
     <link href="Source/CSS/Homepage.css" rel="stylesheet">
     <link rel="icon" href="Assets/Images/ManageIT_Logo.png">
     <link rel="stylesheet" href="Source/CSS/SweetAlert.css">
-    <link rel="stylesheet" href="../CSS/SweetAlert.css">
 
     <title>ManageIT | AVR Inventory System</title>
 </head>

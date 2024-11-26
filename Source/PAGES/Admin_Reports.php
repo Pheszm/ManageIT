@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManageIT | Reports</title>
     <link href="../CSS/Poppins_Sheet.css" rel="stylesheet">
-    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">
     <link rel="stylesheet" href="../CSS/Admin_Reports.css">
     <link rel="stylesheet" href="../CSS/SweetAlert.css">
 </head>
+
 <body>
     <div id="FullBody">
         <div id="TopNavBar">
@@ -18,7 +20,7 @@
             <span>
                 <button id="LogoutBtn"><img src="../../Assets/Images/Logout_Icon.png">Logout</button>
             </span>
-            
+
         </div>
 
         <div id="SideBarNav">
@@ -29,13 +31,51 @@
             <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
         </div>
 
-        <h1 class="Headerrr">???</h1>
 
-        
+
+
+        <div id="ItemListArea">
+            <span class="specialSpan">
+                <h1>Transaction Reports</h1>
+                <select id="TypeComboBox">
+                    <option value="">Type</option>
+                    <option value="Item">Item</option>
+                    <option value="Reservation">Reservation</option>
+                    <option value="Transaction">Transaction</option>
+                </select>
+                <select id="ActionComboBox">
+                    <option value="">Actions</option>
+                    <option value="Created">Created</option>
+                    <option value="Removed">Removed</option>
+                    <option value="Created">Updated</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Returned">Returned</option>
+                    <option value="Canceled">Canceled</option>
+                </select>
+            </span>
+
+            <div id="TableCase6">
+                <table id="AllItemsTable">
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Full Name</th>
+                        <th>Item</th>
+                        <th>Status</th>
+                        <th>Name</th>
+                    </tr>
+                    <!-- Rows will be dynamically added here -->
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
     </div>
 
     <script src="../JS/SweetAlert.js"></script>
     <img id="SRCB_BackgroundIMG2" src="../../Assets/Images/SRCB_Logo.png">
     <script src="../JS/Admin_Reports.js"></script>
 </body>
+
 </html>

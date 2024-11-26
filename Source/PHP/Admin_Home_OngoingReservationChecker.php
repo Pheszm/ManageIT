@@ -15,20 +15,21 @@ $transactionStatus = 'ONGOING';
 
 // Get the current date and time
 $TODAY = date('Y-m-d');
+date_default_timezone_set('Asia/Manila'); // Change this to your timezone
+
+// Get the current time
 $THISTIME = date('H:i:s');
 
 // Prepare the SQL statement to update the reservation status
-$stmt = $conn->prepare("UPDATE Transactions 
-                        SET Transaction_status = ? 
-                        WHERE Transaction_Reserve_id IN (
-                            SELECT id 
-                            FROM reserve_submissions 
-                            WHERE dateofuse = ? 
-                            AND Transaction_status != 'RETURNED ONTIME'
-                            AND Transaction_status != 'RETURNED LATE'
-                            AND fromtime < ? 
-                            AND totime > ?
-                        )");
+$stmt = $conn->prepare("UPDATE transactions t
+JOIN reserve_submissions rs ON t.Transaction_Reserve_id = rs.id
+SET t.Transaction_status = ?
+WHERE rs.dateofuse = ?
+AND rs.fromtime < ?
+AND rs.totime > ?
+AND t.Transaction_status != 'RETURNED ONTIME'
+AND t.Transaction_status != 'RETURNED LATE'
+");
 
 if ($stmt === false) {
     die("Prepare failed: " . $conn->error);
@@ -39,7 +40,7 @@ $stmt->bind_param("ssss", $transactionStatus, $TODAY, $THISTIME, $THISTIME);
 
 // Execute the statement
 if ($stmt->execute()) {
-    echo "Transaction status updated successfully.";
+    echo "Transaction status updated successfully." . $TODAY . "()" . $THISTIME;
 } else {
     echo "Error updating transaction status: " . $stmt->error;
 }
