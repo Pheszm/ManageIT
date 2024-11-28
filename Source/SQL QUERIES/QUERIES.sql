@@ -11,6 +11,14 @@ CREATE TABLE Faculty (
     faculty_role VARCHAR(50) DEFAULT 'user'
 );
 
+CREATE TABLE Student (
+    Student_No INT PRIMARY KEY AUTO_INCREMENT,
+    Student_ID VARCHAR(50) NOT NULL,
+    Student_FullName VARCHAR(100) NOT NULL,
+    Student_Level VARCHAR(150) NOT NULL,
+    Student_YearOrCourse VARCHAR(150),
+    Student_status INT DEFAULT 1
+);
 
 CREATE TABLE reserve_submissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,7 +33,9 @@ CREATE TABLE reserve_submissions (
     message TEXT,
     materials TEXT,
     status INT DEFAULT 1,
-    FOREIGN KEY (approved_by) REFERENCES Faculty(faculty_id)
+    Student_No INT,
+    FOREIGN KEY (approved_by) REFERENCES Faculty(faculty_id),
+    FOREIGN KEY (Student_No) REFERENCES Student(Student_No)
 );
 
 

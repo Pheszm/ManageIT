@@ -1,0 +1,1074 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;    
+    background-color: #FFFFFF;
+    display: flex;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
+
+
+#BodyAREA{
+    background-image: linear-gradient(180deg, #0091E2, #0A4194);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+}
+
+/* Top Navigation */
+#TopNavBar{
+    box-shadow: 0px 0px 1vw rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(-90deg, #0091E2, #0A4194);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding-top: 5px;
+    display: flex;
+    justify-content: flex-start; 
+    z-index: 100; 
+}
+
+#TopNavBar span{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+
+#SRCB_BackgroundIMG{
+    opacity: 0.1;   
+    position: absolute;
+    right: -2.3%;
+    top: -270%;
+    height: 900%;
+}
+#ReserveNowHero_btn{
+    background-color: #1e52a0;
+    text-decoration: none;
+    top: 5rem;
+    right: 60vw;
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    border: 3px solid #ffff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 150px;
+    height: 35px;
+    transition: 0.3s;
+}
+#ReserveNowHero_btn:hover{
+    background-color: #ffff;
+    color: #1e1e1e;
+}
+#LogoutBtn{
+    margin-right: 3%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 0;
+    height: 33px;
+    color: #0A4194;
+    font-weight: bold;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background 0.2s;
+}
+
+#LogoutBtn img{
+    height: 20px;
+    margin-right: 5px;
+}
+
+#LogoutBtn:hover{
+    background-color: #db6060;
+}
+/* Top Navigation */
+
+
+
+
+
+
+
+
+#ManageIT_NavLogo{
+    margin-left: 2%;
+}
+
+/*ScheduledArea Area*/
+
+#ScheduledArea{
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-left: 21.3vw;
+    width: 20vw;
+    top: 10rem;
+    bottom: 1%;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+
+
+#HlloArea{
+    padding-left: 3rem;
+    color: #fff;
+    font-size: 1.1rem;
+    width: 50%;
+}
+#ScheduledArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 20px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+
+#ScheduledArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#ScheduledArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    font-size: 14px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    width: 33.3333%;
+}
+
+#ScheduledArea td{
+    color: #1a54ab;
+    font-size: 14px;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px; 
+    text-align: center; 
+    
+}
+#ScheduledArea tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#ScheduledArea tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ScheduledArea span{
+    margin-top: 10px;
+    display: flex;
+}
+#ComingViewDetailsBtn{
+    position: absolute;
+    bottom: 3%;
+    opacity: 0.5;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1a54ab;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#SchedViewMoreBtn{
+    margin-left: auto;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #1a54ab;
+    border-radius: 30px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*Scheduled Area*/
+
+
+#ScheduledArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 17px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#UpcomingAreaaa{
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-left: 1vw;
+    width: 40vw;
+    top: 4rem;
+    bottom: 1%;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+
+#UpcomingAreaaa h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 24px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#UpcomingAreaaa table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#UpcomingAreaaa th{
+    background-color: #1a54ab;
+    color: #fff;
+    font-size: 17px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    width: 33.3333%;
+}
+
+#UpcomingAreaaa td{
+    color: #1a54ab;
+    user-select: none;
+    font-size: 17px;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px; 
+    text-align: center; 
+    
+}
+#UpcomingAreaaa tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#UpcomingAreaaa tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#UpcomingAreaaa span{
+
+    display: flex;
+    align-items: center;
+}
+
+#StatusComboBox{
+    background-color: #374c6c;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    border: 3px solid #ffff;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    height: 2.3rem;
+    width: 12rem;
+    text-align: center;
+    margin-left: auto;
+}
+
+
+#AllFilteredTable span{
+    width: 100%;
+    display: flex;
+    margin-bottom: 0vw;
+}
+
+#AllFilteredTable{
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-left: 41.6vw;
+    width: 57.5vw;
+    top: 0rem;
+    bottom: 1%;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+
+#AllFilteredTable h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 27px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#AllFilteredTable table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#AllFilteredTable th{
+    background-color: #1a54ab;
+    color: #fff;
+    font-size: 17px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    width: 25%;
+}
+
+#AllFilteredTable td{
+    color: #1a54ab;
+    user-select: none;
+    font-size: 17px;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px; 
+    text-align: center; 
+    
+}
+#AllFilteredTable tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#AllFilteredTable tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#AllFilteredTable span{
+    margin-top: 10px;
+    display: flex;
+}
+/*Issued Items Area*/
+
+#IssuedItemsArea{
+    position: absolute;
+    border-radius: 10px;
+    margin-top: 12px;
+    margin-left: 10px;
+    width: 45.6vw;;
+    height: 44%;
+    bottom: 1%;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+#TableCase{
+    background-color: #f0f0f0;
+    height: 83%;
+    overflow-y: auto;
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+
+#IssuedItemsArea table{
+    border-collapse: collapse;
+    width: 100%;
+}
+#IssuedItemsArea th{
+    background-color: #1a54ab;
+    color: #fff;
+    font-size: 14px;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+}
+
+#IssuedItemsArea td{
+    color: #1a54ab;
+    user-select: none;
+    white-space: nowrap;        /* Prevents text from wrapping to a new line */
+    overflow: hidden;           /* Hides overflow text */
+    text-overflow: ellipsis;   /* Displays "..." for truncated text */
+    max-width: 100px; 
+    text-align: center; 
+    
+}
+
+
+#IssuedItemsArea h1{
+    line-height: 10px;
+    color: #1a54ab;
+    font-size: 20px;
+}
+
+#IssuedItemsArea tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#IssuedItemsArea tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#IssuedItemsArea span{
+    margin-top: 10px;
+    display: flex;
+}
+#PendingViewDetailsBtn{
+    position: absolute;
+    bottom: 3%;
+    opacity: 0.5;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1a54ab;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#ReturnItemBtn{
+    margin-left: 10px;
+    height: 30px;
+    font-size: 14px;
+    opacity: 0.5;
+    font-weight: bold;
+    border: 0;
+    color: #fff;
+    border-radius: 30px;
+    background-color: #1aab6a;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#SchedViewMoreBtn{
+    margin-left: auto;
+    height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0;
+    color: #1a54ab;
+    border-radius: 30px;
+    background-color: transparent;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/*Issued Items Area*/
+
+
+
+
+
+
+
+
+
+
+
+#ViewDetailsScheduled{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 1;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#SchedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 530px;
+    width: 600px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#SchedDetailsForm h1{
+    color: #093374;
+}
+
+#SchedDetailsForm span{
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#viewmessagecontainer{
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+#viewmessagecontainer2{
+    top: 0;
+    width: 100%;
+    max-height: 100px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100px;
+    border: 1px solid #ccc;  
+}
+#viewRes_message{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#SchedDetailsForm h2, p{
+    line-height: 5px;
+}
+
+#SchedDetailsForm h2{
+    color: #0d4293;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+}
+
+
+
+
+#ViewCancelation{
+    display: none;
+    width: 8rem;
+    border-radius: 2vw;
+    margin-left: 4rem;
+    border: none;
+    z-index: 1;
+    background-color: #ecc917;
+    height: 1.6rem;
+    font-weight: bold;
+    
+}
+
+
+/* APPROVE Details Form */
+
+#ViewApprovedReserv{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 5;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#ApprovedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 520px;
+    width: 800px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#ApprovedDetailsForm h1{
+    color: #0e418f;
+}
+
+#ApprovedDetailsForm span{
+    background-color: #ececec;
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    height: 35px;
+    width: 368px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+#ColRowsss{
+    width: 100%;
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+#CancelMessageBox h3{
+    color: #0e418f;
+    text-align: left;
+    line-height: 0px;
+    margin-left: 0.5rem;
+    font-size: 12px;
+}
+#CancelMessageBox{
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    background-color: #ececec;
+    width: 22rem;
+    top: 24.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.5); /* x-offset, y-offset, blur, color */
+    right: 2.1rem;
+}
+
+#viewmessagecontainer4{
+    top: 0;
+    width: 100%;
+    max-height: 120px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100%;
+}
+
+#viewmessagecontainer5{
+    top: 0;
+    width: 100%;
+    max-height: 100px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 90%;
+}
+
+#Error_message{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+
+#viewRes_message2{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#ApprovedDetailsForm h2, p{
+    line-height: 11px;
+    font-size: 16px;
+}
+
+#ApprovedDetailsForm h2{
+    color: #0e418f;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn2 {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#exitbtn2:hover{
+    background-color: #6b0303;
+}
+
+#schedDetailsBox2{
+    position: absolute;
+    background-color: #f0f0f0;
+    height: 250px;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+    right: 30px;
+    top: 90px;
+    width: 45%;
+}
+
+#ApprovedDetailsForm table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#ApprovedDetailsForm th{
+    background-color: #0e418f;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#ApprovedDetailsForm td{
+    color: #1a54ab;
+    user-select: none;
+}
+#ApprovedDetailsForm tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#ApprovedDetailsForm tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApproveBtn2{
+    margin-top: 10px;
+    width: 120px;
+    margin-left: auto;
+    background-color: #037620;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#ApproveBtn2:hover{
+    background-color: #03611a;
+}
+
+#case2, #case3 {
+    width: 50%; /* Set both to 50% */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+#case2 {
+    display: flex;
+    background-color: #ececec;
+    height: 95%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#cancelreservbtn{
+    width: 120px;
+    margin-left: auto;
+    background-color: #931a0f;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#cancelreservbtn:hover{
+    background-color: #7d1107;
+}
+
+#case3 span{
+    width: 100%;
+}
+/* APPROVE Details Form */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* APPROVE Details Form */
+
+#ViewIssued{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+    display: none; /*SET NONE IF DEPLOY*/
+    justify-content: center; 
+    align-items: center;   
+    z-index: 5;
+}
+
+
+.DarkBackground{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+}
+
+#IssuedDetailsForm{
+    padding-left: 30px;
+    padding-right: 30px;
+    position: absolute;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: left;
+    text-align: center;
+    border-radius: 1vw;
+    height: 520px;
+    width: 800px;
+    background-color: #fff;
+    z-index: 2;
+}
+
+#IssuedDetailsForm h1{
+    color: #0e418f;
+}
+
+#IssuedDetailsForm span{
+    background-color: #ececec;
+    color: #156c9f;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    height: 35px;
+    width: 368px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+#ColRowsss{
+    width: 100%;
+    color: #156c9f;
+    display: flex;
+    align-items: flex-start; 
+}
+
+#viewmessagecontainer5{
+    top: 0;
+    width: 100%;
+    max-height: 120px;     
+    overflow-y: auto;      
+    text-align: left;     
+    padding-left: 10px;        
+    padding-right: 10px;       
+    height: 100%;
+}
+
+#viewOnging_message2{
+    line-height: 22px;   
+    width: 100%;
+    word-wrap: break-word; 
+}
+#IssuedDetailsForm h2, p{
+    line-height: 11px;
+    font-size: 16px;
+}
+
+#IssuedDetailsForm h2{
+    color: #0e418f;
+    font-size: 17px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exitbtn3 {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #8b0606;
+    color: #fff;
+    border-radius: 30px;
+    height: 40px;
+    width: 40px;
+    right: 10px;
+    top: 10px;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#exitbtn2:hover{
+    background-color: #6b0303;
+}
+
+#schedDetailsBox2{
+    position: absolute;
+    background-color: #f0f0f0;
+    height: 250px;
+    overflow-y: auto; 
+    max-height: 100%;
+    overflow-x: hidden;
+    right: 30px;
+    top: 90px;
+    width: 45%;
+}
+
+#IssuedDetailsForm table{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#IssuedDetailsForm th{
+    background-color: #0e418f;
+    color: #fff;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#IssuedDetailsForm td{
+    color: #1a54ab;
+    user-select: none;
+}
+#IssuedDetailsForm tr:nth-child(even) {
+    background-color: #ffffff;
+}
+#IssuedDetailsForm tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#ApproveBtn2{
+    margin-top: 10px;
+    width: 120px;
+    margin-left: auto;
+    background-color: #037620;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#ApproveBtn2:hover{
+    background-color: #03611a;
+}
+
+#case2, #case3 {
+    width: 50%; /* Set both to 50% */
+    box-sizing: border-box; /* Include padding and border in width */
+}
+#case2 {
+    display: flex;
+    background-color: #ececec;
+    height: 95%;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#cancelreservbtn{
+    width: 120px;
+    margin-left: auto;
+    background-color: #931a0f;
+    height: 40px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    color: #fff;
+}
+#cancelreservbtn:hover{
+    background-color: #7d1107;
+}
+
+#case3 span{
+    width: 100%;
+}
+/* APPROVE Details Form */
+
+
+
+
+
+
+
+
+
+
+
+
+/*CHART AREA CONFIGURATION*/
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+#chart-container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ChartHeader {
+    color: #1a54ab;
+    text-align: center;
+    font-size: 1.6vw;
+    line-height: 0vw;
+    margin-bottom: 1.8vw;
+}
+
+#ChartTime {
+    color: #083578;
+    text-align: center;
+    font-size: 1.2vw;
+    line-height: 0vw;
+}
+/*CHART AREA CONFIGURATION*/

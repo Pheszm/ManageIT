@@ -12,11 +12,6 @@ document.getElementById("exitbtn3").addEventListener("click", function() {
 });
 
 
-
-
-
-
-
 //LOGIN AUTH CHECKER
 var facultyId;
 document.addEventListener('DOMContentLoaded', function() {

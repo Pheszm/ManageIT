@@ -8,6 +8,7 @@
     <link href="Source/CSS/Homepage.css" rel="stylesheet">
     <link rel="icon" href="Assets/Images/ManageIT_Logo.png">
     <link rel="stylesheet" href="Source/CSS/SweetAlert.css">
+    <link href="Source/CSS/qr_ui_config.css" rel="stylesheet">
 
     <title>ManageIT | AVR Inventory System</title>
 </head>
@@ -26,25 +27,33 @@
         </div>
     </div>
 
-    <div id="Hero">
-        <!--
-        <div id="BlueEffectHero"></div>
-        <span id="BlurEffect">GG</span> 
-        -->
-        <span id="HeroTag">
-            <h1 id="ManageitTitle">ManageIT</h1>
-            <h1 id="HeroSubtitle">AVR Inventory</h1>
-            <h2 id="HeroTagline">Here We Manage</h2>
-            <span>
-                <br>
-                <button class="KnowMoreHero_btn" onclick="location.href='#AboutUsSection';">Know More</button>
-                <button class="ReserveNowHero_btn" onclick="location.href='Source/PAGES/ReservationForm.php';">Reserve Now</button>
+    <div id="StudentLoginAreaa">
+        <div id="DarkBackgroundStudentLogin"></div>
+        <div id="StudentLoginFormmm">
+            <button id="QReeexitbtn">X</button>
+            <span id="LoginTitle3">
+                <h1>STUDENT</h1>
+                <img id="SrcbLogoLogin" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
             </span>
-        </span>
 
+            <div id="QRFormScanner">
+                <div id="you-qr-result"></div>
+                <div>
+                    <div id="my-qr-reader" style="width:350px;"></div>
+                </div>
+            </div>
+            <p>Scan Your QR to login as Student.</p>
+        </div>
+
+
+    </div>
+
+    <div id="AdminLoginAreaa">
+        <div id="DarkBackgroundLogin"></div>
         <div id="LoginForm">
+            <button id="ExitLoginForm">X</button>
             <span id="LoginTitle">
-                <h1>LOGIN</h1>
+                <h1>ADMIN</h1>
                 <img id="SrcbLogoLogin" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
             </span>
 
@@ -57,6 +66,39 @@
                 <button id="loginbtnhero" type="button">Login</button>
             </form>
         </div>
+    </div>
+
+
+    <div id="Hero">
+        <!--
+        <div id="BlueEffectHero"></div>
+        <span id="BlurEffect">GG</span> 
+        -->
+        <span id="HeroTag">
+            <h1 id="ManageitTitle">ManageIT</h1>
+            <h1 id="HeroSubtitle">AVR Inventory</h1>
+            <h2 id="HeroTagline">Here We Manage</h2>
+            <span>
+                <br>
+                <button class="KnowMoreHero_btn" onclick="location.href='#AboutUsSection';">Know More</button>
+                <button id="ReserveNowHero_btn">Reserve Now</button>
+            </span>
+        </span>
+
+
+
+        <div id="LoginSelection">
+            <span id="LoginTitleSelection">
+                <h1>LOGIN</h1>
+                <img id="SrcbLogoLogin" src="Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
+            </span>
+            <button id="SelectAdmin" type="button">ADMIN</button>
+            <p>OR</p>
+            <button id="SelectStudent" type="button">STUDENT</button>
+        </div>
+
+    </div>
+
     </div>
 
 
@@ -162,6 +204,7 @@
 
     <script src="Source/JS/SweetAlert.js"></script>
     <script src="Source/JS/Homepage.js"></script>
+    <script src="Source/JS/QR_Scanner.js"></script>
 </body>
 
 </html>

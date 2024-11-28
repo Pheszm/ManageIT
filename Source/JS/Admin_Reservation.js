@@ -174,79 +174,125 @@ document.getElementById('PendingListTable').addEventListener('click', function(e
         }
     }
 });
-
 // APPROVE BUTTON CLICK EVENT
 document.getElementById('ApproveBtn').addEventListener('click', () => {
     if (SelectedPendingId) {
-        // Ask for confirmation
-        const isConfirmed = confirm("Are you sure you want to approve this reservation?");
-        
-        if (isConfirmed) {
-            // Prepare the data to send
-            const data = { id: SelectedPendingId, approved_by: facultyId };
+        Swal.fire({
+            title: "Confirmation",
+            text: "Are you sure you want to approve this reservation?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Prepare the data to send
+                const data = { id: SelectedPendingId, approved_by: facultyId };
 
-            fetch('../PHP/Admin_Reservation_ApproveReservation.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Reservation approved successfully!");
-                    InsertItems_IssuedItems();
-                    AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
-                    location.reload();
-                } else {
-                    throw new Error('Failed to approve reservation.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("There was an error approving the reservation.");
-            });
-        } else {
-        }
-    } else {        
-        alert("Please select a pending reservation to approve.");
+                fetch('../PHP/Admin_Reservation_ApproveReservation.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        InsertItems_IssuedItems();
+                        AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
+                        Swal.fire({
+                            title: "Approved Successful",
+                            text: "Press okay to continue",
+                            icon: "success",
+                            confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "There was an error approving the reservation.",
+                            icon: "warning",
+                            confirmButtonColor: '#076AD4FF'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error with the request.",
+                        icon: "error",
+                        confirmButtonColor: '#076AD4FF'
+                    });
+                });
+            }
+        });
     }
 });
+
 // APPROVE BUTTON CLICK EVENT
 document.getElementById('ApproveBtn2').addEventListener('click', () => {
     if (SelectedPendingId) {
-        // Ask for confirmation
-        const isConfirmed = confirm("Are you sure you want to approve this reservation?");
-        
-        if (isConfirmed) {
-            // Prepare the data to send
-            const data = { id: SelectedPendingId, approved_by: facultyId };
+        Swal.fire({
+            title: "Confirmation",
+            text: "Are you sure you want to approve this reservation?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Prepare the data to send
+                const data = { id: SelectedPendingId, approved_by: facultyId };
 
-            fetch('../PHP/Admin_Reservation_ApproveReservation.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Reservation approved successfully!");
-                    InsertItems_IssuedItems();
-                    AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
-                    location.reload();
-                } else {
-                    throw new Error('Failed to approve reservation.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert("There was an error approving the reservation.");
-            });
-        } else {
-        }
-    } else {        
-        alert("Please select a pending reservation to approve.");
+                fetch('../PHP/Admin_Reservation_ApproveReservation.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        InsertItems_IssuedItems();
+                        AcitivityLogInsertion("Reservation", "Approved", SelectedPendingId);
+                        Swal.fire({
+                            title: "Approved Successful",
+                            text: "Press okay to continue",
+                            icon: "success",
+                            confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "There was an error approving the reservation.",
+                            icon: "warning",
+                            confirmButtonColor: '#076AD4FF'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error with the request.",
+                        icon: "error",
+                        confirmButtonColor: '#076AD4FF'
+                    });
+                });
+            }
+        });
     }
 });
 
@@ -491,17 +537,33 @@ document.getElementById('ApprovedDetailsBtn').addEventListener('click', function
 
 
 
+document.getElementById('cancelreservbtn').addEventListener('click', () => {
+    const CancelInput = document.getElementById('CancelingAreaaa');
+    CancelInput.style.display = 'flex';
+});
+document.getElementById('CancelMessage').addEventListener('click', () => {
+    const CancelInput = document.getElementById('CancelingAreaaa');
+    CancelInput.style.display = 'none';
+});
 
 // CANCEL RESERVATION BUTTON FUNCTION
-document.getElementById('cancelreservbtn').addEventListener('click', () => {
+document.getElementById('CancelMessageSubmit').addEventListener('click', () => {
+    const inputMessage = document.getElementById('CancelMessageInput').value;
+    if(!inputMessage){
+        Swal.fire({
+            title: "Opps..",
+            text: "Connot proceed if cancelation message is empty.",
+            icon: "error",
+            confirmButtonColor: '#076AD4FF'
+            }).then((result) => {
+            })
+        return;
+    }
     if (SelectedApprovedId) {
-        console.log(SelectedApprovedId);
-        // Ask for confirmation
-        const isConfirmed = confirm("Are you sure you want to cancel this reservation?");
-        
-        if (isConfirmed) {
-            // Prepare the data to send
-            const data = { reservation_id: SelectedApprovedId };
+            const data = { 
+                reservation_id: SelectedApprovedId,
+                CancelMessage: inputMessage
+            };
 
             fetch('../PHP/Admin_Reservation_CancelApprovedReservation.php', {
                 method: 'POST',
@@ -513,9 +575,19 @@ document.getElementById('cancelreservbtn').addEventListener('click', () => {
             .then(response => response.json())
             .then(result => {
                 if (result.success) {
-                    alert("Reservation canceled successfully!");
                     AcitivityLogInsertion("Reservation", "Canceled", SelectedApprovedId);
-                    location.reload(); // Reload the page or update the UI accordingly
+                    Swal.fire({
+                        title: "Cancelation Successful",
+                        text: "The Reservation is successfully Canceled.",
+                        icon: "success",
+                        confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page or update the UI accordingly
+                            }else{
+                                location.reload(); // Reload the page or update the UI accordingly
+                            }
+                        })
                 } else {
                     throw new Error(result.message);
                 }
@@ -525,9 +597,6 @@ document.getElementById('cancelreservbtn').addEventListener('click', () => {
                 alert("There was an error canceling the reservation.");
             });
         }
-    } else {        
-        alert("Please select a reservation to cancel.");
-    }
 });
 
 

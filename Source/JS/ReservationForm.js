@@ -23,11 +23,19 @@ document.getElementById("WarningResponseBtn").addEventListener("click", function
     document.getElementById("WarningSign").style.display = "none";
 });
 
-
+WhereToReturn = sessionStorage.getItem('ReturnToHome');
+console.log(WhereToReturn);
 
 document.getElementById('ReturnBtn').addEventListener('click', () => {
-    window.location.href = '../../index.php';
+    WhereToReturn = sessionStorage.getItem('ReturnToHome');
+    console.log(WhereToReturn);
+    if(WhereToReturn == "true"){
+        window.location.href = '../PAGES/Student_Home.php';
+    }else{
+        window.location.href = '../../index.php';
+    }
 });
+
 
 
 //CLOSE ADD_MATERIALS FORM
@@ -39,9 +47,68 @@ document.getElementById("exitbtn").addEventListener("click", function() {
 
 
 
+//LOGIN AUTH CHECKER
+var StoredStudentID;
+document.addEventListener('DOMContentLoaded', function() {
+    Studentid = sessionStorage.getItem('StudentID'); // Check sessionStorage
+
+    // If facultyId is not found, redirect to the login page
+    if (!Studentid) {
+        window.location.href = '../../index.php'; // Redirect to the login page if not authenticated
+    }
+    // If facultyId is found, proceed with page initialization
+    else {
+        StoredStudentID = Studentid;
+        console.log('Student ID:', StoredStudentID); 
+        StudentNameFetch(Studentid);
+    }
+});
+
+function StudentNameFetch(ID) {
+    const StudentID = ID;
+
+    // Ensure StudentID is available
+    if (!StudentID) {
+        console.error('Student_ID is missing');
+        return;
+    }
+
+    // Send the Student_ID via a POST request
+    fetch('../PHP/ReservationForm_FetchStudentData.php', {  // Ensure this is the correct URL
+        method: 'POST',  // Use POST method
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded', // Required for sending form data
+        },
+        body: `Student_ID=${encodeURIComponent(StudentID)}`  // Send Student_ID in the request body
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Error:', data.error);
+        } else {
+            // Assuming response contains Fullname, Level, and YearCourse
+            document.getElementById('fullname').value = data.Fullname;
+            document.getElementById('course_year').value = data.Level;
+            document.getElementById('subject').value = data.YearCourse;
+            document.getElementById('Student_No').value = data.Student_No;
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching student data:', error);
+    });
+}
 
 
-// QR FUNCTIONALITY
+// Disable the inputs
+document.getElementById('fullname').disabled = true;
+document.getElementById('course_year').disabled = true;
+document.getElementById('subject').disabled = true;
+
+
+
+
+
+
 var QRcodesearched = null;
 function domReady(fn) {
     if (document.readyState === "complete" || document.readyState === "interactive") {
@@ -60,7 +127,6 @@ domReady(function() {
         if (decodeText !== lastResult) {
             ++countResults;
             lastResult = decodeText;
-
             document.getElementById("QRFormScanner").style.display = "none"; // Hide scanner
             htmlscanner.clear(); // Stop scanning when a QR code is detected
             QRcodesearched = decodeText;
@@ -226,6 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('requested_by', requested_by.value.trim());
         formData.append('Message', message.value.trim());
         formData.append('materialz', formattedMaterials);
+        formData.append('Student_No', document.getElementById('Student_No').value);
 
         // Send data to the PHP script
         fetch('../PHP/ReservationForm_SubmitForm.php', {
@@ -242,9 +309,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     confirmButtonColor: '#076AD4FF'
                   }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = '../../index.php'; 
+                        if(WhereToReturn == "true"){
+                            window.location.href = '../PAGES/Student_Home.php';
+                        }else{
+                            window.location.href = '../../index.php';
+                        }
                     }else{
-                        window.location.href = '../../index.php'; 
+                        if(WhereToReturn == "true"){
+                            window.location.href = '../PAGES/Student_Home.php';
+                        }else{
+                            window.location.href = '../../index.php';
+                        }
                     }
                   });
 

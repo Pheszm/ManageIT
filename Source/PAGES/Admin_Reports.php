@@ -35,33 +35,26 @@
 
 
         <div id="ItemListArea">
-            <span class="specialSpan">
+            <div class="specialSpan">
                 <h1>Transaction Reports</h1>
-                <select id="TypeComboBox">
-                    <option value="">Type</option>
-                    <option value="Item">Item</option>
-                    <option value="Reservation">Reservation</option>
-                    <option value="Transaction">Transaction</option>
-                </select>
-                <select id="ActionComboBox">
-                    <option value="">Actions</option>
-                    <option value="Created">Created</option>
-                    <option value="Removed">Removed</option>
-                    <option value="Created">Updated</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Returned">Returned</option>
-                    <option value="Canceled">Canceled</option>
-                </select>
-            </span>
+                <div class="TimeAreaa">
+                    <h3>From:</h3>
+                    <input type="date" id="FromDate">
+                    <h3>To:</h3>
+                    <input type="date" id="ToDate">
+                </div>
+                <button id="ExportButton">Export</button>
+            </div>
 
             <div id="TableCase6">
                 <table id="AllItemsTable">
                     <tr>
-                        <th>Date & Time</th>
+                        <th>Date</th>
+                        <th>Time</th>
                         <th>Full Name</th>
                         <th>Item</th>
                         <th>Status</th>
-                        <th>Name</th>
+                        <th>Approved By</th>
                     </tr>
                     <!-- Rows will be dynamically added here -->
                 </table>

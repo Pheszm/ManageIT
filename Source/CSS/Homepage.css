@@ -175,7 +175,7 @@ html::-webkit-scrollbar-thumb:hover {
     background-image: linear-gradient(-90deg, #0373b4, #062b62);
 }
 
-.ReserveNowHero_btn{
+#ReserveNowHero_btn{
     text-decoration: none;
     position: relative;
     font-family: 'Poppins', sans-serif;
@@ -189,7 +189,7 @@ html::-webkit-scrollbar-thumb:hover {
     height: 35px;
     transition: 0.3s;
 }
-.ReserveNowHero_btn:hover{
+#ReserveNowHero_btn:hover{
     background-color: #ffff;
     color: #1e1e1e;
 }
@@ -216,8 +216,77 @@ html::-webkit-scrollbar-thumb:hover {
 }
 */
 
+#ExitLoginForm{
+    position: absolute;
+    background-color: #831c1c;
+    border: 0.1rem solid #105494;
+    font-weight: bold;
+    color: #fff;
+    top: 0.5rem;
+    right: 0.5rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.7rem;
+    transition: background 0.3s;
+}
+#ExitLoginForm:hover{
+    background-color: #9a2525;
+}
+
+#DarkBackgroundLogin{
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+#DarkBackgroundStudentLogin{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+#AdminLoginAreaa{
+    display: none;
+    position: fixed; /* Change from static to fixed */
+    top: 0; /* Optional: align it to the top of the viewport */
+    left: 0; /* Optional: align it to the left edge of the viewport */
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Optional: ensures it's on top of other elements */
+}
+
+#StudentLoginAreaa{
+    display: none;
+    position: fixed; /* Change from static to fixed */
+    top: 0; /* Optional: align it to the top of the viewport */
+    left: 0; /* Optional: align it to the left edge of the viewport */
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Optional: ensures it's on top of other elements */
+}
+
 
 #LoginForm{
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-image: url(../../Assets/Images/LoginForm.png);
+    background-size: cover;
+    border-radius: 15px;
+    margin-right: 13%;
+    height: 350px;
+    width: 500px;
+}
+
+#LoginSelection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
     background-image: url(../../Assets/Images/LoginForm.png);
     background-size: cover;
     border-radius: 15px;
@@ -247,12 +316,89 @@ html::-webkit-scrollbar-thumb:hover {
     width: 100%;
 }
 
+#QReeexitbtn{
+    position: absolute;
+    background-color: #831c1c;
+    border: 0.1rem solid #105494;
+    font-weight: bold;
+    color: #fff;
+    top: 0.5rem;
+    right: 0.5rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.7rem;
+    transition: background 0.3s;
+}
+#QReeexitbtn:hover{
+    background-color: #9a2525;
+}
+
+#StudentLoginFormmm{
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 1rem;
+    padding: 2.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background-color: #b2e3ff;
+    z-index: 1;
+}
+
+
+
+#LoginTitle3{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+}
+
+
 #LoginTitle{
     display: flex;
     align-items: center;
 }
+
+#LoginTitleSelection{
+    display: flex;
+    align-items: center;
+}
+#LoginSelection h1{
+    line-height: 60px;
+    background: linear-gradient(180deg, #0091E2, #1757b8);
+    font-size: 60px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 20px;
+}
+
+#LoginSelection p{
+    line-height: 1px;
+    color: #1757b8;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 #SrcbLogoLogin{
     height: 70px;
+}
+
+#StudentLoginFormmm h1{
+    line-height: 60px;
+    background: linear-gradient(180deg, #0091E2, #1757b8);
+    font-size: 60px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#StudentLoginFormmm p{
+    padding-top: 1rem;
+    line-height: 1px;
+    color: #1757b8;
+    font-size: 20px;
 }
 
 #LoginForm h1{
@@ -303,6 +449,38 @@ html::-webkit-scrollbar-thumb:hover {
     border: none;
 }
 .loginbtnhero:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
+
+
+
+#SelectAdmin {
+    border-radius: 15px;
+    width: 90%;
+    height: 50px;
+    border: 2px solid #e2e2e2;
+    background-image: linear-gradient(90deg, #0091E2, #0A4194);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+}
+.SelectAdmin:hover{
+    background-image: linear-gradient(-90deg, #0373b4, #062b62);
+}
+
+#SelectStudent {
+    border-radius: 15px;
+    width: 90%;
+    height: 50px;
+    border: 2px solid #e2e2e2;
+    background-image: linear-gradient(90deg, #0091E2, #144ea6);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+}
+.SelectStudent:hover{
     background-image: linear-gradient(-90deg, #0373b4, #062b62);
 }
 /* Hero Section */

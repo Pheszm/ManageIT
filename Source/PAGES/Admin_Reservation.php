@@ -81,11 +81,11 @@
                     <p id="viewRes_fullName">Carl Wyne Gallardo</p>
                 </span>
                 <span>
-                    <h2>Course&Year:</h2>
+                    <h2>Dept:</h2>
                     <p id="viewRes_courseYear">BSIT 2</p>
                 </span>
                 <span>
-                    <h2>Subject:</h2>
+                    <h2>Level:</h2>
                     <p id="viewRes_subject">ITP 302</p>
                 </span>
                 <span>
@@ -135,11 +135,11 @@
                     <p id="viewRes_fullName2">Carl Wyne S. Gallardo</p>
                 </span>
                 <span>
-                    <h2>Course&Year:</h2>
+                    <h2>Dept:</h2>
                     <p id="viewRes_courseYear2">BSIT 2</p>
                 </span>
                 <span>
-                    <h2>Subject:</h2>
+                    <h2>Level:</h2>
                     <p id="viewRes_subject2">ITP 302</p>
                 </span>
                 <span>
@@ -190,6 +190,21 @@
             </div>
             <div class="DarkBackground"></div>
         </div>
+
+
+        <div id="CancelingAreaaa">
+            <div class="DarkBackground"></div>
+            <div id="CancelMessageForm">
+                <h3>Message for the Cancelation</h3>
+                <textarea id="CancelMessageInput" placeholder="Type your message here..."></textarea>
+                <span id="Buttonsss">
+                    <button id="CancelMessageSubmit">Submit</button>
+                    <button id="CancelMessage">Cancel</button>
+                </span>
+            </div>
+        </div>
+
+
 
         <div id="AllApprovedReservationList">
             <div id="AllApprovedArea">

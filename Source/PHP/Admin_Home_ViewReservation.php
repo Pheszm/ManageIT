@@ -15,7 +15,7 @@ $reservationId = $_GET['id'];
 $sql = "SELECT rs.fullname, rs.course_year, rs.subject, rs.materials, 
                rs.requested_by, rs.dateofuse, rs.fromtime, rs.totime, 
                rs.message, f.faculty_full_name AS approved_by_name,
-               t.Transaction_status, t.Transaction_ReturnedTime
+               t.Transaction_status, t.Transaction_ReturnedTime, t.Transaction_Comment
         FROM reserve_submissions rs 
         LEFT JOIN Faculty f ON rs.approved_by = f.faculty_id 
         LEFT JOIN Transactions t ON rs.id = t.Transaction_Reserve_id 

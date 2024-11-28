@@ -19,19 +19,19 @@ $totime = $_POST['totime'] ?? '';
 $course_year = $_POST['course_year'] ?? ''; // Update name attributes if necessary
 $subject = $_POST['subject'] ?? ''; // Update name attributes if necessary
 $requested_by = $_POST['requested_by'] ?? ''; // Update name attributes if necessary
-$message = $_POST['Message'] ?? ''; // Message input
-
+$message = $_POST['Message'] ?? ''; // Message input 
+$Stu_No = $_POST['Student_No'] ?? '';
 // Handle materials; ensure it is encoded correctly
 $materials = !empty($_POST['materialz']) ? json_encode($_POST['materialz']) : json_encode([]); // Default to empty array if no materials
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO reserve_submissions (fullname, dateofuse, fromtime, totime, course_year, subject, requested_by, message, materials) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO reserve_submissions (fullname, dateofuse, fromtime, totime, course_year, subject, requested_by, message, materials, Student_No) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if ($stmt === false) {
     die("Prepare failed: " . $conn->error);
 }
 
 // Bind parameters
-$stmt->bind_param("sssssssss", $fullname, $dateofuse, $fromtime, $totime, $course_year, $subject, $requested_by, $message, $materials);
+$stmt->bind_param("ssssssssss", $fullname, $dateofuse, $fromtime, $totime, $course_year, $subject, $requested_by, $message, $materials, $Stu_No);
 
 // Execute the statement
 // At the end of the PHP code, after executing the statement
