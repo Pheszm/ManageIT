@@ -11,22 +11,18 @@ if ($conn->connect_error) {
 
 // Get the posted data (if any)
 $data = json_decode(file_get_contents('php://input'), true);
-$transactionStatus = 'ONGOING';
 
 // Get the current date and time
 date_default_timezone_set('Asia/Manila'); // Change this to your timezone
 $TODAY = date('Y-m-d');
-// Get the current time
 $THISTIME = date('H:i:s');
 
 // Prepare the SQL statement to update the reservation status
-$stmt = $conn->prepare("UPDATE transactions t
-JOIN reserve_submissions rs ON t.Transaction_Reserve_id = rs.id
-SET t.Transaction_status = ?
-WHERE rs.dateofuse = ?
-AND rs.fromtime < ?
-AND t.Transaction_status != 'RETURNED ONTIME'
-AND t.Transaction_status != 'RETURNED LATE'
+$stmt = $conn->prepare("UPDATE reserve_submissions
+SET status = 0
+WHERE approved_by IS NULL
+AND dateofuse < ? 
+OR (dateofuse = ? AND totime < ?)
 ");
 
 if ($stmt === false) {
@@ -34,11 +30,11 @@ if ($stmt === false) {
 }
 
 // Bind parameters to the prepared statement
-$stmt->bind_param("sss", $transactionStatus, $TODAY, $THISTIME);
+$stmt->bind_param("sss", $TODAY, $TODAY, $THISTIME);
 
 // Execute the statement
 if ($stmt->execute()) {
-    echo "Transaction status updated successfully." . $TODAY . "()" . $THISTIME;
+    echo "Pending status updated successfully. " . $TODAY . " " . $THISTIME;
 } else {
     echo "Error updating transaction status: " . $stmt->error;
 }

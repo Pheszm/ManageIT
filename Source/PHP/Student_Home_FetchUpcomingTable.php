@@ -27,8 +27,7 @@ $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.mate
         FROM reserve_submissions AS rs
         LEFT JOIN Transactions AS t ON rs.id = t.Transaction_Reserve_id 
         WHERE Student_No = ?  
-        AND rs.dateofuse > ?
-        OR (rs.dateofuse = ? AND rs.fromtime > ?)
+        AND (rs.dateofuse > ? OR (rs.dateofuse = ? AND rs.fromtime > ?))
         ORDER BY rs.dateofuse, rs.fromtime"; // Order by date and then by fromtime
 
 // Prepare the SQL statement

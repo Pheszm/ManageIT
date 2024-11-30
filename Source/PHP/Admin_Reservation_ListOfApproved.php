@@ -17,16 +17,32 @@ $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
 // SQL query to fetch data, with JOIN to the Transactions table
 $sql = "SELECT r.id, r.dateofuse, r.fromtime, r.totime, r.fullname, r.materials, t.Transaction_status 
         FROM reserve_submissions r
-        LEFT JOIN Transactions t ON r.id = t.Transaction_Reserve_id
+        JOIN Transactions t ON r.id = t.Transaction_Reserve_id
         WHERE r.approved_by IS NOT NULL 
-        AND r.fullname LIKE ? 
-        AND (t.Transaction_status LIKE ? OR t.Transaction_status IS NULL)
-        ORDER BY r.dateofuse, r.fromtime";
+        AND r.fullname LIKE ?";
 
+// Add the status filter condition if provided
+if ($statusFilter != '') {
+    $sql .= " AND (t.Transaction_status = ? OR t.Transaction_status IS NULL)";
+}
+
+$sql .= " ORDER BY r.dateofuse, r.fromtime";
+
+// Prepare statement
 $stmt = $conn->prepare($sql);
+
+// Bind parameters for the search term and the status filter (if provided)
 $searchTermLike = '%' . $searchTerm . '%';
-$statusFilterLike = '%' . $statusFilter . '%';
-$stmt->bind_param("ss", $searchTermLike, $statusFilterLike);
+
+// Bind the searchTerm first
+if ($statusFilter != '') {
+    // If statusFilter is provided, bind both parameters
+    $stmt->bind_param("ss", $searchTermLike, $statusFilter);
+} else {
+    // If no statusFilter, bind only searchTerm
+    $stmt->bind_param("s", $searchTermLike);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -56,8 +72,8 @@ $conn->close();
 // Function to parse materials and get item names
 function parseMaterialsWithNames($materials, $conn)
 {
-    $items = [];
     global $itemName;
+    $items = [];
     // Clean the string (remove leading/trailing quotes and backslashes)
     $materials = trim($materials, '"');
     $materials = str_replace('\\', '', $materials);

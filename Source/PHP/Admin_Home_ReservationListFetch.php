@@ -10,8 +10,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get the current date in 'YYYY-MM-DD' format
+date_default_timezone_set('Asia/Manila'); // Change this to your timezone
 $currentDate = date('Y-m-d');
+// Get the current time
+$THISTIME = date('H:i:s');
 
 // SQL query to fetch data, excluding past dates, ordered by date and time
 $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.materials 
@@ -19,11 +21,12 @@ $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.mate
         JOIN Transactions AS t ON rs.id = t.Transaction_Reserve_id 
         WHERE rs.approved_by IS NOT NULL 
           AND rs.dateofuse > ? 
+          OR (rs.dateofuse = ? AND rs.fromtime > ?)
           AND t.Transaction_status = 'UPCOMING' 
         ORDER BY rs.dateofuse, rs.fromtime"; // Order by date and then by fromtime
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $currentDate);
+$stmt->bind_param("sss", $currentDate, $currentDate, $THISTIME);
 $stmt->execute();
 $result = $stmt->get_result();
 

@@ -11,7 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die(json_encode(['success' => false, 'message' => 'Connection failed: ' . $conn->connect_error]));
 }
-
+date_default_timezone_set('Asia/Manila'); // Change this to your timezone
 // Get the current date and time parameters from the request (GET or POST)
 $CurrentDate = isset($_GET['current_date']) ? $_GET['current_date'] : date('Y-m-d'); // Default to today if not provided
 $CurrentTime = isset($_GET['current_time']) ? $_GET['current_time'] : date('H:i:s'); // Default to current time if not provided
@@ -23,6 +23,7 @@ $sql1 = "SELECT COUNT(Item_Id) AS TotalItemCount FROM Items WHERE Remove_Status 
 $sql2 = "SELECT COUNT(id) AS TotalPendingReservation 
          FROM reserve_submissions 
          WHERE approved_by IS NULL 
+         AND status = 1
          AND ((dateofuse >= ? AND fromtime < ?) OR dateofuse > ?)";
 
 

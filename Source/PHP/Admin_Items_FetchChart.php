@@ -10,13 +10,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to fetch the top 5 most borrowed items this month
+// SQL query to fetch the top 10 most borrowed items overall
 $query = "
     SELECT i.Item_Name, SUM(ii.Item_UseQuantity) AS Borrowed_Count
     FROM issued_items_date ii
     JOIN items i ON ii.Item_Id = i.Item_Id
-    WHERE MONTH(ii.dateofuse) = MONTH(CURRENT_DATE()) 
-    AND YEAR(ii.dateofuse) = YEAR(CURRENT_DATE())
     GROUP BY i.Item_Name
     ORDER BY Borrowed_Count DESC
     LIMIT 10
@@ -36,9 +34,6 @@ if ($result->num_rows > 0) {
         $borrowedCounts[] = $row['Borrowed_Count'];
     }
 }
-
-// Get the current month and year to display in ChartTime
-$currentMonth = date('F Y');  // e.g., 'December 2024'
 
 // Close the database connection
 $conn->close();

@@ -23,8 +23,13 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 // Check if reservation_id is set
 if (isset($data['reservation_id'])) {
     $reservation_id = $data['reservation_id'];
-    $CurrentTime = $data['Current_time']; // Assuming this is in the correct format 'Y-m-d H:i:s'
-    $CurrentDay = date('Y-m-d'); // Current date in 'Y-m-d' format
+
+    date_default_timezone_set('Asia/Manila'); // Change this to your timezone
+    // Get the current date in 'YYYY-MM-DD' format
+    $CurrentDay = date('Y-m-d');
+    // Get the current time
+    $CurrentTime = date('H:i:s');
+
 
     // Prepare the SQL statement to get dateofuse and totime
     $sql = "SELECT dateofuse, totime FROM reserve_submissions WHERE id = ?";
@@ -46,7 +51,7 @@ if (isset($data['reservation_id'])) {
             }
 
             // Determine the status
-            if ($dateofuse > $CurrentDay || $totime > $CurrentTime) {
+            if ($dateofuse > $CurrentDay || ($dateofuse = $CurrentDay && $totime > $CurrentTime)) {
                 $StatusInReturning = 'RETURNED ONTIME';
             } else {
                 $StatusInReturning = 'RETURNED LATE';

@@ -102,7 +102,6 @@ function StudentNameFetch(ID) {
 function FetchUpcomingTable(StoredStudentNO) {
     const Student_No = StoredStudentNO; 
     const Statuss = StatusComboBox;
-    console.log(StoredStudentNO);
     fetch(`../PHP/Student_Home_FetchUpcomingTable.php?Student_No=${Student_No}`)
         .then(response => response.json())
         .then(data => {
@@ -171,9 +170,8 @@ document.getElementById("StatusComboBox").addEventListener("change", function ()
 
 
 function FetchFilteredTable() {
-    const Student_No = StoredStudentNO;
+    var Student_No = StoredStudentNO;
     const Statuss = document.getElementById("StatusComboBox").value;
-    console.log(Statuss);
     fetch(`../PHP/Student_Home_FetchWithFilterTable.php?Student_No=${Student_No}&Statuss=${Statuss}`)
     .then(response => response.json())
         .then(data => {

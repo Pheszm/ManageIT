@@ -783,4 +783,20 @@ function AcitivityLogInsertion(Type, Action, ReferenceId) {
 
 
 
-
+function PendingOvertimeChecker() {
+    fetch('../PHP/Admin_Home_CheckPendingReservationsLeft.php', {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}) // Send an empty body if no data is needed, or you can pass data here
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+PendingOvertimeChecker();

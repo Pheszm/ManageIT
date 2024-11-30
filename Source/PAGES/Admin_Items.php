@@ -1,16 +1,23 @@
+<?php
+include '../PHP/Admin_Items_FetchChart.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManageIT | Item List</title>
     <link href="../CSS/Poppins_Sheet.css" rel="stylesheet">
-    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">  
+    <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">
     <link rel="stylesheet" href="../CSS/Admin_Items.css">
     <link href="../CSS/qr_ui_config.css" rel="stylesheet">
-    <script src="../JS/QR_Maker.js"></script> 
+    <script src="../JS/QR_Maker.js"></script>
     <link rel="stylesheet" href="../CSS/SweetAlert.css">
+    <script src="../JS/BarChart_API.js"></script>
 </head>
+
 <body>
     <div id="FullBody">
         <div id="TopNavBar">
@@ -20,7 +27,7 @@
             <span>
                 <button id="LogoutBtn"><img src="../../Assets/Images/Logout_Icon.png">Logout</button>
             </span>
-            
+
         </div>
 
         <div id="SideBarNav">
@@ -30,7 +37,7 @@
             <button id="ActBtn"><img src="../../Assets/Images/ActivityLog_Icon.png">Activity Logs</button>
             <button id="ReportsBtn"><img src="../../Assets/Images/Reports_Icon.png">Reports</button>
         </div>
-        
+
 
         <div id="ItemListArea">
             <h1>AVR Item List</h1>
@@ -76,28 +83,28 @@
             <div class="DetailsArea">
                 <span>
                     <h2>Item:</h2>
-                    <p id="View_Item"></p> 
+                    <p id="View_Item"></p>
                 </span>
                 <span>
                     <h2>Model:</h2>
-                    <p id="View_Model"></p> 
+                    <p id="View_Model"></p>
                 </span>
                 <span>
                     <h2>Category:</h2>
-                    <p id="View_Category"></p> 
+                    <p id="View_Category"></p>
                 </span>
                 <div class="NumberTextArea">
                     <span>
                         <h2>Total Quantity:</h2>
-                        <p id="View_Quantity"></p> 
+                        <p id="View_Quantity"></p>
                     </span>
                     <span>
                         <h2>Available:</h2>
-                        <p id="View_Available"></p> 
+                        <p id="View_Available"></p>
                     </span>
                     <span>
                         <h2>Status:</h2>
-                        <p id="View_Status"></p> 
+                        <p id="View_Status"></p>
                     </span>
                 </div>
             </div>
@@ -110,16 +117,42 @@
 
 
         <div class="MosltyUsedAREA">
-            <h1 class="HEADERR">Mostly Used Item</h1>
+            <h1 class="HEADERR">All Time Borrowed Item</h1>
             <div id="TableCase3">
-                <table id="AllApproveReservation">
-                    <tr>
-                        <th>Item</th>
-                        <th>Frequency</th>
-                        <th>Last Used</th>
-                    </tr>
-                    <!-- Rows will be dynamically added here -->
-                </table>
+                <!-- Canvas for the chart -->
+                <canvas id="myChart"></canvas>
+
+
+                <script>
+                    // Fetching data from PHP
+                    const itemNames = <?php echo json_encode($itemNames); ?>;
+                    const borrowedCounts = <?php echo json_encode($borrowedCounts); ?>;
+
+                    // Data for the chart
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar', // Type of chart
+                        data: {
+                            labels: itemNames, // Dynamically inserted item names
+                            datasets: [{
+                                label: 'Most Borrowed Items', // Label for the dataset
+                                data: borrowedCounts, // Dynamically inserted borrowed counts
+                                backgroundColor: 'rgba(135, 206, 250, 0.7)', // Bar color
+                                borderColor: 'rgba(0, 123, 255, 1)', // Border color
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y', // Make the bars horizontal
+                            scales: {
+                                x: {
+                                    beginAtZero: true, // Start the x-axis at zero
+                                }
+                            },
+                            responsive: true, // Make the chart responsive to window size
+                        }
+                    });
+                </script>
             </div>
         </div>
 
@@ -140,10 +173,18 @@
                 <button id="AddFormExitBtn">X</button>
                 <h1>Adding Items Form</h1>
                 <div id="AddImageArea"><button id="Add_UploadImageBtn">Upload Image</button></div>
-                <span><h2>Item Name:</h2><input id="Add_Item_Name" placeholder="Name.."></span>
-                <span><h2>Model:</h2><input id="Add_Item_Model" placeholder="Model.."></span>
-                <span><h2>Category:</h2><input id="Add_Item_Category" placeholder="Category.."></span>
-                <span><h2>Quantity:</h2><input id="Add_Item_Quantity" type="number" placeholder="Quantity.."></span>
+                <span>
+                    <h2>Item Name:</h2><input id="Add_Item_Name" placeholder="Name..">
+                </span>
+                <span>
+                    <h2>Model:</h2><input id="Add_Item_Model" placeholder="Model..">
+                </span>
+                <span>
+                    <h2>Category:</h2><input id="Add_Item_Category" placeholder="Category..">
+                </span>
+                <span>
+                    <h2>Quantity:</h2><input id="Add_Item_Quantity" type="number" placeholder="Quantity..">
+                </span>
                 <button id="AddBtnSave">ADD ITEM</button>
             </div>
         </div>
@@ -157,11 +198,21 @@
                 <button id="UpdateFormExitBtn">X</button>
                 <h1>Updating Item</h1>
                 <div id="Update_ImageArea"><button id="Update_UploadImageBtn">Upload Image</button></div>
-                <span><h2>Item Name:</h2><input id="Update_Item_Name" placeholder="Name.."></span>
-                <span><h2>Model:</h2><input id="Update_Item_Model" placeholder="Model.."></span>
-                <span><h2>Category:</h2><input id="Update_Item_Category" placeholder="Category.."></span>
-                <span><h2>Quantity:</h2><input id="Update_Item_Quantity" type="number" placeholder="Quantity.."></span>
-                <span><h2>Availability:</h2><input id="Update_Item_Available" type="number" placeholder="Availability.."></span>
+                <span>
+                    <h2>Item Name:</h2><input id="Update_Item_Name" placeholder="Name..">
+                </span>
+                <span>
+                    <h2>Model:</h2><input id="Update_Item_Model" placeholder="Model..">
+                </span>
+                <span>
+                    <h2>Category:</h2><input id="Update_Item_Category" placeholder="Category..">
+                </span>
+                <span>
+                    <h2>Quantity:</h2><input id="Update_Item_Quantity" type="number" placeholder="Quantity..">
+                </span>
+                <span>
+                    <h2>Availability:</h2><input id="Update_Item_Available" type="number" placeholder="Availability..">
+                </span>
 
                 <span id="edit_statusSpan">
                     <h2>Status:</h2>
@@ -171,7 +222,7 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                </span> 
+                </span>
                 <button id="UpdateBtnSave">SAVE</button>
             </div>
         </div>
@@ -182,4 +233,5 @@
     <script src="../JS/Admin_Items.js"></script>
     <script src="../JS/QR_Scanner.js"></script>
 </body>
+
 </html>

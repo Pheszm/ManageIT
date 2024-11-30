@@ -53,7 +53,7 @@
 
 
         <div id="ApprovedArea">
-            <h1>Approved</h1>
+            <h1>Approved and Upcoming</h1>
             <div id="TableCase2">
                 <table id="ApprovedListTable">
                     <tr>

@@ -14,13 +14,17 @@ if ($conn->connect_error) {
 
 // Retrieve parameters from the request (GET parameters)
 $itemId = intval($_GET['Item_Id']); // The Item_Id to check
-$CurrentDate = $_GET['CurrentDate'];
-$CurrentTime = $_GET['CurrentTime'];
+
+date_default_timezone_set('Asia/Manila'); // Change this to your timezone
+$CurrentDate = date('Y-m-d');
+// Get the current time
+$CurrentTime = date('H:i:s');
 
 // Prepare the SQL query with placeholders
 $sql = "SELECT Item_UseQuantity
         FROM issued_items_date 
-        WHERE dateofuse = ? AND Item_Id = ?
+        WHERE dateofuse = ? 
+        AND Item_Id = ?
         AND (fromtime < ? AND totime > ?)";
 
 // Prepare statement

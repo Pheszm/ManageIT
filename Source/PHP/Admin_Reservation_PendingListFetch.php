@@ -9,19 +9,21 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+date_default_timezone_set('Asia/Manila'); // Change this to your timezone
+$TODAY = date('Y-m-d');
+$THISTIME = date('H:i:s');
 
-// Get the current date and time in 'YYYY-MM-DD HH:MM:SS' format
-$currentDateTime = date('Y-m-d H:i:s');
 
 // SQL query to fetch data, excluding past dates, ordered by date and time
 $sql = "SELECT rs.id, rs.dateofuse, rs.fromtime, rs.totime, rs.fullname, rs.materials 
         FROM reserve_submissions AS rs
-        WHERE rs.approved_by IS NULL 
-          AND (rs.dateofuse > ? OR (rs.dateofuse = ? AND rs.fromtime >= ?))
+        WHERE rs.approved_by IS NULL
+        AND status = 1
+        AND (rs.dateofuse > ? OR (rs.dateofuse = ? AND rs.fromtime > ?))
         ORDER BY rs.dateofuse, rs.fromtime ASC";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sss", $currentDateTime, $currentDateTime, $currentDateTime);
+$stmt->bind_param("sss", $TODAY, $TODAY, $THISTIME);
 $stmt->execute();
 $result = $stmt->get_result();
 
