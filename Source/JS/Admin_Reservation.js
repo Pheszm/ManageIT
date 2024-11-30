@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 var SelectedPendingId;
 document.getElementById('PendingListTable').addEventListener('click', function(e) {
     const SchedViewDetailsBtn = document.getElementById('PendingDetailsBtn');
+    const DeclineeBtnnn = document.getElementById('DeclineBtnn');
     const ApproveBtnnnn = document.getElementById('ApproveBtn');
     const targetRow = e.target.closest('tr');
     if (targetRow && targetRow.rowIndex > 0) { // Check if it's not the header row
@@ -161,6 +162,7 @@ document.getElementById('PendingListTable').addEventListener('click', function(e
         });
         targetRow.style.backgroundColor = "#9BB9E5FF"; // Corrected syntax
         SchedViewDetailsBtn.style.opacity = 1;
+        DeclineeBtnnn.style.opacity = 1;
         ApproveBtnnnn.style.opacity = 1;
         // Retrieve the hidden input value (reservation ID)
         var SelectPendingId = targetRow.querySelector('input[type="hidden"]').value;
@@ -169,11 +171,108 @@ document.getElementById('PendingListTable').addEventListener('click', function(e
         }else{
             targetRow.style.backgroundColor = ""; // Corrected syntax
             SchedViewDetailsBtn.style.opacity = 0.5;
+            DeclineeBtnnn.style.opacity = 0.5;
             ApproveBtnnnn.style.opacity = 0.7;
             SelectedPendingId = '';
         }
     }
 });
+
+
+document.getElementById('DeclineeBtn2').addEventListener('click', () => {
+    const CancelInput = document.getElementById('DeclineAreaaa');
+    CancelInput.style.display = 'flex';
+});
+document.getElementById('DeclineBtnn').addEventListener('click', () => {
+    const CancelInput = document.getElementById('DeclineAreaaa');
+    CancelInput.style.display = 'flex';
+});
+document.getElementById('DeclineMessage').addEventListener('click', () => {
+    const CancelInput = document.getElementById('DeclineAreaaa');
+    CancelInput.style.display = 'none';
+});
+document.getElementById('DeclineMessageSubmit').addEventListener('click', () => {
+    DeclinePendingProcess();
+});
+// DECLINE PENDING RESERVATION FUNCTION
+function DeclinePendingProcess(){
+    const DeclineMessageInput = document.getElementById('DeclineMessageInput');
+
+    if(!DeclineMessageInput.value){
+        Swal.fire({
+            title: "Attention",
+            text: "Please leave a message for declining.",
+            icon: "warning",
+            confirmButtonColor: '#076AD4FF'
+        });
+        return;
+    }
+
+    if (SelectedPendingId) {
+        Swal.fire({
+            title: "Confirmation",
+            text: "Are you sure you want to decline this reservation?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Prepare the data to send
+                const data = { 
+                    id: SelectedPendingId, 
+                    approved_by: facultyId,
+                    comment: DeclineMessageInput.value
+                };
+
+                fetch('../PHP/Admin_Reservation_DeclineReservation.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.ok) {
+                        AcitivityLogInsertion("Reservation", "Declined", SelectedPendingId);
+                        Swal.fire({
+                            title: "Declined Successful",
+                            text: "Press okay to continue",
+                            icon: "success",
+                            confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            title: "Error",
+                            text: "There was an error in declining the reservation.",
+                            icon: "warning",
+                            confirmButtonColor: '#076AD4FF'
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error with the request.",
+                        icon: "error",
+                        confirmButtonColor: '#076AD4FF'
+                    });
+                });
+            }
+        });
+    }
+}
+
+
+
+
 // APPROVE BUTTON CLICK EVENT
 document.getElementById('ApproveBtn').addEventListener('click', () => {
     if (SelectedPendingId) {

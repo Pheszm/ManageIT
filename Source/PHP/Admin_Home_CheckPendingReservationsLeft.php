@@ -22,7 +22,7 @@ $stmt = $conn->prepare("UPDATE reserve_submissions
 SET status = 0
 WHERE approved_by IS NULL
 AND dateofuse < ? 
-OR (dateofuse = ? AND totime < ?)
+OR (dateofuse = ? AND fromtime < ?)
 ");
 
 if ($stmt === false) {

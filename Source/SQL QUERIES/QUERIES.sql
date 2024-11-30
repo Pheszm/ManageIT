@@ -83,7 +83,7 @@ CREATE TABLE activity_logs (
     Log_type varchar(100),    
     Log_action varchar(100),
     Reference_id INT,
-    DateAndTime DATETIME,
+    DateAndTime DATETIME
 );
 
 

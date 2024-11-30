@@ -98,6 +98,23 @@ function StudentNameFetch(ID) {
     });
 }
 
+function ColortheRowss() {
+    const table = document.getElementById('UpcomingTbl');
+    for (let i = 1; i < table.rows.length; i++) {
+        const row = table.rows[i];  // Get the current row
+        const cell = row.cells[1];  // Get the second cell (index 1)
+        const cellfirst = row.cells[0]; 
+        if (cell && cell.textContent.trim() === "DECLINED" || cell && cell.textContent.trim() === "CANCELED") {
+            cellfirst.textContent = "🔴" + cellfirst.textContent;
+        }
+        if (cell && cell.textContent.trim() === "UPCOMING") {
+            cellfirst.textContent = "🟢" + cellfirst.textContent;
+        }
+        if (cell && cell.textContent.trim() === "PENDING") {
+            cellfirst.textContent = "🔵" + cellfirst.textContent;
+        }
+    }
+}
 
 function FetchUpcomingTable(StoredStudentNO) {
     const Student_No = StoredStudentNO; 
@@ -130,6 +147,7 @@ function FetchUpcomingTable(StoredStudentNO) {
                 hiddenInput.name = 'reservationId[]'; // Optional: name for form submission
                 row.appendChild(hiddenInput); // Append to the row
             });
+            ColortheRowss();
         })
         .catch(error => console.error('Error fetching schedule:', error));
 };

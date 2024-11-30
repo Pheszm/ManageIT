@@ -37,6 +37,7 @@ if ($result->num_rows > 0) {
     }
 }
 
+date_default_timezone_set('Asia/Manila');
 // Get the current month and year to display in ChartTime
 $currentMonth = date('F Y');  // e.g., 'December 2024'
 

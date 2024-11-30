@@ -548,6 +548,7 @@ function StoringImageFunc() {
 
 // ADD ITEM FUNCTION
 document.getElementById("AddBtnSave").addEventListener("click", function() {
+	
     const itemName = document.getElementById('Add_Item_Name');
     const itemModel = document.getElementById('Add_Item_Model');
     const itemCategory = document.getElementById('Add_Item_Category');
@@ -593,37 +594,60 @@ document.getElementById("AddBtnSave").addEventListener("click", function() {
         item_imageName: Add_ImageFileName, // ImageName
     };
 
-    // Confirm action after validation
-    const confirmAddItem = confirm("Are you sure you want to add this item?");
-    if (confirmAddItem) {
-        // Call the function to store the image before sending item data
-        StoringImageFunc();
 
-        // Send the item data along with the image file name
-        fetch('../PHP/Admin_Items_AddItem.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',  // Send as JSON
-            },
-            body: JSON.stringify(updatedData)  // Convert the object to JSON
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                alert('Item added successfully.');
-				var ItemIDCreate = result.item_id; // STORE IT HERE
-				AcitivityLogInsertion("Item", "Created", ItemIDCreate);
-                location.reload(); // Optionally reload the page or refresh the data
-            } else {
-                // Handle specific errors (if any)
-                alert('Error: ' + (result.error || JSON.stringify(result.errors)));
-            }
-        })
-        .catch(error => {
-            console.error('Error adding item:', error);
-            alert('An error occurred while trying to add the item.');
-        });
-    }
+	Swal.fire({
+        title: "Confirmation",
+        text: "Are you sure you want to add this item?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+			// Call the function to store the image before sending item data
+			StoringImageFunc();
+
+			// Send the item data along with the image file name
+			fetch('../PHP/Admin_Items_AddItem.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',  // Send as JSON
+				},
+				body: JSON.stringify(updatedData)  // Convert the object to JSON
+			})
+			.then(response => response.json())
+			.then(result => {
+				if (result.success) {
+					var ItemIDCreate = result.item_id; // STORE IT HERE
+					AcitivityLogInsertion("Item", "Created", ItemIDCreate);
+					Swal.fire({
+						title: "Item Added Successfully.",
+						text: "Press okay to continue",
+						icon: "success",
+						confirmButtonColor: '#076AD4FF'
+						}).then((result) => {
+						if (result.isConfirmed) {
+							location.reload(); // Optionally reload the page or refresh the data
+						}else{
+							location.reload(); // Optionally reload the page or refresh the data
+						}
+					});
+				} else {
+					Swal.fire({
+						title: "Oops..",
+						text: 'Error: ' + (result.error || JSON.stringify(result.errors)),
+						icon: "error",
+						confirmButtonColor: '#076AD4FF'
+						})
+				}
+			})
+			.catch(error => {
+				console.error('Error adding item:', error);
+				alert('An error occurred while trying to add the item.');
+			});
+        }
+    });
 });
 
 
@@ -845,33 +869,59 @@ document.getElementById("RemoveItemBtn").addEventListener("click", function() {
     }
 
     // Confirm before deleting the item
-    const confirmRemove = confirm("Are you sure you want to remove this item?");
-    if (confirmRemove) {
-        // Send a request to remove the item
-        const removeData = {
-            item_id: SelectedAllItemsRow,  // The ID of the item to be removed (must be set before calling this function)
-        };
+	Swal.fire({
+        title: "Confirmation",
+        text: "Are you sure you want to remove this item?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+			// Send a request to remove the item
+			const removeData = {
+				item_id: SelectedAllItemsRow,  // The ID of the item to be removed (must be set before calling this function)
+			};
 
-        fetch('../PHP/Admin_Items_RemoveItem.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(removeData), // Send the item ID as JSON
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            if (result.success) {
-                alert('Item removed successfully.');
-				AcitivityLogInsertion("Item", "Removed", SelectedAllItemsRow);
-                location.reload();  // Optionally reload the page or refresh the data
-            } else {
-                alert('Error removing item: ' + (result.error || 'Unknown error'));
-            }
-        })
-        .catch((error) => {
-            console.error("Error removing item:", error);
-            alert("An error occurred while removing the item.");
-        });
-    }
+			fetch('../PHP/Admin_Items_RemoveItem.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(removeData), // Send the item ID as JSON
+			})
+			.then((response) => response.json())
+			.then((result) => {
+				if (result.success) {
+					AcitivityLogInsertion("Item", "Removed", SelectedAllItemsRow);
+					Swal.fire({
+						title: "Item removed successfully",
+						text: "Press okay to continue",
+						icon: "success",
+						confirmButtonColor: '#076AD4FF'
+						}).then((result) => {
+							if (result.isConfirmed) {
+								location.reload(); // Optionally reload the page or refresh the data
+							}else{
+								location.reload(); // Optionally reload the page or refresh the data
+							}
+						});
+					} else {
+					Swal.fire({
+						title: "Oops..",
+						text: 'Error removing item: ' + (result.error || 'Unknown error'),
+						icon: "error",
+						confirmButtonColor: '#076AD4FF'
+					})
+				}
+			})		
+			.catch((error) => {
+				console.error("Error removing item:", error);
+				alert("An error occurred while removing the item.");
+			});
+		}
+	});
 });
+
+

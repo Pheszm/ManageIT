@@ -47,7 +47,7 @@
             </div>
             <span>
                 <button id="PendingDetailsBtn">View Details</button>
-                <!--  <button id="PendingViewMoreBtn">View More ></button> -->
+                <button id="DeclineBtnn">Decline</button>
             </span>
         </div>
 
@@ -118,8 +118,13 @@
                         </tr>
                     </table>
                 </div>
+                <div class="GotoRightbtnss">
+                    <div>
+                        <button id="DeclineeBtn2">Decline</button>
+                        <button id="ApproveBtn2">Approve</button>
+                    </div>
+                </div>
 
-                <button id="ApproveBtn2">Approve</button>
             </div>
             <div class="DarkBackground"></div>
         </div>
@@ -203,6 +208,17 @@
                 </span>
             </div>
         </div>
+        <div id="DeclineAreaaa">
+            <div class="DarkBackground"></div>
+            <div id="DeclineMessageForm">
+                <h3>Message for Declining</h3>
+                <textarea id="DeclineMessageInput" placeholder="Type your message here..."></textarea>
+                <span id="Buttonss">
+                    <button id="DeclineMessageSubmit">Submit</button>
+                    <button id="DeclineMessage">Cancel</button>
+                </span>
+            </div>
+        </div>
 
 
 
@@ -219,6 +235,7 @@
                         <option value="RETURNED ONTIME">RETURNED ONTIME</option>
                         <option value="RETURNED LATE">RETURNED LATE</option>
                         <option value="MISSING">MISSING</option>
+                        <option value="DECLINED">DECLINED</option>
                     </select>
                     <input id="SearchBarAllApproved" placeholder="Search Here..">
                 </span>

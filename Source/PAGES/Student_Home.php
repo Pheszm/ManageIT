@@ -181,6 +181,8 @@
                         <option value="RETURNED ONTIME">RETURNED ONTIME</option>
                         <option value="RETURNED LATE">RETURNED LATE</option>
                         <option value="MISSING">MISSING</option>
+                        <option value="DECLINED">DECLINED</option>
+
                     </select>
 
                 </span>
@@ -210,8 +212,8 @@
                     <table id="UpcomingTbl">
                         <tr>
                             <th>Time & Date</th>
-                            <th>Item</th>
                             <th>Status</th>
+                            <th>Item</th>
                         </tr>
                         <!-- Rows will be dynamically added here -->
                     </table>
