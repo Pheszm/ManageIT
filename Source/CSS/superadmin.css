@@ -520,4 +520,35 @@ input:checked + .slider:before {
     border: none;
 }
 
+.selectionAreaa{
+    display: flex;
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+}
+.selectionAreaa p{
+    font-size: 3rem;
+    color: #fff;
+}
 
+#Userbtn{
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    transition: scale 0.3s;
+    font-weight: bolder;
+}
+#Userbtn:hover{
+    scale: 1.15;
+}
+#Studentbtn{
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    transition: scale 0.3s;
+}
+#Studentbtn:hover{
+    scale: 1.15;
+}

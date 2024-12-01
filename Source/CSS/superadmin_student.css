@@ -1,0 +1,556 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;    
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+#FullBody{
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    background-image: linear-gradient(180deg, #022050, #011535);
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+* { /*Set sizing perfect. */
+    box-sizing: border-box; /* Apply to all elements */
+}
+
+/* Top Navigation */
+#TopNavBar{
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    background-image: linear-gradient(-90deg, #0b367b, #06275d);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding-top: 5px;
+    display: flex;
+    justify-content: flex-start; 
+    z-index: 100; 
+}
+#TopNavBar span{
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+}
+#SRCB_BackgroundIMG{
+    opacity: 0.1;
+    position: absolute;
+    right: -2.3%;
+    top: -270%;
+    height: 900%;
+}
+
+#LogoutBtn{
+    margin-right: 3%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 0;
+    height: 33px;
+    color: #0A4194;
+    font-weight: bold;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background 0.2s;
+}
+#LogoutBtn img{
+    height: 20px;
+    margin-right: 5px;
+}
+#LogoutBtn:hover{
+    background-color: #db6060;
+}
+
+#toggle-btn {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#SideBarNav.open {
+    transform: translateX(-100%); /* Show sidebar */
+}
+#SideBarNav{
+    padding-top: 120px;
+    position: absolute;
+    width: 220px;
+    height: 100%;
+    background-color: #FFFFFF;
+    transition: transform 0.3s ease;
+    transform: translateX(0%); /* Hidden by default */
+}
+
+#SideBarNav button{
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: #FFFF;
+    border: none;
+    font-weight: 500;
+    color: #0b367b;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: background 0.2s;
+}
+
+#SideBarNav button:hover{
+    background-color: #d5e1ff;
+}
+
+#SideBarNav img{
+    height: 25px;
+    margin-right: 10px;
+    margin-left: 15px;
+
+}
+
+#ReservationBtn{
+    background-image: linear-gradient(-90deg, #eeeeee, #e4e4e4);
+}
+
+
+#ManageIT_NavLogo{
+    margin-left: 3vw;
+}
+
+
+
+
+
+
+
+
+
+
+#TableAreaContainer{
+    height: 90%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 100%;
+    overflow-y: auto; 
+    max-height: 90%;
+    overflow-x: hidden;
+}
+
+
+
+/*ACCOUNTS TABLE*/
+#AccountsList{
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 75%;
+    background-color: #fff;
+    vertical-align: top; 
+}
+
+
+#MaterialsHeader{
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+#MaterialsHeader h2{
+    color: #0b367b;
+    font-weight: 500;
+    line-height: 10px;
+}
+#MaterialsHeader button{
+    font-weight: bolder;
+    border: none;
+    color: #0b367b;
+    background-color: #fff; 
+    margin-left: auto;
+    font-size: 17px;
+}
+#MaterialsHeader button:hover{
+    scale: 1.15;
+}
+
+#ItemTable{
+    width: 100%;
+    border-collapse: collapse; 
+}
+
+#ItemTable th{
+    height: 20px;
+    align-items: center;
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 10px;
+    background-color: #0b367b;
+    position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1; /* Ensure it stays above other content */
+}
+
+#ItemTable td{
+    color: #0b367b;
+    align-items: center;
+    text-align: center;
+}
+
+#ItemTable td button{
+    font-weight: bolder;
+    font-size: 15px;
+    border: none;
+    color: #0b367b;
+    background-color: transparent; 
+}
+#ItemTable td button:hover{
+    scale: 1.15;
+}
+
+
+#hidebtn{
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    color: #0A4194;
+    font-size: 11px;
+}
+
+
+
+
+
+
+
+
+
+/* Adding Material Area */
+
+#AddingFacultyForm{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+
+#DarkBlur{
+    background-color: #000000;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0.6;
+    top: 0;
+}
+
+
+#AddingForm{
+    position: relative;
+    width: 450px;
+    height: 450px;
+    background-color: #fff;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+
+#extbtn{
+    margin-left: auto;
+    height: 30px;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    background-color: #882424;
+    color: #fff;
+}
+#extbtn:hover{
+    background-color: #6c1616;
+}
+
+#AddingForm h1{
+    color: #06275d;
+    line-height: 10px;
+}
+
+#AddingForm form{
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#AddingForm form input,
+#AddingForm form button
+{
+    padding: 10px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+#AddingForm form button{
+    color: #fff;
+    background-color: #13428f;
+}
+#AddingForm form button:hover{
+    color: #fff;
+    background-color: #083070;
+}
+
+/* Adding Material Area */
+
+
+
+
+
+
+
+
+
+/* Adding Material Area */
+
+#CheckFacultyData{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+
+#DataForm{
+    position: relative;
+    width: 550px;
+    height: 450px;
+    background-color: #fff;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    padding: 20px;
+    z-index: 5;
+
+}
+
+#extbtn1{
+    margin-left: auto;
+    height: 30px;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    background-color: #882424;
+    color: #fff;
+}
+
+#DataForm span{
+    width: 100%;
+    line-height: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+#DataForm h2{
+    color: #1f4e9a;
+    margin-right: 10px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+#DataForm h1,
+#DataForm h3
+{
+    color: #10397a;
+    line-height: 1px;
+}
+
+#DataForm h3{
+    margin-top: 50px;
+}
+
+#DataForm img{
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+#DataForm img{
+    width: 20px;
+}
+#deleteBtn,
+#updateBtn{
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+#deleteBtn{
+    background: #631313;
+}
+#deleteBtn:hover{
+    background: #4d0c0c;
+}
+
+#updateBtn{
+    background: #128546;
+}
+#updateBtn:hover{
+    background: #095b2e;
+}
+
+#modifybtns{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+/* Switch Styling*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 23px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #7b0e0e;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #0dc022;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+/* Switch Styling*/
+
+
+
+
+
+
+
+
+
+
+/* Update Faculty Data */
+#UpdateFacultyData{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center; 
+    z-index: 5;
+}
+
+#extbtn2{
+    margin-left: auto;
+    height: 30px;
+    width: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    background-color: #882424;
+    color: #fff;
+}
+
+#Savebtn{
+    background-color: #8d8f12;
+    color: #fff;
+    font-size: 20px;
+    margin-top: auto;
+    padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border: none;
+}
+
+.selectionAreaa{
+    display: flex;
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+}
+.selectionAreaa p{
+    font-size: 3rem;
+    color: #fff;
+}
+#searchbox{
+    margin-left: auto;
+}
+#Userbtn{
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    transition: scale 0.3s;
+}
+#Userbtn:hover{
+    scale: 1.15;
+}
+#Studentbtn{
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    font-weight: bolder;
+    transition: scale 0.3s;
+}
+#Studentbtn:hover{
+    scale: 1.15;
+}

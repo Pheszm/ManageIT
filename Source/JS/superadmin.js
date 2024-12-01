@@ -9,6 +9,9 @@ document.getElementById("extbtn").addEventListener("click", function() {
 });
 
 
+document.getElementById("Studentbtn").addEventListener("click", function() {
+    window.location.href = 'SuperAdmin_Student.php';
+});
 
 
 //CLOSE DATA FORM
@@ -216,33 +219,71 @@ window.onload = function() {
         };
 
         try {
-            const response = await fetch('../PHP/SuperAdmin_AddingAccount.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                alert("Account added successfully!");
-                location.reload(); 
-            } else {
-                // Set custom validity based on the errors returned
-                for (const field in result.errors) {
-                    if (result.errors.hasOwnProperty(field)) {
-                        const inputField = this[field]; // Get the input field by name
-                        inputField.setCustomValidity(result.errors[field]);
-                        inputField.reportValidity(); // Show message
+            Swal.fire({
+                title: "Confirmation",
+                text: "Are you sure you want to add this account?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const response = await fetch('../PHP/SuperAdmin_AddingAccount.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData),
+                        });
+        
+                        const result = await response.json();
+        
+                        if (result.success) {
+                            Swal.fire({
+                                title: "Account added successfully!",
+                                text: "Press okay to continue",
+                                icon: "success",
+                                confirmButtonColor: '#076AD4FF'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            // Set custom validity based on the errors returned
+                            for (const field in result.errors) {
+                                if (result.errors.hasOwnProperty(field)) {
+                                    const inputField = this[field]; // Get the input field by name
+                                    inputField.setCustomValidity(result.errors[field]);
+                                    inputField.reportValidity(); // Show message
+                                }
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            title: "Oops..",
+                            text: 'An error occurred while adding the account. Please try again.',
+                            icon: "error",  // Changed to 'error' for better representation of failure
+                            confirmButtonColor: '#076AD4FF'
+                        });
                     }
                 }
-            }
+            });
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while adding the account. Please try again.');
+            Swal.fire({
+                title: "Oops..",
+                text: 'An error occurred during the confirmation process. Please try again.',
+                icon: "error",  // Changed to 'error' for better representation of failure
+                confirmButtonColor: '#076AD4FF'
+            });
         }
+        
     });
 };
 
@@ -266,31 +307,60 @@ window.onload = function() {
 /// DELETE FUNCTION
 document.getElementById("deleteBtn").addEventListener("click", function() {
     const facultyId = document.getElementById('view_facultyIdInput').value;
-    if (confirm('Are you sure you want to delete this faculty member?')) {
-        deleteFaculty(facultyId);
-    }
+    deleteFaculty(facultyId);
 });
 
 // Function to delete specific faculty data
 function deleteFaculty(facultyId) {
-    fetch(`../PHP/SuperAdmin_DeletingAccount.php?id=${facultyId}`, {
-        method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert('Faculty member deleted successfully.');
-            // Optionally, you can refresh the table or close the data form
-            document.getElementById("CheckFacultyData").style.display = "none";
-            // You may also want to refresh the table here
-            location.reload(); // Reload the page or fetch the updated data
-        } else {
-            alert('Error deleting faculty member: ' + result.error);
+    Swal.fire({
+        title: "Confirmation",
+        text: "Are you sure you want to delete this data?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`../PHP/SuperAdmin_DeletingAccount.php?id=${facultyId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    Swal.fire({
+                        title: "Faculty member deleted successfully.",
+                        text: "Press okay to continue",
+                        icon: "success",
+                        confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById("CheckFacultyData").style.display = "none";
+                            location.reload();
+                        }else{
+                            document.getElementById("CheckFacultyData").style.display = "none";
+                            location.reload();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Oops..",
+                        text: 'Error in deleting: ' + result.error,
+                        icon: "success",
+                        confirmButtonColor: '#076AD4FF'
+                    })
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: "Oops..",
+                    text: 'An error occurred while trying to delete the faculty member.',
+                    icon: "success",
+                    confirmButtonColor: '#076AD4FF'
+                })
+            });
         }
-    })
-    .catch(error => {
-        console.error('Error deleting faculty member:', error);
-        alert('An error occurred while trying to delete the faculty member.');
     });
 }
 
@@ -406,49 +476,73 @@ document.getElementById("Savebtn").addEventListener("click", function() {
         status: status
     };
 
-    // Confirm action after validation
-    const confirmUpdate = confirm("Are you sure you want to save these changes?");
-    if (confirmUpdate) {
-        // Send a PUT request to update faculty data
-        fetch('../PHP/SuperAdmin_UpdateAccount.php', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData)
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                alert('Faculty member updated successfully.');
-                location.reload(); // Reload the page or refresh the data
-            } else {
-                // Handle specific duplication errors
-                result.errors.forEach(error => {
-                    if (error.includes('Email')) {
-                        email.setCustomValidity(error);
-                        email.reportValidity();
-                    }
-                    if (error.includes('Phone number')) {
-                        phone.setCustomValidity(error);
-                        phone.reportValidity();
-                    }
-                    if (error.includes('Username')) {
-                        username.setCustomValidity(error);
-                        username.reportValidity();
-                    }
-                    if (error.includes('Full Name')) {
-                        fullname.setCustomValidity(error);
-                        fullname.reportValidity();
-                    }
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error updating faculty member:', error);
-            alert('An error occurred while trying to update the faculty member.');
-        });
-    }
+
+    
+    Swal.fire({
+        title: "Confirmation",
+        text: "Are you sure you want to save these changes?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('../PHP/SuperAdmin_UpdateAccount.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedData)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) { 
+                    Swal.fire({
+                        title: "Faculty member updated successfully.",
+                        text: "Press okay to continue",
+                        icon: "success",
+                        confirmButtonColor: '#076AD4FF'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); 
+                        }else{
+                            location.reload(); 
+                        }
+                    });
+                } else {
+                    result.errors.forEach(error => {
+                        if (error.includes('Email')) {
+                            email.setCustomValidity(error);
+                            email.reportValidity();
+                        }
+                        if (error.includes('Phone number')) {
+                            phone.setCustomValidity(error);
+                            phone.reportValidity();
+                        }
+                        if (error.includes('Username')) {
+                            username.setCustomValidity(error);
+                            username.reportValidity();
+                        }
+                        if (error.includes('Full Name')) {
+                            fullname.setCustomValidity(error);
+                            fullname.reportValidity();
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error updating faculty member:', error);
+                Swal.fire({
+                    title: "Oops..",
+                    text: "An error occurred while trying to update the faculty member.",
+                    icon: "error",
+                    confirmButtonColor: '#076AD4FF'
+                    })
+            });
+        }
+    });
+
 });
 
 // Clear custom validity messages on input change

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ManageIT | Admin</title>
+    <title>ManageIT | Manage User</title>
     <link href="../CSS/Poppins_Sheet.css" rel="stylesheet">
     <link rel="icon" href="../../Assets/Images/ManageIT_Logo.png">
     <link rel="stylesheet" href="../CSS/SuperAdmin.css">
@@ -21,6 +21,11 @@
             </span>
         </div>
 
+        <div class="selectionAreaa">
+            <button id="Userbtn">USER</button>
+            <p>|</p>
+            <button id="Studentbtn">STUDENT</button>
+        </div>
 
         <div id="AccountsList">
             <span id="MaterialsHeader">
@@ -54,8 +59,6 @@
             </div>
             <div id="DarkBlur"></div>
         </div>
-
-
 
         <div id="CheckFacultyData">
             <div id="DataForm">
@@ -144,7 +147,6 @@
             </div>
             <div id="DarkBlur"></div>
         </div>
-
 
     </div>
     <script src="../JS/SweetAlert.js"></script>
