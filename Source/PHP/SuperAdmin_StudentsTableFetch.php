@@ -15,12 +15,12 @@ if ($conn->connect_error) {
 
 // Prepare SQL query with search functionality
 $sql = "
-    SELECT Student_No, Student_ID, Student_FullName, Student_Level, Student_YearOrCourse, Student_status
+    SELECT Student_No, Student_ID, Student_FullName, Student_Department, Student_Level, Student_status
     FROM Student
     WHERE 
         Student_ID LIKE ? OR 
         Student_FullName LIKE ? OR
-        Student_YearOrCourse LIKE ? OR
+        Student_Department LIKE ? OR
         Student_Level LIKE ?
     ORDER BY Student_status DESC, Student_FullName ASC
 ";

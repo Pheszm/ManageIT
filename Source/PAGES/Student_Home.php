@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="../CSS/Student_Home.css">
     <link rel="stylesheet" href="../CSS/SweetAlert.css">
     <script src="../JS/BarChart_API.js"></script>
+    <link rel="stylesheet" href="../CSS/all.min.css">
+    <link rel="stylesheet" href="../CSS/fontawesome.min.css">
 </head>
 
 <body>
@@ -21,9 +23,16 @@
         <img id="SRCB_BackgroundIMG" src="../../Assets/Images/SRCB_Logo.png" alt="SRCB LOGO">
         <h1 id="HlloArea">HELLO,</h1>
         <span>
+            <button id="NotificationBell"><i class="fa-solid fa-bell"></i></button>
             <button id="LogoutBtn"><img src="../../Assets/Images/Logout_Icon.png">Logout</button>
         </span>
-
+    </div>
+    <div id="Notifsss">
+        <h2>Notifications</h2>
+        <button id="notifExitbtn">X</button>
+        <div id="NotifBar">
+asdasd
+        </div>
     </div>
 
 

@@ -340,19 +340,51 @@ html {
 
 
 #span2{
-    width: 805px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 /*Volume Today Area*/
 
+.VolandPen{
+    display: flex;
+}
 #VolumeArea{
     border-radius: 10px;
     margin-top: 70px;
     margin-left: 10px;
-    width: 52.6vw;
+    width: 26vw;
     height: 10vw;
     background-color: #fefefe;
     padding: 10px;
+}
+#PendingArea{
+    border-radius: 10px;
+    margin-top: 70px;
+    margin-left: 10px;
+    width: 26vw;
+    height: 10vw;
+    background-color: #fefefe;
+    padding: 10px;
+}
+
+#PendingArea h2,
+#VolumeArea h2{
+    color: #083578;
+    text-align: center;
+    font-size: 1.6vw;
+    line-height: 0vw;
+    margin-bottom: 1.8vw;
+}
+
+#PendingArea h3,
+#VolumeArea h3{
+    color: #1a54ab;
+    text-align: center;
+    font-size: 3vw;
+    line-height: 0vw;
+    margin-bottom: 1.8vw;
 }
 
 #TableCase{
@@ -999,7 +1031,7 @@ canvas {
 }
 
 .ChartHeader {
-    color: #1a54ab;
+    color: #083578;
     text-align: center;
     font-size: 1.6vw;
     line-height: 0vw;
@@ -1007,9 +1039,15 @@ canvas {
 }
 
 #ChartTime {
-    color: #083578;
+    color: #1a54ab;
     text-align: center;
     font-size: 1.2vw;
     line-height: 0vw;
 }
 /*CHART AREA CONFIGURATION*/
+
+
+
+#PendingTodayss{
+    cursor: pointer;
+}

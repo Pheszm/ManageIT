@@ -37,9 +37,9 @@
                                 <label for="totime">&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;</label>
                                 <input type="time" id="totime" name="totime" required>
                             </span>
-                            <input type="text" id="course_year" name="course_year" placeholder="Department Level.." required>
+                            <input type="text" id="course_year" name="course_year" placeholder="Department.." required>
                             <br>
-                            <input type="text" id="subject" name="subject" placeholder="Grade.." required>
+                            <input type="text" id="subject" name="subject" placeholder="Level.." required>
                             <br>
                             <input type="text" name="requested_by" placeholder="Requested By.." required>
                             <br>

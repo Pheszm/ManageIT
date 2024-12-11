@@ -17,7 +17,7 @@ if (empty($studentID)) {
     exit;
 }
 
-$sql = "SELECT Student_No, Student_FullName, Student_Level, Student_YearOrCourse FROM Student WHERE Student_ID = ?";
+$sql = "SELECT Student_No, Student_FullName, Student_Department, Student_Level FROM Student WHERE Student_ID = ?";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -27,15 +27,15 @@ if ($stmt === false) {
 
 $stmt->bind_param("s", $studentID);
 $stmt->execute();
-$stmt->bind_result($Student_No, $Fullname, $Level, $YearCourse);
+$stmt->bind_result($Student_No, $Fullname, $Department, $Level);
 
 if ($stmt->fetch()) {
     // Successfully fetched the data, return as JSON
     echo json_encode([
         'Student_No' => $Student_No,
         'Fullname' => $Fullname,
-        'Level' => $Level,
-        'YearCourse' => $YearCourse
+        'Department' => $Department,
+        'Level' => $Level
     ]);
 } else {
     echo json_encode(['error' => 'No student found with this ID']);

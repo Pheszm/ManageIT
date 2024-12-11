@@ -86,8 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <tr>
                         <th>Student ID</th>
                         <th>Fullname</th>
-                        <th>Level</th>
                         <th>Department</th>
+                        <th>Level</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>`;
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Populate table cells with student data
                     studentIdCell.innerText = student.Student_ID;
                     fullNameCell.innerText = student.Student_FullName;
-                    departmentCell.innerText = student.Student_YearOrCourse || 'N/A';  // Display Year/Course or 'N/A' if not available
+                    departmentCell.innerText = student.Student_Department;  // Display Year/Course or 'N/A' if not available
                     levelCell.innerText = student.Student_Level;
                     statusCell.innerText = (student.Student_status == 1) ? 'Active🟢' : 'Inactive🔴';
                     operationCell.innerHTML = `<button class="view-button" data-id="${student.Student_No}">View</button>`;
@@ -137,15 +137,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // Function to fetch and display student details when 'View' button is clicked
 function fetchStudentData(studentNo) {
-    fetch(`../PHP/FetchStudentDetails.php?studentNo=${studentNo}`)
+    fetch(`../PHP/SuperAdmin_FetchStudentDetails.php?studentNo=${studentNo}`)
         .then(response => response.json())
         .then(student => {
             // Populate the student data into the modal
             document.getElementById('view_facultyIdInput').value = student.Student_No; // Hidden input for student ID
-            document.getElementById('view_fullname').innerText = student.Student_ID; // Student ID
-            document.getElementById('view_email').innerText = student.Student_FullName; // Full Name
-            document.getElementById('view_phone').innerText = student.Student_Level || 'N/A'; // Department (Year or Course)
-            document.getElementById('view_level').innerText = student.Student_YearOrCourse || 'N/A'; // Level
+            document.getElementById('view_Id').innerText = student.Student_ID; // Student ID
+            document.getElementById('view_Name').innerText = student.Student_FullName; // Full Name
+            document.getElementById('view_Department').innerText = student.Student_Level || 'N/A'; // Department (Year or Course)
+            document.getElementById('view_level').innerText = student.Student_Department || 'N/A'; // Level
             document.getElementById('view_status').innerText = (student.Student_status === 1) ? 'Active🟢' : 'Inactive🔴'; // Status
 
             // Show the student view modal (Make the modal visible)
@@ -163,73 +163,54 @@ function fetchStudentData(studentNo) {
 // ADDING FUNCTION
 window.onload = function() {
     const facultyForm = document.getElementById('facultyForm');
-    const phoneInput = document.getElementById('adding_phone');
-
-    // Limit input to 11 digits
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/\D/g, '').slice(0, 11); 
-    });
+    const stuID = document.getElementById('adding_stuID');
+    const fullname = document.getElementById('adding_fullname');
+    const dept = document.getElementById('Dept');
+    const level = document.getElementById('Level');
 
     facultyForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent default form submission
 
         // Clear previous custom validity messages
-        this.fullname.setCustomValidity('');
-        this.email.setCustomValidity('');
-        this.phone.setCustomValidity('');
-        this.username.setCustomValidity('');
-        this.password.setCustomValidity('');
+        stuID.setCustomValidity('');
+        fullname.setCustomValidity('');
+        dept.setCustomValidity('');
+        level.setCustomValidity('');
 
-        // Validate Full Name
-        if (this.fullname.value.trim() === '') {
-            this.fullname.setCustomValidity('Full Name is required.');
-            this.fullname.reportValidity(); // Show message
-            return; // Stop processing if validation fails
+        if (stuID.value.trim() === '') {
+            stuID.setCustomValidity('Student ID is required.');
+            stuID.reportValidity();
+            return;
         }
-
-        // Validate Email
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
-        if (!emailPattern.test(this.email.value)) {
-            this.email.setCustomValidity('Please enter a valid email address.');
-            this.email.reportValidity(); // Show message
-            return; // Stop processing if validation fails
+        if (fullname.value.trim() === '') {
+            fullname.setCustomValidity('Full Name is required.');
+            fullname.reportValidity();
+            return;
         }
-
-        // Validate Phone Number
-        const phonePattern = /^\d{11}$/; // Check if exactly 10 digits
-        if (!phonePattern.test(this.phone.value)) {
-            this.phone.setCustomValidity('Please enter a valid 11-digit phone number.');
-            this.phone.reportValidity(); // Show message
-            return; // Stop processing if validation fails
+        if (dept.value.trim() === '') {
+            dept.setCustomValidity('Department is required.');
+            dept.reportValidity();
+            return;
         }
-
-        // Validate Username
-        if (this.username.value.trim().length < 5) {
-            this.username.setCustomValidity('Username must be at least 5 characters long.');
-            this.username.reportValidity(); // Show message
-            return; // Stop processing if validation fails
+        if (level.value.trim() === '') {
+            level.setCustomValidity('Level is required.');
+            level.reportValidity();
+            return;
         }
-
-        // Validate Password
-        if (this.password.value.trim().length < 6) {
-            this.password.setCustomValidity('Password must be at least 6 characters long.');
-            this.password.reportValidity(); // Show message
-            return; // Stop processing if validation fails
-        }
+        
 
         // If all validations pass, proceed with the fetch
         const formData = {
-            fullname: this.fullname.value,
-            email: this.email.value,
-            phone: this.phone.value,
-            username: this.username.value,
-            password: this.password.value,
+            StuID: stuID.value,
+            fullname: fullname.value,
+            dept: dept.value,
+            level: level.value
         };
 
         try {
             Swal.fire({
                 title: "Confirmation",
-                text: "Are you sure you want to add this account?",
+                text: "Are you sure you want to add this student?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -238,7 +219,7 @@ window.onload = function() {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await fetch('../PHP/SuperAdmin_AddingAccount.php', {
+                        const response = await fetch('../PHP/SuperAdmin_AddingStudent.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -250,7 +231,7 @@ window.onload = function() {
         
                         if (result.success) {
                             Swal.fire({
-                                title: "Account added successfully!",
+                                title: "Student added successfully!",
                                 text: "Press okay to continue",
                                 icon: "success",
                                 confirmButtonColor: '#076AD4FF'
@@ -297,7 +278,7 @@ window.onload = function() {
 
 
 // Clear previous custom validity messages
-['adding_fullname', 'adding_email', 'adding_phone', 'adding_username', 'adding_password'].forEach(id => {
+['adding_stuID', 'adding_fullname', 'Dept', 'Level'].forEach(id => {
     document.getElementById(id).addEventListener('input', function() {
         this.setCustomValidity('');
     });
@@ -320,6 +301,7 @@ document.getElementById("deleteBtn").addEventListener("click", function() {
 
 // Function to delete specific faculty data
 function deleteFaculty(facultyId) {
+    console.log(facultyId);
     Swal.fire({
         title: "Confirmation",
         text: "Are you sure you want to delete this data?",
@@ -330,7 +312,7 @@ function deleteFaculty(facultyId) {
         confirmButtonText: "Yes!"
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`../PHP/SuperAdmin_DeletingAccount.php?id=${facultyId}`, {
+            fetch(`../PHP/SuperAdmin_DeletingStudent.php?id=${facultyId}`, {
                 method: 'DELETE'
             })
             .then(response => response.json())
@@ -395,25 +377,27 @@ document.getElementById("updateBtn").addEventListener("click", function() {
     document.getElementById("CheckFacultyData").style.display = "none";
 });
 
-function fetchFacultyUpdateData(facultyId) {
-    fetch(`../PHP/SuperAdmin_ViewDataFetch.php?id=${facultyId}`)
+function fetchFacultyUpdateData(studentNo) {
+    fetch(`../PHP/SuperAdmin_FetchStudentDetails.php?studentNo=${studentNo}`)
         .then(response => response.json())
-        .then(faculty => {
-            if (faculty.error) {
-                alert(faculty.error);
+        .then(student => {
+            if (student.error) {
+                alert(student.error);
                 return;
             }
 
+
+
+
             // Populate the update form fields
-            document.getElementById('edit_facultyIdInput').value = faculty.faculty_id;
-            document.getElementById('edit_fullname').value = faculty.faculty_full_name || '';
-            document.getElementById('edit_email').value = faculty.faculty_email_address || '';
-            document.getElementById('edit_phone').value = faculty.faculty_phone_number || '';
-            document.getElementById('edit_username').value = faculty.faculty_username || '';
-            document.getElementById('edit_password').value = faculty.faculty_password || '';
+            document.getElementById('edit_facultyIdInput').value = student.Student_No;
+            document.getElementById('edit_StuID').value = student.Student_ID|| '';
+            document.getElementById('edit_FullName').value = student.Student_FullName || '';
+            document.getElementById('edit_Department').value = student.Student_Department || '';
+            document.getElementById('edit_Level').value = student.Student_Level || '';
 
             // Set the status toggle based on the faculty status
-            document.getElementById('edit_toggleSwitch').checked = (faculty.faculty_status == 1);
+            document.getElementById('edit_toggleSwitch').checked = (student.Student_status == 1);
 
             // Show the update form
             document.getElementById("UpdateFacultyData").style.display = "flex";
@@ -426,65 +410,55 @@ function fetchFacultyUpdateData(facultyId) {
 
 // Add event listener to the Save button
 document.getElementById("Savebtn").addEventListener("click", function() {
-    const fullname = document.getElementById('edit_fullname');
-    const email = document.getElementById('edit_email');
-    const phone = document.getElementById('edit_phone');
-    const username = document.getElementById('edit_username');
-    const password = document.getElementById('edit_password');
-    const status = document.getElementById('edit_toggleSwitch').checked ? 1 : 0; // 1 for active, 0 for inactive
+    const StuID = document.getElementById('edit_StuID');
+    const fullname = document.getElementById('edit_FullName');
+    const dept = document.getElementById('edit_Department');
+    const level = document.getElementById('edit_Level');
+    const status = document.getElementById('edit_toggleSwitch').checked ? 1 : 0; 
 
     // Clear previous custom validity messages
+    StuID.setCustomValidity('');
     fullname.setCustomValidity('');
-    email.setCustomValidity('');
-    phone.setCustomValidity('');
-    username.setCustomValidity('');
-    password.setCustomValidity('');
+    dept.setCustomValidity('');
+    level.setCustomValidity('');
 
+    
     // Validate fields
+    if (StuID.value.trim() === '') {
+        StuID.setCustomValidity('Student ID is required.');
+        StuID.reportValidity();
+        return;
+    }
+    
     if (fullname.value.trim() === '') {
         fullname.setCustomValidity('Full Name is required.');
         fullname.reportValidity();
         return;
     }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
-    if (!emailPattern.test(email.value)) {
-        email.setCustomValidity('Please enter a valid email address.');
-        email.reportValidity();
+    
+    if (dept.value.trim() === '') {
+        dept.setCustomValidity('Department is required.');
+        dept.reportValidity();
+        return;
+    }
+    
+    if (level.value.trim() === '') {
+        level.setCustomValidity('Level is required.');
+        level.reportValidity();
         return;
     }
 
-    const phonePattern = /^\d{11}$/; // Check if exactly 11 digits
-    if (!phonePattern.test(phone.value)) {
-        phone.setCustomValidity('Please enter a valid 11-digit phone number.');
-        phone.reportValidity();
-        return;
-    }
 
-    if (username.value.trim().length < 5) {
-        username.setCustomValidity('Username must be at least 5 characters long.');
-        username.reportValidity();
-        return;
-    }
-
-    if (password.value.trim().length < 6) {
-        password.setCustomValidity('Password must be at least 6 characters long.');
-        password.reportValidity();
-        return;
-    }
 
     // Prepare data to be sent in the request
     const updatedData = {
-        faculty_id: document.getElementById('edit_facultyIdInput').value,
+        StudentNo: document.getElementById('edit_facultyIdInput').value,
+        StuID: StuID.value,
         fullname: fullname.value,
-        email: email.value,
-        phone: phone.value,
-        username: username.value,
-        password: password.value,
+        dept: dept.value,
+        level: level.value,
         status: status
     };
-
-
     
     Swal.fire({
         title: "Confirmation",
@@ -496,7 +470,7 @@ document.getElementById("Savebtn").addEventListener("click", function() {
         confirmButtonText: "Yes!"
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch('../PHP/SuperAdmin_UpdateAccount.php', {
+            fetch('../PHP/SuperAdmin_UpdateStudent.php', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -554,13 +528,8 @@ document.getElementById("Savebtn").addEventListener("click", function() {
 });
 
 // Clear custom validity messages on input change
-['edit_fullname', 'edit_email', 'edit_phone', 'edit_username', 'edit_password'].forEach(id => {
+['edit_StuID', 'edit_FullName', 'edit_Department', 'edit_Level'].forEach(id => {
     document.getElementById(id).addEventListener('input', function() {
         this.setCustomValidity('');
     });
-});
-
-// Limit input to 11 digits for phone
-document.getElementById('edit_phone').addEventListener('input', function() {
-    this.value = this.value.replace(/\D/g, '').slice(0, 11); 
 });

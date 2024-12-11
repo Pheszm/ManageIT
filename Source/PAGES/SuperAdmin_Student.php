@@ -39,8 +39,8 @@
                     <tr>
                         <th>Student ID</th>
                         <th>Fullname</th>
-                        <th>Level</th>
                         <th>Dept</th>
+                        <th>Level</th>
                         <th>Status</th>
                         <th>Operation</th>
                     </tr>
@@ -51,13 +51,18 @@
         <div id="AddingFacultyForm">
             <div id="AddingForm">
                 <button id="extbtn">X</button>
-                <h1>Adding Account</h1>
+                <h1>Adding Student</h1>
                 <form id="facultyForm" novalidate>
-                    <input type="text" id="adding_fullname" name="fullname" placeholder="Full Name.." required>
-                    <input type="email" id="adding_email" name="email" placeholder="Email Address.." required>
-                    <input type="number" id="adding_phone" name="phone" placeholder="Phone Number.." required>
-                    <input type="text" id="adding_username" name="username" placeholder="Username.." required>
-                    <input type="text" id="adding_password" name="password" placeholder="Password.." required>
+                    <input type="text" id="adding_stuID" placeholder="Student ID.." required>
+                    <input type="text" id="adding_fullname" placeholder="Full Name.." required>
+                    <select id="Dept">
+                        <option value="">Department..</option>
+                        <option value="Higher Education Department">Higher Education Department</option>
+                        <option value="Senior High Department">Senior High Department</option>
+                        <option value="High School Department">High School Department</option>
+                    </select>
+                    <!--<input type="text" id="Dept" placeholder="Department.." required>-->
+                    <input type="text" id="Level" placeholder="Level.." required>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -73,17 +78,17 @@
                 
                 <span id="view_fullnameSpan">
                     <h2>Student ID:</h2>
-                    <p id="view_fullname"></p> <!-- This will display the Student ID -->
+                    <p id="view_Id"></p> <!-- This will display the Student ID -->
                 </span>
                 
                 <span id="view_emailSpan">
                     <h2>Full Name:</h2>
-                    <p id="view_email"></p> <!-- This will display the student's Full Name -->
+                    <p id="view_Name"></p> <!-- This will display the student's Full Name -->
                 </span>
                 
                 <span id="view_phoneSpan">
                     <h2>Department:</h2>
-                    <p id="view_phone"></p> <!-- This will display the Department or Year/Course -->
+                    <p id="view_Department"></p> <!-- This will display the Department or Year/Course -->
                 </span>
 
                 <span id="view_levelSpan">
@@ -113,30 +118,31 @@
                 <h1 id="edit_facultyHeader">UPDATING USER</h1>
 
                 <span id="edit_fullnameSpan">
-                    <h2>Fullname:</h2>
-                    <input type="text" id="edit_fullname" placeholder="Enter full name" required>
+                    <h2>Student ID:</h2>
+                    <input type="text" id="edit_StuID" placeholder="Enter Student ID" required>
                 </span>
 
                 <span id="edit_emailSpan">
-                    <h2>Email Address:</h2>
-                    <input type="email" id="edit_email" placeholder="Enter email address" required>
+                    <h2>Full Name:</h2>
+                    <input type="text" id="edit_FullName" placeholder="Enter Full Name.." required>
                 </span>
 
                 <span id="edit_phoneSpan">
-                    <h2>Phone Number:</h2>
-                    <input type="number" id="edit_phone" placeholder="Enter phone number" required>
+                    <h2>Department:</h2>
+                    <select id="edit_Department">
+                        <option value="">Department..</option>
+                        <option value="Higher Education Department">Higher Education Department</option>
+                        <option value="Senior High Department">Senior High Department</option>
+                        <option value="High School Department">High School Department</option>
+                    </select>
+                    <!--<input type="text" id="edit_Department" placeholder="Enter Department.." required>-->
                 </span>
 
-                <h3>LOGIN CREDENTIAL</h3>
                 <span id="edit_usernameSpan">
-                    <h2>Username:</h2>
-                    <input type="text" id="edit_username" placeholder="Enter username" required>
+                    <h2>Level:</h2>
+                    <input type="text" id="edit_Level" placeholder="Enter Level.." required>
                 </span>
 
-                <span id="edit_passwordSpan">
-                    <h2>Password:</h2>
-                    <input type="text" id="edit_password" placeholder="Enter password" required>
-                </span>
 
                 <span id="edit_statusSpan">
                     <h2>Status:</h2>

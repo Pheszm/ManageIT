@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Prepare the SQL query to fetch student details based on Student_ID
-$sql = "SELECT * FROM Student WHERE Student_ID = ?";
+$sql = "SELECT * FROM Student WHERE Student_ID = ? AND Student_status = 1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $StudentID);  // 's' denotes string data type
 

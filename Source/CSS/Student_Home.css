@@ -89,6 +89,7 @@ html {
     transition: background 0.2s;
 }
 
+
 #LogoutBtn img{
     height: 20px;
     margin-right: 5px;
@@ -97,11 +98,96 @@ html {
 #LogoutBtn:hover{
     background-color: #db6060;
 }
+
+#NotificationBell{
+    margin-right: 2%;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 0;
+    height: 33px;
+    color: #1450a9;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-radius: 30px;
+    padding-left: 8px;
+    padding-right: 8px;
+    transition: background 0.2s;
+}
 /* Top Navigation */
 
 
+#Notifsss{
+    display: none; /* NONE if Testing */
+    width: 20rem;
+    height: 15rem;
+    background-color: #155298;
+    position: absolute;
+    right: 8vw;
+    top: 3.3rem;
+    z-index: 101;
+    border-radius: 0.5vw;
+    box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.2); 
+    overflow: hidden;
+}
 
 
+#notifExitbtn {
+    font-weight: bold;
+    position: absolute;
+    border: none;
+    background-color: #ff5757;
+    color: #fff;
+    border-radius: 0.3rem;
+    height: 1.75rem;
+    width: 1.75rem;
+    right: 0.4rem;
+    top: 0.4rem;
+    transition: background-color 0.2s;
+    display: flex;         
+    justify-content: center;
+    align-items: center;   
+    font-size: 16px;     
+    user-select: none;
+}
+#notifExitbtn:hover{
+    background-color: #e44242;
+}
+
+#Notifsss h2{
+    color: #fff;
+    font-size: 1rem;   
+    padding-left: 1rem;
+    line-height: 0.9rem;
+}
+
+#NotifBar{
+    display: block; 
+    width: 20rem;
+    height: 83%;
+    background-color: #ffffff;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+#NotifBar div{
+    padding: 0.05rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    transition: scale 0.3s;
+}
+
+#NotifBar div:hover{
+    scale: 1.01;
+}
+
+#NotifBar div *{
+    line-height: 0.4rem;
+}
 
 
 

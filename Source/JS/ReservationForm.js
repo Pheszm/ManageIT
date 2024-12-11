@@ -88,8 +88,8 @@ function StudentNameFetch(ID) {
         } else {
             // Assuming response contains Fullname, Level, and YearCourse
             document.getElementById('fullname').value = data.Fullname;
-            document.getElementById('course_year').value = data.Level;
-            document.getElementById('subject').value = data.YearCourse;
+            document.getElementById('subject').value = data.Level;
+            document.getElementById('course_year').value = data.Department;
             document.getElementById('Student_No').value = data.Student_No;
         }
     })

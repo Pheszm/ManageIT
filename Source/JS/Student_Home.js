@@ -50,12 +50,9 @@ document.getElementById('LogoutBtn').addEventListener('click', () => {
 var StoredStudentID;
 document.addEventListener('DOMContentLoaded', function() {
     Studentid = sessionStorage.getItem('StudentID'); // Check sessionStorage
-
-    // If facultyId is not found, redirect to the login page
     if (!Studentid) {
       window.location.href = '../../index.php'; // Redirect to the login page if not authenticated
     }
-    // If facultyId is found, proceed with page initialization
     else {
         StoredStudentID = Studentid;
         console.log('Student ID:', StoredStudentID); 
@@ -67,7 +64,6 @@ var StoredStudentNO;
 
 function StudentNameFetch(ID) {
     const StudentID = ID;
-
     // Ensure StudentID is available
     if (!StudentID) {
         console.error('Student_ID is missing in the URL');
@@ -85,6 +81,7 @@ function StudentNameFetch(ID) {
     .then(response => response.json())
     .then(data => {
         StoredStudentNO = data.Student_No;  
+        checkNotifs();
         FetchFilteredTable();
         FetchUpcomingTable(StoredStudentNO);
         if (data.Name) {
@@ -431,3 +428,171 @@ document.getElementById("ViewCancelation").addEventListener("click", function() 
     }
 
 });
+
+
+
+document.getElementById("NotificationBell").addEventListener("click", function() {
+    if(document.getElementById("Notifsss").style.display  != 'block'){
+        document.getElementById("Notifsss").style.display = "block";
+    }else{
+        document.getElementById("Notifsss").style.display = "none";
+    }
+});
+
+document.getElementById("notifExitbtn").addEventListener("click", function() {
+    document.getElementById("Notifsss").style.display = "none";
+});
+
+
+
+function checkNotifs() {
+    const StudentNo = StoredStudentNO;
+    // Fetch notifications from the backend
+    fetch("../PHP/Student_Home_CheckNotif.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ StudentNO: StudentNo })
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json(); // Parse the response as JSON
+        })
+        .then((data) => {
+            let notViewedCounts = 0;
+
+            // Get the notification container
+            const notificationContainer = document.getElementById("NotifBar");
+
+            // Clear any existing notifications
+            notificationContainer.innerHTML = "";
+
+            if (!Array.isArray(data) || data.length === 0) {
+                // Ensure `data` is an array before using `.forEach`
+                notificationContainer.innerHTML = "<p>No new notifications</p>";
+            } else {
+                // Loop through notifications
+                data.forEach((notification) => {
+                    if (notification.Notif_Viwed == 0) {
+                        notViewedCounts += 1;
+                    }
+
+                    const notificationItem = document.createElement("div");
+                    notificationItem.className = "notification-item";
+                    notificationItem.innerHTML = `
+                        <div style="${notification.Notif_Viwed == 0 ? "background-color: #ff8686;" : ""}">
+                            <p><strong>${notification.Transaction_status === "UPCOMING" ? "APPROVED" : notification.Transaction_status || "Unknown Status"} RESERVATION</strong></p>
+                            <p>From ${notification.faculty_full_name || "UNKNOWN.."}</p>
+                            <p>${formatDate(notification.When_Notif) || "?"}</p>
+                            <input type="hidden" id="HiddenReservationID" value="${notification.id}">
+                        </div>
+                    `;
+
+                    // Add click event listener to the div
+                    notificationItem.addEventListener("click", () => {
+                        const hiddenID = notification.id;
+                        notifclickedview(hiddenID); // Call the function with the ID
+                        fetch("../PHP/Student_Home_UpdateNotifView.php", {
+                            method: "POST", // POST request method
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ id: hiddenID })
+                        }).then(() => {
+                            checkNotifs(); // Refresh notifications
+                        });
+                        notificationItem.style.backgroundColor = ""; 
+                    });
+
+                    notificationContainer.appendChild(notificationItem);
+                });
+
+                // Update notification bell color
+                const notificationBell = document.getElementById("NotificationBell");
+                if (notViewedCounts > 0) {
+                    notificationBell.style.backgroundColor = "#fa5b5b";
+                } else {
+                    notificationBell.style.backgroundColor = "";
+                }
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching notifications:", error);
+        });
+}
+
+
+function formatDate(dateTimeString) {
+    if (!dateTimeString) return "?"; // Handle cases where the date is null or undefined
+
+    // Convert the string into a Date object
+    const date = new Date(dateTimeString);
+
+    // Format the time (12-hour clock with AM/PM)
+    const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const formattedTime = date.toLocaleString('en-US', optionsTime);
+
+    // Format the date (e.g., August 25, 2024)
+    const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', optionsDate);
+
+    return `${formattedTime} (${formattedDate})`;
+}
+
+// Call the function
+
+
+
+
+
+function notifclickedview(IDDDDD){
+    if (IDDDDD) {
+        fetch(`../PHP/Admin_Home_ViewReservation.php?id=${IDDDDD}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('viewRes_fullName2').textContent = data.fullname;
+                document.getElementById('viewRes_courseYear2').textContent = data.course_year;
+                document.getElementById('viewRes_subject2').textContent = data.subject;
+                document.getElementById('viewRes_requestedBy2').textContent = data.requested_by;
+                document.getElementById('viewRes_dateOfUse2').textContent = convertToReadableDate(data.dateofuse);
+                document.getElementById('viewRes_fromtime2').textContent = convertToAMPM(data.fromtime);
+                document.getElementById('viewRes_totime2').textContent = convertToAMPM(data.totime);
+                document.getElementById('viewRes_message2').textContent = data.message;
+                document.getElementById('viewRes_Status2').textContent = data.Transaction_status; // Use correct property name
+                document.getElementById('viewRes_RetTime2').textContent = data.Transaction_ReturnedTime; // Use correct property name
+                document.getElementById('viewRes_Approv2').textContent = data.approved_by_name; // Use correct property name
+                if(data.Transaction_Comment != null){
+                    document.getElementById('Error_message').textContent = data.Transaction_Comment; 
+                    document.getElementById('ViewCancelation').style.display = 'block'; 
+                }else{
+                    document.getElementById('ViewCancelation').style.display = 'none'; 
+                }
+
+                
+
+                // Clear existing rows
+                const table = document.getElementById('pendingviewmaterial3');
+                table.innerHTML = '<tr><th>Item</th><th>Qnty</th></tr>'; // Reset table
+                // Add new rows for materials
+                const materials = data.materials.split(', ');
+                materials.forEach(material => {
+                    const row = table.insertRow();
+                    const itemCell = row.insertCell(0);
+                    const quantityCell = row.insertCell(1);
+                    const [quantity, ...itemNameParts] = material.split(' ');
+                    const itemName = itemNameParts.join(' '); // Join remaining parts as item name
+                    itemCell.textContent = itemName;
+                    quantityCell.textContent = quantity;
+                });
+
+                // Show the reservation details modal
+                document.getElementById('ViewApprovedReserv').style.display = 'flex';
+            })
+            .catch(error => console.error('Error fetching reservation details:', error));
+    } else {
+        console.log("No reservation selected.");
+    }
+}

@@ -22,6 +22,8 @@
 window.onload = function() {
     sessionStorage.removeItem('facultyId');
     sessionStorage.removeItem('StudentID');
+    sessionStorage.removeItem('StudentID');
+
 };
 
 document.getElementById("ExitLoginForm").addEventListener("click", function() {

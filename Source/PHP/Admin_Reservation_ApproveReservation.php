@@ -15,15 +15,17 @@ $reservationId = $data['id'] ?? '';
 $approvedBy = $data['approved_by'] ?? '';
 $transactionStatus = 'UPCOMING'; // Set the default status
 $transactionComment = $data['comment'] ?? null; // Optional comment
+date_default_timezone_set('Asia/Manila');
+$currentDateTime = date('Y-m-d H:i:s');
 
 // Prepare the SQL statement to update the reservation
-$stmt = $conn->prepare("UPDATE reserve_submissions SET approved_by = ? WHERE id = ?");
+$stmt = $conn->prepare("UPDATE reserve_submissions SET approved_by = ?, Notif_Viwed = 0, When_Notif = ? WHERE id = ?");
 if ($stmt === false) {
     die("Prepare failed: " . $conn->error);
 }
 
 // Bind parameters
-$stmt->bind_param("ii", $approvedBy, $reservationId);
+$stmt->bind_param("isi", $approvedBy, $currentDateTime, $reservationId);
 
 // Execute the statement
 if ($stmt->execute()) {

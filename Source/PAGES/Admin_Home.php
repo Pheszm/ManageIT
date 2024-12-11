@@ -14,6 +14,9 @@ include '../PHP/Admin_Home_FetchChart.php';
     <link rel="stylesheet" href="../CSS/Admin_Home.css">
     <link rel="stylesheet" href="../CSS/SweetAlert.css">
     <script src="../JS/BarChart_API.js"></script>
+    <link rel="stylesheet" href="../CSS/all.min.css">
+    <link rel="stylesheet" href="../CSS/fontawesome.min.css">
+
 </head>
 
 <body>
@@ -214,26 +217,19 @@ include '../PHP/Admin_Home_FetchChart.php';
         </span>
 
         <span id="span2">
-            <div id="VolumeArea">
-                <h1>Volume Today</h1>
-                <table id="VolumeAreaTable">
-                    <tr>
-                        <th>
-                            Total Items
-                        </th>
-                        <th>
-                            Items in Use
-                        </th>
-                        <th>
-                            Available Items
-                        </th>
-                        <th>
-                            Pending<br>Reservations
-                        </th>
-                    </tr>
+            <div class="VolandPen">            
+                <div id="VolumeArea">
+                    <h2><i class="fa-brands fa-dropbox"></i> Total Items</h2>
+                    <h3 id="VolumeTodayss">3</h3>
+                    </table>
+                </div>
 
-                </table>
-            </div>
+                <div id="PendingArea">
+                    <h2><i class="fa-solid fa-mug-hot"></i> Pending Reservations</h2>
+                    <h3 id="PendingTodayss">3</h3>
+                    </table>
+                </div
+            ></div>
 
             <div id="ChartArea">
                 <h2 class="ChartHeader">Top Items Used this Month</h2>

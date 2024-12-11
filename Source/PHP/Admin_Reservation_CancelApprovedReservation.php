@@ -17,12 +17,14 @@ $data = json_decode(file_get_contents("php://input"), true);
 if (isset($data['reservation_id'])) {
     $reservation_id = $data['reservation_id'];
     $Cancelmessage = $data['CancelMessage'];
-
+    date_default_timezone_set('Asia/Manila');
+    $currentDateTime = date('Y-m-d H:i:s');
+    
     // First SQL: Update the status of the reserve_submission
-    $sql1 = "UPDATE reserve_submissions SET status = 0 WHERE id = ?";
+    $sql1 = "UPDATE reserve_submissions SET status = 0, Notif_Viwed = 0, When_Notif = ? WHERE id = ?";
     if ($stmt1 = $conn->prepare($sql1)) {
         // Bind parameters for the first query
-        $stmt1->bind_param("i", $reservation_id);
+        $stmt1->bind_param("si", $currentDateTime, $reservation_id);
 
         // Execute the first query
         if ($stmt1->execute()) {
