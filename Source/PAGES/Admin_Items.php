@@ -180,7 +180,10 @@ include '../PHP/Admin_Items_FetchChart.php';
                     <h2>Model:</h2><input id="Add_Item_Model" placeholder="Model..">
                 </span>
                 <span>
-                    <h2>Category:</h2><input id="Add_Item_Category" placeholder="Category..">
+                    <h2>Category:</h2>
+                    <input list="Categories" id="Add_Item_Category" placeholder="Category..">
+                    <datalist id="Categories">
+                    </datalist>
                 </span>
                 <span>
                     <h2>Quantity:</h2><input id="Add_Item_Quantity" type="number" placeholder="Quantity..">
@@ -205,7 +208,10 @@ include '../PHP/Admin_Items_FetchChart.php';
                     <h2>Model:</h2><input id="Update_Item_Model" placeholder="Model..">
                 </span>
                 <span>
-                    <h2>Category:</h2><input id="Update_Item_Category" placeholder="Category..">
+                    <h2>Category:</h2>
+                    <input list="CategoriesUpdate" id="Update_Item_Category" placeholder="Category..">
+                    <datalist id="CategoriesUpdate">
+                    </datalist>
                 </span>
                 <span>
                     <h2>Quantity:</h2><input id="Update_Item_Quantity" type="number" placeholder="Quantity..">

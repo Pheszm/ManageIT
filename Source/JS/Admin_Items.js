@@ -411,7 +411,8 @@ window.onload = function () {
 		.then((data) => {
 			const modelComboBox = document.getElementById("ModelComboBox");
 			const categoryComboBox = document.getElementById("CategoryComboBox");
-
+			const categoryDatalist = document.getElementById("Categories");
+			const CategoriesUpdateDatalist = document.getElementById("CategoriesUpdate");
 			// Populate ModelComboBox
 			data.models.forEach((model) => {
 				const option = document.createElement("option");
@@ -427,6 +428,24 @@ window.onload = function () {
 				option.textContent = category;
 				categoryComboBox.appendChild(option);
 			});
+
+			// Populate categoryDatalist
+			data.categories.forEach((category) => {
+				const option = document.createElement("option");
+				option.value = category;
+				option.textContent = category;
+				categoryDatalist.appendChild(option);
+			});
+
+			// Populate CategoriesUpdateDatalist
+			data.categories.forEach((category) => {
+				const option = document.createElement("option");
+				option.value = category;
+				option.textContent = category;
+				CategoriesUpdateDatalist.appendChild(option);
+			});
+
+
 		})
 		.catch((error) => console.error("Error fetching data:", error));
 };

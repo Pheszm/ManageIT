@@ -33,9 +33,9 @@
                             </span>
                             <span>
                                 <label for="fromtime">From:&nbsp;&nbsp;</label>
-                                <input type="time" id="fromtime" name="fromtime" required>
+                                <input type="time" id="fromtime" name="fromtime" min="07:00" max="17:00" required>
                                 <label for="totime">&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;</label>
-                                <input type="time" id="totime" name="totime" required>
+                                <input type="time" id="totime" name="totime" min="07:00" max="17:00" required>
                             </span>
                             <input type="text" id="course_year" name="course_year" placeholder="Department.." required>
                             <br>
