@@ -15,6 +15,10 @@ document.getElementById("exitbtn3").addEventListener("click", function() {
 document.getElementById("PendingTodayss").addEventListener("click", function() {
     window.location.href = '../PAGES/Admin_Reservation.php'; 
 });
+document.getElementById("VolumeTodayss").addEventListener("click", function() {
+    window.location.href = '../PAGES/Admin_Items.php'; 
+});
+
 
 //LOGIN AUTH CHECKER
 var facultyId;

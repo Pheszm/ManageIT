@@ -111,9 +111,35 @@
             <button class="ContactUsBtn" onclick="location.href='#ContactUsSection';">Contact Us</button>
         </span>
 
-        <video controls>
-            <source src="" type="video/mp4">
+        <video id="VideoPlayerAboutUs" controls>
+            <source src="Assets/Videos/AboutUsVideo.mov" type="video/mp4">
         </video>
+
+        <script>
+            //PLAY VIDEO WHEN ON SCREEN
+            document.addEventListener("DOMContentLoaded", function () {
+                const video = document.getElementById("VideoPlayerAboutUs");
+                const videoSection = document.getElementById("AboutUsSection");
+
+                if (video && videoSection) {
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                video.loop = true;
+                                video.muted = true; //Video Muteee
+                                video.play().catch((error) => {
+                                    console.error("Error playing video:", error);
+                                });
+                            } else {
+                                video.loop = false;
+                                video.pause(); 
+                            }
+                        });
+                    }, { threshold: 0.5 }); 
+                    observer.observe(videoSection);
+                }
+            });
+        </script>
     </div>
 
 
