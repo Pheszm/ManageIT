@@ -826,53 +826,72 @@ document.getElementById("UpdateBtnSave").addEventListener("click", function() {
 		return;
     }
 
+	Swal.fire({
+        title: "Confirmation",
+        text: "Are you sure you want to update this item?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+    }).then((result) => {
+        if (result.isConfirmed) {
 
+			if(OlditemImageName != Update_ImageFileName && Update_ImageFileName != null){
+				OlditemImageName = Update_ImageFileName;
+				console.log(OlditemImageName);
+				StoringImageFunc();
+			}
+				// Prepare the updated data to be sent
+				const updatedData = {
+					item_id: SelectedAllItemsRow,  // The ID of the item being updated (assuming it's available)
+					item_name: itemName,
+					item_model: itemModel,
+					item_category: itemCategory,
+					item_quantity: itemQuantity,
+					item_status: itemStatus,
+					item_available: itemAvailable,
+					item_imageName: OlditemImageName,  // Image name or URL from the selected image
+				};
+				
+			// Send the updated data to the server
+			fetch('../PHP/Admin_Items_UpdateItem.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(updatedData), // Send updated data as JSON
+			})
+			.then((response) => response.json())
+			.then((result) => {
+				if (result.success) {
+					AcitivityLogInsertion("Item", "Updated", SelectedAllItemsRow);
 
-
-    // Confirm before submitting the update
-    const confirmUpdate = confirm("Are you sure you want to update this item?");
-    if (confirmUpdate) {
-		if(OlditemImageName != Update_ImageFileName && Update_ImageFileName != null){
-			OlditemImageName = Update_ImageFileName;
-			console.log(OlditemImageName);
-			StoringImageFunc();
+					Swal.fire({
+						title: "Item Updated Successfully.",
+						text: "Press okay to continue",
+						icon: "success",
+						confirmButtonColor: '#076AD4FF'
+						}).then((result) => {
+						if (result.isConfirmed) {
+							location.reload();  
+						}else{
+							location.reload(); 
+						}
+					});
+				} else {
+					alert('Error updating item: ' + (result.error || 'Unknown error'));
+				}
+			})
+			.catch((error) => {
+				console.error("Error updating item:", error);
+				alert("An error occurred while updating the item.");
+			});
 		}
+	});
 
-		    // Prepare the updated data to be sent
-			const updatedData = {
-				item_id: SelectedAllItemsRow,  // The ID of the item being updated (assuming it's available)
-				item_name: itemName,
-				item_model: itemModel,
-				item_category: itemCategory,
-				item_quantity: itemQuantity,
-				item_status: itemStatus,
-				item_available: itemAvailable,
-				item_imageName: OlditemImageName,  // Image name or URL from the selected image
-			};
-			
-        // Send the updated data to the server
-        fetch('../PHP/Admin_Items_UpdateItem.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedData), // Send updated data as JSON
-        })
-        .then((response) => response.json())
-        .then((result) => {
-            if (result.success) {
-                alert('Item updated successfully.');
-				AcitivityLogInsertion("Item", "Updated", SelectedAllItemsRow);
-                location.reload();  // Optionally reload the page or refresh the data
-            } else {
-                alert('Error updating item: ' + (result.error || 'Unknown error'));
-            }
-        })
-        .catch((error) => {
-            console.error("Error updating item:", error);
-            alert("An error occurred while updating the item.");
-        });
-    }
+		
+    
 });
 
 
